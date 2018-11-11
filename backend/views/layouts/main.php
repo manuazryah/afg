@@ -16,6 +16,10 @@ AppAsset::register($this);
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
+        <script src="<?= Yii::$app->homeUrl; ?>js/jquery.min.js"></script>
+        <script type="text/javascript">
+            var homeUrl = '<?= Yii::$app->homeUrl; ?>';
+        </script>
         <?php $this->head() ?>
     </head>
     <body class="skin-blue fixed sidebar-mini sidebar-mini-expand-feature sidebar-collapse">

@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker;
+use yii\helpers\ArrayHelper;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Export */
@@ -9,12 +12,22 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="export-form form-inline">
-
+    <?= \common\components\AlertMessageWidget::widget() ?>
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
         <h4 class="frm-sub-title">Customer Info </h4>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'customer')->textInput(['maxlength' => true]) ?>
+            <?php $customers = ArrayHelper::map(common\models\Customers::findAll(['status' => 1]), 'id', 'name'); ?>
+            <?php
+            echo $form->field($model, 'customer')->widget(Select2::classname(), [
+                'data' => $customers,
+                'language' => 'en',
+                'options' => ['placeholder' => 'Choose Customer'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]);
+            ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'customer_id')->textInput() ?>
@@ -26,10 +39,40 @@ use yii\widgets\ActiveForm;
     <div class="row">
         <h4 class="frm-sub-title">Export Info </h4>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'export_date')->textInput() ?>
+            <?php
+            if (!$model->isNewRecord) {
+                $model->export_date = date('d-m-Y', strtotime($model->export_date));
+            } else {
+                $model->export_date = date('d-m-Y');
+            }
+            ?>
+            <?=
+            $form->field($model, 'export_date')->widget(DatePicker::classname(), [
+                'type' => DatePicker::TYPE_INPUT,
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-M-yyyy'
+                ]
+            ]);
+            ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'loding_date')->textInput() ?>
+            <?php
+            if (!$model->isNewRecord) {
+                $model->loding_date = date('d-m-Y', strtotime($model->loding_date));
+            } else {
+                $model->loding_date = date('d-m-Y');
+            }
+            ?>
+            <?=
+            $form->field($model, 'loding_date')->widget(DatePicker::classname(), [
+                'type' => DatePicker::TYPE_INPUT,
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-M-yyyy'
+                ]
+            ]);
+            ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'broker_name')->textInput(['maxlength' => true]) ?>

@@ -78,78 +78,15 @@ AppAsset::register($this);
                         <?php
                     }
                     ?>
+                
                     <li>
-                        <a href="">
-                            <i class="fa fa-cubes"></i>
-                            <span class="title">Home Management</span>
-                        </a>
-                        <ul>
-                            <li>
-                                <?= Html::a('<i class="fa fa-angle-double-right"></i> Slider', ['/cms/slider/index'], ['class' => 'title']) ?>
-                            </li>
-                            <li>
-                                <?= Html::a('<i class="fa fa-angle-double-right"></i> <span class="title">Our Clients</span>', ['/cms/our-client/index'], ['class' => 'title']) ?>
-                            </li>
-                        </ul>
+                        <?= Html::a('<i class="fa fa-building"></i> <span class="title">Customers</span>', ['/cms/customers/update', 'id' => 1], ['class' => 'title']) ?>
                     </li>
+                    
                     <li>
-                        <?= Html::a('<i class="fa fa-building"></i> <span class="title">Company Profile</span>', ['/cms/company-profile/update', 'id' => 1], ['class' => 'title']) ?>
+                        <?= Html::a('<i class="fa fa-building"></i> <span class="title">Consignee</span>', ['/masters/consignee/index'], ['class' => 'title']) ?>
                     </li>
-                    <li>
-                        <?= Html::a('<i class="fa fa-home"></i> <span class="title">Properties</span>', ['/cms/properties/index'], ['class' => 'title']) ?>
-                    </li>
-                    <li>
-                        <?= Html::a('<i class="fa fa-shield"></i> <span class="title">What We Offer</span>', ['/cms/what-we-offer/index'], ['class' => 'title']) ?>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="fa fa-cogs"></i>
-                            <span class="title">Corporate Info</span>
-                        </a>
-                        <ul>
-                            <li>
-                                <?= Html::a("<i class='fa fa-angle-double-right'></i> Chairman's Message", ['/cms/chairmans-message/update', 'id' => 1], ['class' => 'title']) ?>
-                            </li>
-                            <li>
-                                <?= Html::a("<i class='fa fa-angle-double-right'></i> Management Details", ['/cms/management-details/index'], ['class' => 'title']) ?>
-                            </li>
-                            <li>
-                                <?= Html::a("<i class='fa fa-angle-double-right'></i> Auditor's Report", ['/cms/audit-report/update', 'id' => 1], ['class' => 'title']) ?>
-                            </li>
-                            <li>
-                                <?= Html::a("<i class='fa fa-angle-double-right'></i> Corporate Governance", ['/cms/corporate-governance/update', 'id' => 1], ['class' => 'title']) ?>
-                            </li>
-                            <li>
-                                <?= Html::a("<i class='fa fa-angle-double-right'></i> Meeting Announcement", ['/cms/meeting-announcement/update', 'id' => 1], ['class' => 'title']) ?>
-                            </li>
-                            <li>
-                                <?= Html::a("<i class='fa fa-angle-double-right'></i> Fact Sheet", ['/cms/fact-sheet/update', 'id' => 1], ['class' => 'title']) ?>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="fa fa-money"></i>
-                            <span class="title">Financial Info</span>
-                        </a>
-                        <ul>
-                            <li>
-                                <?= Html::a("<i class='fa fa-angle-double-right'></i> Annual Reports", ['/cms/annual-reports/index'], ['class' => 'title']) ?>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <?= Html::a('<i class="fa fa-users"></i> <span class="title">Shareholder Details</span>', ['/cms/shareholder-details/index'], ['class' => 'title']) ?>
-                    </li>
-                    <li>
-                        <?= Html::a('<i class="fa fa-calendar"></i> <span class="title">News & Events</span>', ['/cms/news-events/index'], ['class' => 'title']) ?>
-                    </li>
-                    <li>
-                        <?= Html::a('<i class="fa fa-map-marker"></i> <span class="title">Contact Address</span>', ['/cms/contact-info/index'], ['class' => 'title']) ?>
-                    </li>
-                    <li>
-                        <?= Html::a('<i class="fa fa-tags"></i> <span class="title">Meta Tags</span>', ['/cms/meta-tags/index'], ['class' => 'title']) ?>
-                    </li>
+                  
                 </ul>
 
                 <!-- notifications and other links -->
@@ -211,102 +148,37 @@ AppAsset::register($this);
 
 
                     <ul id="main-menu" class="main-menu">
-                        <li>
-                            <?= Html::a('<i class="fa-home"></i> <span class="title">Home</span>', ['/site/home'], ['class' => 'title']) ?>
-                        </li>
-                        <?php
-                        if (Yii::$app->session['post']['admin'] == 1) {
-                            ?>
-                            <li>
-                                <a href="">
-                                    <i class="fa fa-tachometer"></i>
-                                    <span class="title">Administration</span>
-                                </a>
-                                <ul>
-                                    <li>
-                                        <?= Html::a('<i class="fa fa-angle-double-right"></i> Access Powers', ['/admin/admin-posts/index'], ['class' => 'title']) ?>
-                                    </li>
-
-                                    <li>
-                                        <?= Html::a('<i class="fa fa-angle-double-right"></i> Admin Users', ['/admin/admin-users/index'], ['class' => 'title']) ?>
-                                    </li>
-                                </ul>
-                            </li>
-                            <?php
-                        }
+                                  <li>
+                        <?= Html::a('<i class="fa-home"></i> <span class="title">Home</span>', ['/site/home'], ['class' => 'title']) ?>
+                    </li>
+                    <?php
+                    if (Yii::$app->session['post']['admin'] == 1) {
                         ?>
                         <li>
                             <a href="">
-                                <i class="fa fa-cubes"></i>
-                                <span class="title">Home Management</span>
+                                <i class="fa fa-tachometer"></i>
+                                <span class="title">Administration</span>
                             </a>
                             <ul>
                                 <li>
-                                    <?= Html::a('<i class="fa fa-angle-double-right"></i> Slider', ['/cms/slider/index'], ['class' => 'title']) ?>
+                                    <?= Html::a('<i class="fa fa-angle-double-right"></i> Access Powers', ['/admin/admin-posts/index'], ['class' => 'title']) ?>
                                 </li>
+
                                 <li>
-                                    <?= Html::a('<i class="fa fa-angle-double-right"></i> <span class="title">Our Clients</span>', ['/cms/our-client/index'], ['class' => 'title']) ?>
+                                    <?= Html::a('<i class="fa fa-angle-double-right"></i> Admin Users', ['/admin/admin-users/index'], ['class' => 'title']) ?>
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <?= Html::a('<i class="fa fa-building"></i> <span class="title">Company Profile</span>', ['/cms/company-profile/update', 'id' => 1], ['class' => 'title']) ?>
-                        </li>
-                        <li>
-                            <?= Html::a('<i class="fa fa-home"></i> <span class="title">Properties</span>', ['/cms/properties/index'], ['class' => 'title']) ?>
-                        </li>
-                        <li>
-                            <?= Html::a('<i class="fa fa-shield"></i> <span class="title">What We Offer</span>', ['/cms/what-we-offer/index'], ['class' => 'title']) ?>
-                        </li>
-                        <li>
-                            <a href="">
-                                <i class="fa fa-cogs"></i>
-                                <span class="title">Corporate Info</span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <?= Html::a("<i class='fa fa-angle-double-right'></i> Chairman's Message", ['/cms/chairmans-message/update', 'id' => 1], ['class' => 'title']) ?>
-                                </li>
-                                <li>
-                                    <?= Html::a("<i class='fa fa-angle-double-right'></i> Management Details", ['/cms/management-details/index'], ['class' => 'title']) ?>
-                                </li>
-                                <li>
-                                    <?= Html::a("<i class='fa fa-angle-double-right'></i> Auditor's Report", ['/cms/audit-report/update', 'id' => 1], ['class' => 'title']) ?>
-                                </li>
-                                <li>
-                                    <?= Html::a("<i class='fa fa-angle-double-right'></i> Corporate Governance", ['/cms/corporate-governance/update', 'id' => 1], ['class' => 'title']) ?>
-                                </li>
-                                <li>
-                                    <?= Html::a("<i class='fa fa-angle-double-right'></i> Meeting Announcement", ['/cms/meeting-announcement/update', 'id' => 1], ['class' => 'title']) ?>
-                                </li>
-                                <li>
-                                    <?= Html::a("<i class='fa fa-angle-double-right'></i> Fact Sheet", ['/cms/fact-sheet/update', 'id' => 1], ['class' => 'title']) ?>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="">
-                                <i class="fa fa-money"></i>
-                                <span class="title">Financial Info</span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <?= Html::a("<i class='fa fa-angle-double-right'></i> Annual Reports", ['/cms/annual-reports/index'], ['class' => 'title']) ?>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <?= Html::a('<i class="fa fa-users"></i> <span class="title">Shareholder Details</span>', ['/cms/shareholder-details/index'], ['class' => 'title']) ?>
-                        </li>
-                        <li>
-                            <?= Html::a('<i class="fa fa-calendar"></i> <span class="title">News & Events</span>', ['/cms/news-events/index'], ['class' => 'title']) ?>
-                        </li>
-                        <li>
-                            <?= Html::a('<i class="fa fa-map-marker"></i> <span class="title">Contact Address</span>', ['/cms/contact-info/index'], ['class' => 'title']) ?>
-                        </li>
-                        <li>
-                            <?= Html::a('<i class="fa fa-tags"></i> <span class="title">Meta Tags</span>', ['/cms/meta-tags/index'], ['class' => 'title']) ?>
-                        </li>
+                        <?php
+                    }
+                    ?>
+                
+                    <li>
+                        <?= Html::a('<i class="fa fa-building"></i> <span class="title">Customers</span>', ['/masters/customers/index'], ['class' => 'title']) ?>
+                    </li>
+                    <li>
+                        <?= Html::a('<i class="fa fa-building"></i> <span class="title">Consignee</span>', ['/masters/consignee/index'], ['class' => 'title']) ?>
+                    </li>
                     </ul>
 
                 </div>

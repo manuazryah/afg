@@ -141,4 +141,11 @@
     margin: 20px 0px;
     margin-bottom: 20px;
 }
+.grid-view{
+    margin-top: 15px;
+}
+.frm-sub-title{
+    margin-left: 13px;
+    font-weight: 600;
+}
 /**************************** Dashboard css End ***********************/

@@ -78,6 +78,9 @@ AppAsset::register($this);
                     <li>
                         <?= Html::a('<i class="fa fa-building"></i> <span class="title">Consignee</span>', ['/masters/consignee/index'], ['class' => 'title']) ?>
                     </li>
+                    <li>
+                        <?= Html::a('<i class="fa fa-files-o"></i> <span class="title">Export</span>', ['/masters/export/index'], ['class' => 'title']) ?>
+                    </li>
                 </ul>
             </section>
             <!-- /.sidebar -->

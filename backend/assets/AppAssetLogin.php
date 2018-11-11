@@ -14,11 +14,17 @@ class AppAssetLogin extends AssetBundle {
     public $css = [
         'css/bootstrap.min.css',
         'css/font-awesome.min.css',
-        'css/animate.min.css',
-        'css/custom.css',
-        'css/green.css',
+        'css/ionicons.min.css',
+        'css/AdminLTE.min.css',
+        'css/blue.css',
+        'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic',
+        'css/site.css',
     ];
     public $js = [
+        'js/jquery.min.js',
+        'js/bootstrap.min.js',
+        'js/icheck.min.js',
+        'js/demo.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -8,214 +8,96 @@ use yii\helpers\Html;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="<?= Yii::$app->language ?>">
     <head>
         <meta charset="<?= Yii::$app->charset ?>">
-        <link rel="icon" href="<?= yii::$app->homeUrl ?>../favicon/icon.png">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
-        <script src="<?= Yii::$app->homeUrl; ?>js/jquery-1.11.1.min.js"></script>
-        <script type="text/javascript">
-            var homeUrl = '<?= Yii::$app->homeUrl; ?>';
-        </script>
         <?php $this->head() ?>
     </head>
-    <body class="page-body">
+    <body class="skin-blue fixed sidebar-mini sidebar-mini-expand-feature sidebar-collapse">
         <?php $this->beginBody() ?>
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="<?= yii::$app->homeUrl; ?>" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><img class="img-responsive" src="<?= yii::$app->homeUrl; ?>img/fav.png" alt="logo"/></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><img class="img-responsive" src="<?= yii::$app->homeUrl; ?>img/logo.jpg" alt="logo" style="width: 150px;" /></span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
 
-
-        <nav class="navbar horizontal-menu navbar-fixed-top"><!-- set fixed position by adding class "navbar-fixed-top" -->
-
-            <div class="navbar-inner">
-
-                <!-- Navbar Brand -->
-                <div class="navbar-brand">
-                    <a href="" class="logo">
-                        <img src="<?= Yii::$app->homeUrl ?>images/logo.png" width="" alt="" class="hidden-xs" />
-                        <img src="<?= Yii::$app->homeUrl ?>images/logo.png" width="" alt="" class="visible-xs" />
-                    </a>
-                </div>
-
-                <!-- Mobile Toggles Links -->
-                <div class="nav navbar-mobile">
-
-                    <!-- This will toggle the mobile menu and will be visible only on mobile devices -->
-                    <div class="mobile-menu-toggle">
-                        <a href="#" data-toggle="mobile-menu-horizontal">
-                            <i class="fa-bars"></i>
-                        </a>
-                    </div>
-
-                </div>
-
-                <div class="navbar-mobile-clear"></div>
-
-                <ul class="navbar-nav">
-                    <li>
-                        <?= Html::a('<i class="fa-home"></i> <span class="title">Home</span>', ['/site/home'], ['class' => 'title']) ?>
-                    </li>
-                    <?php
-                    if (Yii::$app->session['post']['admin'] == 1) {
-                        ?>
-                        <li>
-                            <a href="">
-                                <i class="fa fa-tachometer"></i>
-                                <span class="title">Administration</span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <?= Html::a('<i class="fa fa-angle-double-right"></i> Access Powers', ['/admin/admin-posts/index'], ['class' => 'title']) ?>
-                                </li>
-
-                                <li>
-                                    <?= Html::a('<i class="fa fa-angle-double-right"></i> Admin Users', ['/admin/admin-users/index'], ['class' => 'title']) ?>
-                                </li>
-                            </ul>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <li class="dropdown user user-menu">
+                            <?php
+                            echo ''
+                            . Html::beginForm(['/site/logout'], 'post', ['style' => '']) . '<a>'
+                            . Html::submitButton(
+                                    '<i class="fa fa-sign-out" aria-hidden="true"></i> Sign out', ['class' => 'signout-btn', 'style' => '']
+                            ) . '</a>'
+                            . Html::endForm()
+                            . '';
+                            ?>
                         </li>
-                        <?php
-                    }
-                    ?>
-                
-                    <li>
-                        <?= Html::a('<i class="fa fa-building"></i> <span class="title">Customers</span>', ['/cms/customers/update', 'id' => 1], ['class' => 'title']) ?>
-                    </li>
-                    
-                    <li>
-                        <?= Html::a('<i class="fa fa-building"></i> <span class="title">Consignee</span>', ['/masters/consignee/index'], ['class' => 'title']) ?>
-                    </li>
-                  
-                </ul>
-
-                <!-- notifications and other links -->
-                <ul class="nav nav-userinfo navbar-right">
-                    <li>
-                        <a href="<?= Yii::$app->homeUrl; ?>site/home"><i class="fa-home"></i> Home</a>
-                    </li>
-
-                    <li class="dropdown user-profile">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="<?= yii::$app->homeUrl; ?>images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
-                            <span>
-                                <?= Yii::$app->user->identity->username ?>
-                                <i class="fa-angle-down"></i>
-                            </span>
-                        </a>
-
-                        <ul class="dropdown-menu user-profile-menu list-unstyled">
-                            <li class="user-header">
-                                <img src="<?= yii::$app->homeUrl; ?>images/user-4.png" alt="user-image" class="img-circle" />
-                                <p>
-                                    <?= Yii::$app->user->identity->username ?>
-                                    <!--<small>Member since Nov. 2012</small>-->
-                                </p>
-                            </li>
-                            <li class="user-footer" style="background: #eeeeee;">
-                                <div class="row">
-                                    <div class="pull-left">
-                                        <?= Html::a('Profile', ['/admin/admin-users/update', 'id' => Yii::$app->user->identity->id], ['class' => 'btn btn-white', 'style' => 'padding: 5px 20px;border: 1px solid #a09f9f;']) ?>
-                                    </div>
-                                    <div class="pull-right">
-                                        <?php
-                                        echo ''
-                                        . Html::beginForm(['/site/logout'], 'post', ['style' => 'margin-bottom: 0px;']) . '<a>'
-                                        . Html::submitButton(
-                                                'Sign out', ['class' => 'btn btn-white', 'style' => 'border: 1px solid #a09f9f;']
-                                        ) . '</a>'
-                                        . Html::endForm()
-                                        . '';
-                                        ?>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </nav>
-
-        <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
-
-            <div class="sidebar-menu toggle-others fixed">
-
-                <div class="sidebar-menu-inner">
-
-
-
-                    <ul id="main-menu" class="main-menu">
-                                  <li>
-                        <?= Html::a('<i class="fa-home"></i> <span class="title">Home</span>', ['/site/home'], ['class' => 'title']) ?>
-                    </li>
-                    <?php
-                    if (Yii::$app->session['post']['admin'] == 1) {
-                        ?>
-                        <li>
-                            <a href="">
-                                <i class="fa fa-tachometer"></i>
-                                <span class="title">Administration</span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <?= Html::a('<i class="fa fa-angle-double-right"></i> Access Powers', ['/admin/admin-posts/index'], ['class' => 'title']) ?>
-                                </li>
-
-                                <li>
-                                    <?= Html::a('<i class="fa fa-angle-double-right"></i> Admin Users', ['/admin/admin-users/index'], ['class' => 'title']) ?>
-                                </li>
-                            </ul>
-                        </li>
-                        <?php
-                    }
-                    ?>
-                
-                    <li>
-                        <?= Html::a('<i class="fa fa-building"></i> <span class="title">Customers</span>', ['/masters/customers/index'], ['class' => 'title']) ?>
-                    </li>
-                    <li>
-                        <?= Html::a('<i class="fa fa-building"></i> <span class="title">Consignee</span>', ['/masters/consignee/index'], ['class' => 'title']) ?>
-                    </li>
                     </ul>
-
                 </div>
-
-            </div>
-
-            <div class="main-content">
-                <?= $content; ?>
-
-                <footer class="main-footer sticky footer-type-1">
-
-                    <div class="footer-inner">
-
-                        <!-- Add your copyright text here -->
-                        <div class="footer-text">
-                            <strong>Copyright© 2018 Automart. All rights reserved.</strong>
-                        </div>
-
-
-                        <!-- Go to Top Link, just add rel="go-top" to any link to add this functionality -->
-                        <div class="go-up">
-
-                            <a href="#" rel="go-top">
-                                <i class="fa-angle-up"></i>
-                            </a>
-
-                        </div>
-
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="<?= Yii::$app->homeUrl; ?>img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     </div>
+                    <div class="pull-left info">
+                        <p>Alexander Pierce</p>
+                    </div>
+                </div>
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li>
+                        <?= Html::a('<i class="fa fa-home"></i> <span>Home</span>', ['/site/index'], ['class' => '']) ?>
+                    </li>
+                    <li>
+                        <?= Html::a('<i class="fa fa-users"></i> <span class="title">Customers</span>', ['/cms/customers/index'], ['class' => 'title']) ?>
+                    </li>
 
-                </footer>
-            </div>
+                    <li>
+                        <?= Html::a('<i class="fa fa-building"></i> <span class="title">Consignee</span>', ['/masters/consignee/index'], ['class' => 'title']) ?>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content">
+                <?= $content ?>
+            </section>
+            <!-- /.content -->
         </div>
-        <!-- Page Loading Overlay -->
-        <!--        <div class="page-loading-overlay">
-                    <div class="loader-2"></div>
-                </div>-->
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.4.0
+            </div>
+            <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+            reserved.
+        </footer>
         <?php $this->endBody() ?>
     </body>
 </html>

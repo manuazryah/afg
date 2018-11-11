@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
             <div class="panel-body">
-                <?= "<?= " ?> Html::a('<i class="fa fa-list"></i><span> Manage <?= Inflector::camel2words(StringHelper::basename($generator->modelClass)); ?></span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                <?= "<?= " ?> Html::a('<i class="fa fa-list"></i><span> Manage <?= Inflector::camel2words(StringHelper::basename($generator->modelClass)); ?></span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone link-btn']) ?>
                 <div class="panel-body"><div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-create">
                         <?= "<?= " ?>$this->render('_form', [
                         'model' => $model,

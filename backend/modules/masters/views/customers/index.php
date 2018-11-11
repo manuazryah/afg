@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="panel-body">
                     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-                    <?= Html::a('<i class="fa-th-list"></i><span> Create Customers</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                    <?= Html::a('<i class="fa fa-list"></i><span> Create Customers</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                     <?= common\widgets\Alert::widget() ?>
                     <?=
                     GridView::widget([
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             // 'other_emails:ntext',
                             // 'upload_documents',
                             'company_name',
-                           // 'phone_usa',
+                            // 'phone_usa',
                             // 'phone_uae',
                             // 'trn_uae',
                             // 'address2:ntext',
@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             // 'DOC',
                             // 'DOU',
                             ['class' => 'yii\grid\ActionColumn',
-                                'template' => '{view}{update}'],
+                                'template' => '{view}{update}{delete}'],
                         ],
                     ]);
                     ?>

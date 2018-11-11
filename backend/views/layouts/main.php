@@ -63,7 +63,7 @@ AppAsset::register($this);
                         <img src="<?= Yii::$app->homeUrl; ?>img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>Alexander Pierce</p>
+                        <p><?= Yii::$app->user->identity->username ?></p>
                     </div>
                 </div>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -72,7 +72,7 @@ AppAsset::register($this);
                         <?= Html::a('<i class="fa fa-home"></i> <span>Home</span>', ['/site/index'], ['class' => '']) ?>
                     </li>
                     <li>
-                        <?= Html::a('<i class="fa fa-users"></i> <span class="title">Customers</span>', ['/cms/customers/index'], ['class' => 'title']) ?>
+                        <?= Html::a('<i class="fa fa-users"></i> <span class="title">Customers</span>', ['/masters/customers/index'], ['class' => 'title']) ?>
                     </li>
 
                     <li>

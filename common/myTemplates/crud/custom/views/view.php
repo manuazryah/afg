@@ -22,50 +22,51 @@ $this->params['breadcrumbs'][] = ['label' => <?= $generator->generateString(Infl
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
-        <div class="col-md-12">
+    <div class="col-md-12">
 
-                <div class="panel panel-default">
-                        <div class="panel-heading">
-                                <h3 class="panel-title"><?= "<?= " ?>Html::encode($this->title) ?></h3>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?= "<?= " ?>Html::encode($this->title) ?></h3>
 
 
-                        </div>
-                        <div class="panel-body">
-                                <?= "<?= " ?> Html::a('<i class="fa-th-list"></i><span> Manage <?= Inflector::camel2words(StringHelper::basename($generator->modelClass)); ?></span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
-                                <div class="panel-body"><div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
-                                                <p>
-                                                        <?= "<?= " ?>Html::a(<?= $generator->generateString('Update') ?>, ['update', <?= $urlParams ?>], ['class' => 'btn btn-primary']) ?>
-                                                        <?= "<?= " ?>Html::a(<?= $generator->generateString('Delete') ?>, ['delete', <?= $urlParams ?>], [
-                                                        'class' => 'btn btn-danger',
-                                                        'data' => [
-                                                        'confirm' => <?= $generator->generateString('Are you sure you want to delete this item?') ?>,
-                                                        'method' => 'post',
-                                                        ],
-                                                        ]) ?>
-                                                </p>
+            </div>
+            <div class="panel-body">
 
-                                                <?= "<?= " ?>DetailView::widget([
-                                                'model' => $model,
-                                                'attributes' => [
-                                                <?php
-                                                if (($tableSchema = $generator->getTableSchema()) === false) {
-                                                        foreach ($generator->getColumnNames() as $name) {
-                                                                echo "            '" . $name . "',\n";
-                                                        }
-                                                } else {
-                                                        foreach ($generator->getTableSchema()->columns as $column) {
-                                                                $format = $generator->generateColumnFormat($column);
-                                                                echo "            '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
-                                                        }
-                                                }
-                                                ?>
-                                                ],
-                                                ]) ?>
-</div>
-                                        </div>
-                                </div>
-                        </div>
+                <div class="panel-body"><div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
+                        <p>
+                            <?= "<?= " ?> Html::a('<i class="fa fa-list"></i><span> Manage <?= Inflector::camel2words(StringHelper::basename($generator->modelClass)); ?></span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                            <?= "<?= " ?>Html::a(<?= $generator->generateString('Update') ?>, ['update', <?= $urlParams ?>], ['class' => 'btn btn-primary']) ?>
+                            <?= "<?= " ?>Html::a(<?= $generator->generateString('Delete') ?>, ['delete', <?= $urlParams ?>], [
+                            'class' => 'btn btn-danger',
+                            'data' => [
+                            'confirm' => <?= $generator->generateString('Are you sure you want to delete this item?') ?>,
+                            'method' => 'post',
+                            ],
+                            ]) ?>
+                        </p>
+
+                        <?= "<?= " ?>DetailView::widget([
+                        'model' => $model,
+                        'attributes' => [
+                        <?php
+                        if (($tableSchema = $generator->getTableSchema()) === false) {
+                            foreach ($generator->getColumnNames() as $name) {
+                                echo "            '" . $name . "',\n";
+                            }
+                        } else {
+                            foreach ($generator->getTableSchema()->columns as $column) {
+                                $format = $generator->generateColumnFormat($column);
+                                echo "            '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
+                            }
+                        }
+                        ?>
+                        ],
+                        ]) ?>
+                    </div>
                 </div>
+            </div>
         </div>
+    </div>
+</div>
 
 

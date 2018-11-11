@@ -20,9 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
             <div class="panel-body">
-                <?= Html::a('<i class="fa-th-list"></i><span> Manage Customers</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                 <div class="panel-body"><div class="customers-view">
                         <p>
+                            <?= Html::a('<i class="fa fa-list"></i><span> Manage Customers</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                             <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 
                         </p>

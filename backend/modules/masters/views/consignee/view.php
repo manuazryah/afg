@@ -20,9 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
             <div class="panel-body">
-                <?= Html::a('<i class="fa-th-list"></i><span> Manage Consignee</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                 <div class="panel-body"><div class="consignee-view">
                         <p>
+                            <?= Html::a('<i class="fa fa-list"></i><span> Manage Consignee</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                             <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 
                         </p>
@@ -31,14 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         DetailView::widget([
                             'model' => $model,
                             'attributes' => [
-                                
-                                 [
+                                    [
                                     'attribute' => 'customers_id',
                                     'value' => function($model) {
                                         if (!empty($model->customers_id)) {
-                                          $customers= \common\models\Customers::findOne($model->customers_id)  ;
-                                          if(!empty($customers))
-                                             return $customers->name;
+                                            $customers = \common\models\Customers::findOne($model->customers_id);
+                                            if (!empty($customers))
+                                                return $customers->name;
                                         }
                                     }
                                 ],
@@ -46,9 +45,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'attribute' => 'consignee_id',
                                     'value' => function($model) {
                                         if (!empty($model->consignee_id)) {
-                                          $consignee= \common\models\Consignee::findOne($model->consignee_id)  ;
-                                          if(!empty($consignee))
-                                            return  $consignee->consignee_name;
+                                            $consignee = \common\models\Consignee::findOne($model->consignee_id);
+                                            if (!empty($consignee))
+                                                return $consignee->consignee_name;
                                         }
                                     }
                                 ],
@@ -61,8 +60,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'address2',
                                 'state',
                                 'zipcode',
-                               
-                               
                             ],
                         ])
                         ?>

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Export */
 
-$this->title = $model->id;
+$this->title = 'Export Details';
 $this->params['breadcrumbs'][] = ['label' => 'Exports', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -24,126 +24,158 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="panel-body"><div class="export-view">
                         <p>
                             <?= Html::a('<i class="fa fa-list"></i><span> Manage Export</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
-                            <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                            <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
 
                         </p>
-
-                        <?=
-                        DetailView::widget([
-                            'model' => $model,
-                            'attributes' => [
-                                [
-                                    'attribute' => 'vehicle_id',
-                                    'value' => function($model) {
-                                        $vehicles = explode(',', $model->vehicle_id);
-                                        foreach ($vehicles as $value) {
-                                            $vehicle_detail = \common\models\Vehicle::findOne($value);
-                                            if (!empty($vehicle_detail))
-                                                return $vehicle_detail->vin . ',';
-                                        }
-                                    }
-                                ],
-                                [
-                                    'attribute' => 'customer',
-                                    'value' => function($model) {
-                                        $customer = common\models\Customers::findOne($model->customer);
-                                        if (!empty($customer))
-                                            return $customer->name;
-                                        else
-                                            return '';
-                                    }
-                                ],
-                                'customer_id',
-                                'cust_address:ntext',
-                                'export_date',
-                                'loding_date',
-                                'broker_name',
-                                'booking_no',
-                                'ETA',
-                                'ar_no',
-                                'xtn_no',
-                                'seal_no',
-                                'container_no',
-                                'cut_off',
-                                'vessel',
-                                'voyage',
-                                'terminal',
-                                'stremship_line',
-                                'destination',
-                                'ITN',
-                                'contact_details:ntext',
-                                'special_instruction:ntext',
-                                'port_of_loading',
-                                'port_of_discharge',
-                                'bol_note',
-                                [
-                                    'attribute' => 'additional_info_container_type',
-                                    'value' => function($model) {
-                                        if ($model->additional_info_container_type == 1) {
-                                            return "1 X 20'HC DRY VAN";
-                                        } else if ($model->additional_info_container_type == 2) {
-                                            return "1 X 45'HC DRY VAN";
-                                        } else if ($model->additional_info_container_type == 3) {
-                                            return "1 X 40'HC DRY VAN";
-                                        }
-                                    }
-                                ],
-                                'bl_or_awb_number',
-                                'export_referance',
-                                'forwading_agent:ntext',
-                                'domestic_routing_instructions:ntext',
-                                'pre_carraiage_by',
-                                'place_of_recipt_by_pre_carrrier',
-                                'final_destintion',
-                                'loading_terminal',
-                                'container_type',
-                                'number_of_packages',
-                                'by',
-                                'exporting_carruer',
-                                'date',
-                                'auto_recieving_date',
-                                'auto_cut_off',
-                                'vessel_cut_off',
-                                'sale_date',
-                                'vehicle_location',
-                                'exporter_id',
-                                'exporter_type_issue',
-                                'transpotation_value',
-                                'exporter_dob',
-                                'ultimate_consignee_dob',
-                                [
-                                    'attribute' => 'conignee_id',
-                                    'value' => function($model) {
-                                        $consignee = common\models\Consignee::findOne($model->conignee_id);
-                                        if (!empty($consignee))
-                                            return $consignee->consignee_name;
-                                        else
-                                            return '';
-                                    }
-                                ],
-                                [
-                                    'attribute' => 'notify_party',
-                                    'value' => function($model) {
-                                        $notify = common\models\Consignee::findOne($model->notify_party);
-                                        if (!empty($notify))
-                                            return $notify->consignee_name;
-                                        else
-                                            return '';
-                                    }
-                                ],
-                                [
-                                    'attribute' => 'menifest_consignee',
-                                    'value' => function($model) {
-                                        $menifest_consignee = common\models\Consignee::findOne($model->menifest_consignee);
-                                        if (!empty($menifest_consignee))
-                                            return $menifest_consignee->consignee_name;
-                                        else
-                                            return '';
-                                    }
-                                ],
-                            ],
-                        ])
-                        ?>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <h4>Export Detail</h4>
+                                <table class="table table-bordered table-responsive">
+                                    <tr>
+                                        <th>EXPORT DATE</th>
+                                        <td><?= $model->export_date ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>LOADING DATE</th>
+                                        <td><?= $model->loding_date ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>BROKER NAME</th>
+                                        <td><?= $model->broker_name ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>BOOKING NO</th>
+                                        <td><?= $model->booking_no ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>ETA</th>
+                                        <td><?= $model->ETA ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>AR NO</th>
+                                        <td><?= $model->ar_no ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>XTN NO</th>
+                                        <td><?= $model->xtn_no ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>SEAL NO</th>
+                                        <td><?= $model->seal_no ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>CONTAINER NO</th>
+                                        <td><?= $model->container_no ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>CUT OFF</th>
+                                        <td><?= $model->cut_off ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>VESSEL</th>
+                                        <td><?= $model->vessel ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>VOYAGE</th>
+                                        <td><?= $model->voyage ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>TERMINAL</th>
+                                        <td><?= $model->terminal ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>STREAMSHIP LINE</th>
+                                        <td><?= $model->stremship_line ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>ITN</th>
+                                        <td><?= $model->ITN ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>CONTAINER TYPE</th>
+                                        <td><?= $model->additional_info_container_type ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>PORT OF LOADING</th>
+                                        <td><?= $model->port_of_loading ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>PORT OF DISCHARGE</th>
+                                        <td><?= $model->port_of_discharge ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>BOL NOTE</th>
+                                        <td><?= $model->bol_note ?></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <h4>Houston Custom Cover Letter</h4>
+                                <table class="table table-bordered table-responsive">
+                                    <tr>
+                                        <th>EXPORT DATE</th>
+                                        <td><?= $model->export_date ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>VEHICLE LOCATION</th>
+                                        <td><?= $model->vehicle_location ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>EXPORTER ID</th>
+                                        <td><?= $model->exporter_id ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>EXPORTER TYPE ISSUER</th>
+                                        <td><?= $model->exporter_type_issue ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>TRANSPORTATION VALUE</th>
+                                        <td><?= $model->transpotation_value ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>EXPORTER DOB</th>
+                                        <td><?= $model->exporter_dob ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>ULTIMATE CONSIGNEE DOB</th>
+                                        <td><?php ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>CONSIGNEE</th>
+                                        <td><?= $model->conignee_id ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>NOTIFY PARTY</th>
+                                        <td><?= $model->notify_party ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>LABEL</th>
+                                        <td><?php ?></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <h4>Customer Information</h4>
+                                <table class="table table-bordered table-responsive">
+                                    <tr>
+                                        <th>CUSTOMER NAME</th>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>CUSTOMER ID</th>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>COMPANY NAME</th>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>EMAIL</th>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

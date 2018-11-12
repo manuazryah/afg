@@ -17,7 +17,7 @@ use common\models\Consignee;
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="row">
-        <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>
+        <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
             <?php
             $vehicles = ArrayHelper::map(common\models\Vehicle::find()->all(), 'id', 'vin');
             if (!$model->isNewRecord) {
@@ -59,6 +59,7 @@ use common\models\Consignee;
             <?= $form->field($model, 'cust_address')->textInput(['readonly' => true]) ?>
         </div>
     </div>
+    <hr class="horizontal-line">
     <div class="row">
         <h4 class="frm-sub-title">Export Info </h4>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
@@ -173,14 +174,14 @@ use common\models\Consignee;
             <?= $form->field($model, 'contact_details')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
+    <hr class="horizontal-line">
     <div class="row">
-        <hr>
         <h4 class="frm-sub-title">Additional Info </h4>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'special_instruction')->textarea(['rows' => 4]) ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'additional_info_container_type')->dropDownList([''=>'--Select--','1'=>"1 X 20'HC DRY VAN",'2'=>"1 X 45'HC DRY VAN",'3'=>"1 X 40'HC DRY VAN"]) ?>
+            <?= $form->field($model, 'additional_info_container_type')->dropDownList(['' => '--Select--', '1' => "1 X 20'HC DRY VAN", '2' => "1 X 45'HC DRY VAN", '3' => "1 X 40'HC DRY VAN"]) ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'port_of_loading')->textInput(['maxlength' => true]) ?>
@@ -192,8 +193,8 @@ use common\models\Consignee;
             <?= $form->field($model, 'bol_note')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
+    <hr class="horizontal-line">
     <div class="row">
-        <hr>
         <h4 class="frm-sub-title">Dock Receipt - More Info </h4>
         <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'bl_or_awb_number')->textInput(['maxlength' => true]) ?>
@@ -322,8 +323,8 @@ use common\models\Consignee;
             ?>
         </div>
     </div>
+    <hr class="horizontal-line">
     <div class="row">
-        <hr>
         <h4 class="frm-sub-title">Houston Customs Cover Letter </h4>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'vehicle_location')->textInput(['maxlength' => true]) ?>
@@ -413,9 +414,8 @@ use common\models\Consignee;
             ?>
         </div>
     </div>
-
+    <hr class="horizontal-line">
     <div class="row">
-        <hr>
         <h4 class="frm-sub-title">Container Images</h4>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'invoice')->fileInput() ?>
@@ -435,7 +435,10 @@ use common\models\Consignee;
     </div>
 
     <div class="row">
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+        <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
+            <?= $form->field($model, 'container_images[]')->fileInput(['multiple' => true]) ?>
+        </div>
+        <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'container_images[]')->fileInput(['multiple' => true]) ?>
         </div>
     </div>

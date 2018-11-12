@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "export".
  *
  * @property int $id
+ * @property string $vehicle_id
  * @property string $customer
  * @property int $customer_id
  * @property string $cust_address
@@ -32,6 +33,7 @@ use Yii;
  * @property string $port_of_loading
  * @property string $port_of_discharge
  * @property string $bol_note
+ * @property int $additional_info_container_type
  * @property string $bl_or_awb_number
  * @property string $export_referance
  * @property string $forwading_agent
@@ -67,38 +69,45 @@ use Yii;
  *
  * @property ContainerImage[] $containerImages
  */
-class Export extends \yii\db\ActiveRecord {
-
+class Export extends \yii\db\ActiveRecord
+{
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public static function tableName() {
+    
+    public $container_images;
+    
+    public static function tableName()
+    {
         return 'export';
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['customer', 'customer_id'], 'required'],
-            [['customer_id', 'conignee_id', 'notify_party', 'menifest_consignee', 'status', 'CB', 'UB'], 'integer'],
+            [['customer_id', 'additional_info_container_type', 'conignee_id', 'notify_party', 'menifest_consignee', 'status', 'CB', 'UB'], 'integer'],
             [['cust_address', 'contact_details', 'special_instruction', 'forwading_agent', 'domestic_routing_instructions'], 'string'],
-            [['export_date', 'loding_date', 'ETA', 'cut_off', 'date', 'auto_recieving_date', 'auto_cut_off', 'vessel_cut_off', 'sale_date', 'exporter_dob', 'ultimate_consignee_dob', 'DOC', 'DOU'], 'safe'],
+            [['export_date', 'loding_date', 'ETA', 'cut_off', 'date', 'auto_recieving_date', 'auto_cut_off', 'vessel_cut_off', 'sale_date', 'exporter_dob', 'ultimate_consignee_dob', 'DOC', 'DOU','vehicle_id','container_images'], 'safe'],
             [['customer', 'broker_name'], 'string', 'max' => 80],
             [['booking_no', 'ar_no', 'xtn_no', 'seal_no', 'container_no', 'vessel', 'voyage', 'terminal', 'stremship_line', 'destination', 'ITN', 'port_of_loading', 'port_of_discharge', 'bol_note', 'bl_or_awb_number', 'export_referance', 'pre_carraiage_by', 'place_of_recipt_by_pre_carrrier', 'final_destintion', 'loading_terminal', 'container_type', 'number_of_packages', 'by', 'exporting_carruer', 'vehicle_location', 'exporter_id', 'exporter_type_issue', 'transpotation_value', 'invoice'], 'string', 'max' => 45],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => 'ID',
+            'vehicle_id' => 'Vehicle',
             'customer' => 'Customer',
             'customer_id' => 'Customer ID',
-            'cust_address' => 'Cust Address',
+            'cust_address' => 'Customer Address',
             'export_date' => 'Export Date',
             'loding_date' => 'Loding Date',
             'broker_name' => 'Broker Name',
@@ -108,18 +117,19 @@ class Export extends \yii\db\ActiveRecord {
             'xtn_no' => 'Xtn No',
             'seal_no' => 'Seal No',
             'container_no' => 'Container No',
-            'cut_off' => 'CUT OFF',
+            'cut_off' => 'Cut Off',
             'vessel' => 'Vessel',
             'voyage' => 'Voyage',
             'terminal' => 'Terminal',
             'stremship_line' => 'Stremship Line',
             'destination' => 'Destination',
-            'ITN' => 'Itn',
+            'ITN' => 'ITN',
             'contact_details' => 'Contact Details',
             'special_instruction' => 'Special Instruction',
             'port_of_loading' => 'Port Of Loading',
             'port_of_discharge' => 'Port Of Discharge',
             'bol_note' => 'Bol Note',
+            'additional_info_container_type' => 'Container Type',
             'bl_or_awb_number' => 'Bl Or Awb Number',
             'export_referance' => 'Export Referance',
             'forwading_agent' => 'Forwading Agent',
@@ -143,23 +153,23 @@ class Export extends \yii\db\ActiveRecord {
             'transpotation_value' => 'Transpotation Value',
             'exporter_dob' => 'Exporter Dob',
             'ultimate_consignee_dob' => 'Ultimate Consignee Dob',
-            'conignee_id' => 'Conignee ID',
+            'conignee_id' => 'Consignee',
             'notify_party' => 'Notify Party',
             'menifest_consignee' => 'Menifest Consignee',
             'invoice' => 'Invoice',
             'status' => 'Status',
-            'CB' => 'Cb',
-            'UB' => 'Ub',
-            'DOC' => 'Doc',
-            'DOU' => 'Dou',
+            'CB' => 'C B',
+            'UB' => 'U B',
+            'DOC' => 'D O C',
+            'DOU' => 'D O U',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getContainerImages() {
+    public function getContainerImages()
+    {
         return $this->hasMany(ContainerImage::className(), ['export_id' => 'id']);
     }
-
 }

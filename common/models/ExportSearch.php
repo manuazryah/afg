@@ -18,8 +18,8 @@ class ExportSearch extends Export
     public function rules()
     {
         return [
-            [['id', 'customer_id', 'conignee_id', 'notify_party', 'menifest_consignee', 'status', 'CB', 'UB'], 'integer'],
-            [['customer', 'cust_address', 'export_date', 'loding_date', 'broker_name', 'booking_no', 'ETA', 'ar_no', 'xtn_no', 'seal_no', 'container_no', 'cut_off', 'vessel', 'voyage', 'terminal', 'stremship_line', 'destination', 'ITN', 'contact_details', 'special_instruction', 'port_of_loading', 'port_of_discharge', 'bol_note', 'bl_or_awb_number', 'export_referance', 'forwading_agent', 'domestic_routing_instructions', 'pre_carraiage_by', 'place_of_recipt_by_pre_carrrier', 'final_destintion', 'loading_terminal', 'container_type', 'number_of_packages', 'by', 'exporting_carruer', 'date', 'auto_recieving_date', 'auto_cut_off', 'vessel_cut_off', 'sale_date', 'vehicle_location', 'exporter_id', 'exporter_type_issue', 'transpotation_value', 'exporter_dob', 'ultimate_consignee_dob', 'invoice', 'DOC', 'DOU'], 'safe'],
+            [['id', 'customer_id', 'additional_info_container_type', 'conignee_id', 'notify_party', 'menifest_consignee', 'status', 'CB', 'UB'], 'integer'],
+            [['vehicle_id', 'customer', 'cust_address', 'export_date', 'loding_date', 'broker_name', 'booking_no', 'ETA', 'ar_no', 'xtn_no', 'seal_no', 'container_no', 'cut_off', 'vessel', 'voyage', 'terminal', 'stremship_line', 'destination', 'ITN', 'contact_details', 'special_instruction', 'port_of_loading', 'port_of_discharge', 'bol_note', 'bl_or_awb_number', 'export_referance', 'forwading_agent', 'domestic_routing_instructions', 'pre_carraiage_by', 'place_of_recipt_by_pre_carrrier', 'final_destintion', 'loading_terminal', 'container_type', 'number_of_packages', 'by', 'exporting_carruer', 'date', 'auto_recieving_date', 'auto_cut_off', 'vessel_cut_off', 'sale_date', 'vehicle_location', 'exporter_id', 'exporter_type_issue', 'transpotation_value', 'exporter_dob', 'ultimate_consignee_dob', 'invoice', 'DOC', 'DOU'], 'safe'],
         ];
     }
 
@@ -65,6 +65,7 @@ class ExportSearch extends Export
             'loding_date' => $this->loding_date,
             'ETA' => $this->ETA,
             'cut_off' => $this->cut_off,
+            'additional_info_container_type' => $this->additional_info_container_type,
             'date' => $this->date,
             'auto_recieving_date' => $this->auto_recieving_date,
             'auto_cut_off' => $this->auto_cut_off,
@@ -82,7 +83,8 @@ class ExportSearch extends Export
             'DOU' => $this->DOU,
         ]);
 
-        $query->andFilterWhere(['like', 'customer', $this->customer])
+        $query->andFilterWhere(['like', 'vehicle_id', $this->vehicle_id])
+            ->andFilterWhere(['like', 'customer', $this->customer])
             ->andFilterWhere(['like', 'cust_address', $this->cust_address])
             ->andFilterWhere(['like', 'broker_name', $this->broker_name])
             ->andFilterWhere(['like', 'booking_no', $this->booking_no])

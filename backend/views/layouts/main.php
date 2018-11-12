@@ -101,11 +101,15 @@ AppAsset::register($this);
                     <li>
                         <?= Html::a('<i class="fa fa-building"></i> <span class="title">Consignee</span>', ['/masters/consignee/index'], ['class' => 'title']) ?>
                     </li>
+                    
                     <li>
-                        <?= Html::a('<i class="fa fa-th"></i> <span>Container</span>', ['/site/index'], ['class' => '']) ?>
+                        <?= Html::a('<i class="fa fa-bus"></i> <span class="title">Vehicle</span>', ['/masters/vehicle/index'], ['class' => 'title']) ?>
                     </li>
                     <li>
-                        <?= Html::a('<i class="fa fa-files-o"></i> <span class="title">Export</span>', ['/masters/export/index'], ['class' => 'title']) ?>
+                        <?= Html::a('<i class="fa fa-th"></i> <span>Container</span>', ['/export/export/container'], ['class' => '']) ?>
+                    </li>
+                    <li>
+                        <?= Html::a('<i class="fa fa-files-o"></i> <span class="title">Export</span>', ['/export/export/index'], ['class' => 'title']) ?>
                     </li>
                     <li>
                         <?= Html::a('<i class="fa fa-credit-card"></i> <span>Payments</span>', ['/site/index'], ['class' => '']) ?>

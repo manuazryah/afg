@@ -231,3 +231,21 @@ body {
     color: #dd4b39;
 }
 /**************************** Dashboard css End ***********************/
+
+
+.img-box {
+    margin: 10px 0px;
+}
+.news-img {
+    border: 1px solid #e4dede;
+}
+.gal-img-remove {
+    position: absolute;
+    top: 6px;
+    right: 16px;
+    font-size: 16px;
+    color: red;
+}
+.vehicle-check-options label{
+    font-weight: normal;
+}

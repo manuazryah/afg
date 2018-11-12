@@ -6,7 +6,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
+use common\models\ForgotPasswordTokens;
 use common\models\AdminUsers;
 use common\models\AdminPosts;
 
@@ -178,12 +178,12 @@ class SiteController extends Controller {
         $to = $model->email;
         $subject = 'Change password';
         $message = $this->renderPartial('forgot_mail', ['model' => $model, 'val' => $val]);
-        echo $message;
-        exit;
+//        echo $message;
+//        exit;
         // Always set content-type when sending HTML email
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= 'From: <info@avensiauae.com>' . "\r\n";
+        $headers .= 'From: <info@afg.com>' . "\r\n";
         mail($to, $subject, $message, $headers);
         return TRUE;
     }

@@ -39,7 +39,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="form-group">
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
-
+            <div class="clearfix"></div>
+            <div class="separator">
+                <p class="change_link">
+                    <a href="<?= Yii::$app->homeUrl; ?>site/forgot" class="to_register">Forgot your password?</a>
+                </p>
+                <div class="clearfix"></div>
+            </div>
             <?php ActiveForm::end(); ?>
         </div>
     </div>

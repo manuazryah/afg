@@ -4,7 +4,6 @@
 
 use backend\assets\AppAssetLogin;
 use yii\helpers\Html;
-use common\widgets\Alert;
 
 AppAssetLogin::register($this);
 ?>
@@ -26,7 +25,6 @@ AppAssetLogin::register($this);
         <div class="login-box">
             <!-- /.login-logo -->
             <div class="login-box-body">
-                <?= Alert::widget() ?>
                 <?= $content ?>
 
             </div>

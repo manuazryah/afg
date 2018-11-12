@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
     <div class="login-logo">
-        <h1><span>AFG</span> Shipping</h1>
+        <h1><span>AFG</span>Shipping</h1>
     </div>
 
     <p>Please fill out the following fields to login:</p>
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'inputTemplate' => "{input}<span class='glyphicon glyphicon-user form-control-feedback'></span>"
             ];
             ?>
-            <?= $form->field($model, 'username', $fieldOptions2)->label('User Name')->textInput() ?>
+            <?= $form->field($model, 'user_name', $fieldOptions2)->label('User Name')->textInput() ?>
             <?php
             $fieldOptions3 = [
                 'options' => ['class' => 'form-group has-feedback'],

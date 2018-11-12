@@ -191,4 +191,16 @@ body {
     background-color: #3ec1d5;
     border-color: #3ec1d5;
 }
+.change-pwd{
+    background: #a90707;
+    color: #fff;
+    font-weight: 600;
+}
+.change-pwd:hover{
+    background: #8e0606;
+    color: #fff;
+}
+.cl-red{
+    color: red;
+}
 /**************************** Dashboard css End ***********************/

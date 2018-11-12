@@ -10,7 +10,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-         'gii' => [
+        'gii' => [
             'class' => 'yii\gii\Module',
             'allowedIPs' => ['127.0.0.1', '::1', '192.168.0.*', '192.168.178.20'], // adjust this to your needs
             'generators' => [//here
@@ -22,7 +22,10 @@ return [
                 ]
             ],
         ],
-         'masters' => [
+        'admin' => [
+            'class' => 'backend\modules\admin\Module',
+        ],
+        'masters' => [
             'class' => 'backend\modules\masters\Module',
         ],
     ],
@@ -31,7 +34,7 @@ return [
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\models\AdminUsers',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
@@ -42,7 +45,7 @@ return [
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
-                    [
+                [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],

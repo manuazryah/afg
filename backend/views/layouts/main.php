@@ -14,6 +14,7 @@ AppAsset::register($this);
         <meta charset="<?= Yii::$app->charset ?>">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="<?= Yii::$app->homeUrl; ?>img/favicon.png" rel="icon">
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <script src="<?= Yii::$app->homeUrl; ?>js/jquery.min.js"></script>
@@ -67,13 +68,31 @@ AppAsset::register($this);
                         <img src="<?= Yii::$app->homeUrl; ?>img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p><?= Yii::$app->user->identity->username ?></p>
+                        <p><?= Yii::$app->user->identity->user_name ?></p>
                     </div>
                 </div>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li>
                         <?= Html::a('<i class="fa fa-home"></i> <span>Home</span>', ['/site/index'], ['class' => '']) ?>
+                    </li>
+                    <li class="treeview">
+                        <a href="">
+                            <i class="fa fa-dashboard"></i>
+                            <span>Administration</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <?= Html::a('<i class="fa fa-angle-double-right"></i> Access Powers', ['/admin/admin-posts/index'], ['class' => 'title']) ?>
+                            </li>
+
+                            <li>
+                                <?= Html::a('<i class="fa fa-angle-double-right"></i> Admin Users', ['/admin/admin-users/index'], ['class' => 'title']) ?>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <?= Html::a('<i class="fa fa-users"></i> <span class="title">Customers</span>', ['/masters/customers/index'], ['class' => 'title']) ?>
@@ -83,7 +102,42 @@ AppAsset::register($this);
                         <?= Html::a('<i class="fa fa-building"></i> <span class="title">Consignee</span>', ['/masters/consignee/index'], ['class' => 'title']) ?>
                     </li>
                     <li>
+                        <?= Html::a('<i class="fa fa-th"></i> <span>Container</span>', ['/site/index'], ['class' => '']) ?>
+                    </li>
+                    <li>
                         <?= Html::a('<i class="fa fa-files-o"></i> <span class="title">Export</span>', ['/masters/export/index'], ['class' => 'title']) ?>
+                    </li>
+                    <li>
+                        <?= Html::a('<i class="fa fa-credit-card"></i> <span>Payments</span>', ['/site/index'], ['class' => '']) ?>
+                    </li>
+                    <li class="treeview">
+                        <a href="">
+                            <i class="fa fa-file-text-o"></i>
+                            <span>Invoices</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <?= Html::a('<i class="fa fa-angle-double-right"></i> <span>All Invoices</span>', ['/site/index'], ['class' => '']) ?>
+                            </li>
+                            <li>
+                                <?= Html::a('<i class="fa fa-angle-double-right"></i> <span>Paid Invoices</span>', ['/site/index'], ['class' => '']) ?>
+                            </li>
+                            <li>
+                                <?= Html::a('<i class="fa fa-angle-double-right"></i> <span>Partial Paid Invoices</span>', ['/site/index'], ['class' => '']) ?>
+                            </li>
+                            <li>
+                                <?= Html::a('<i class="fa fa-angle-double-right"></i> <span>Un Paid Invoices</span>', ['/site/index'], ['class' => '']) ?>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <?= Html::a('<i class="fa fa-money"></i> <span>Prices</span>', ['/site/index'], ['class' => '']) ?>
+                    </li>
+                    <li>
+                        <?= Html::a('<i class="fa fa-bullhorn"></i> <span>Notifications</span>', ['/site/index'], ['class' => '']) ?>
                     </li>
                 </ul>
             </section>
@@ -102,7 +156,7 @@ AppAsset::register($this);
             <div class="pull-right hidden-xs">
                 <b>Version</b> 2.4.0
             </div>
-            <strong>Copyright &copy; 2017-2018 <a href="https://www.epitome.ae/">epitome.ae</a>.</strong> All rights
+            <strong>Copyright &copy; 2017-2018 <a href="http://azryah.com/">AFG Shipping</a>.</strong> All rights
             reserved.
         </footer>
         <?php $this->endBody() ?>

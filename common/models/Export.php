@@ -67,21 +67,19 @@ use Yii;
  *
  * @property ContainerImage[] $containerImages
  */
-class Export extends \yii\db\ActiveRecord
-{
+class Export extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'export';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['customer', 'customer_id'], 'required'],
             [['customer_id', 'conignee_id', 'notify_party', 'menifest_consignee', 'status', 'CB', 'UB'], 'integer'],
@@ -95,8 +93,7 @@ class Export extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'customer' => 'Customer',
@@ -106,12 +103,12 @@ class Export extends \yii\db\ActiveRecord
             'loding_date' => 'Loding Date',
             'broker_name' => 'Broker Name',
             'booking_no' => 'Booking No',
-            'ETA' => 'Eta',
+            'ETA' => 'ETA',
             'ar_no' => 'Ar No',
             'xtn_no' => 'Xtn No',
             'seal_no' => 'Seal No',
             'container_no' => 'Container No',
-            'cut_off' => 'Cut Off',
+            'cut_off' => 'CUT OFF',
             'vessel' => 'Vessel',
             'voyage' => 'Voyage',
             'terminal' => 'Terminal',
@@ -161,8 +158,8 @@ class Export extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getContainerImages()
-    {
+    public function getContainerImages() {
         return $this->hasMany(ContainerImage::className(), ['export_id' => 'id']);
     }
+
 }

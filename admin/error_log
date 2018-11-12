@@ -1,0 +1,255 @@
+[12-Jun-2018 17:11:33 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[12-Jun-2018 17:11:33 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[12-Jun-2018 17:11:33 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[12-Jun-2018 17:11:45 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[12-Jun-2018 17:11:45 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[12-Jun-2018 17:11:45 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[12-Jun-2018 17:13:57 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[12-Jun-2018 17:13:57 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[12-Jun-2018 17:13:57 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 06:40:23 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 06:40:23 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 06:40:23 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 06:40:24 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 06:40:24 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 06:40:24 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 09:55:44 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 09:55:44 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 09:55:44 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 09:55:45 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 09:55:45 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 09:55:45 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 12:46:20 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 12:46:20 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 12:46:20 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 12:46:21 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 12:46:21 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 12:46:21 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 12:52:34 Etc/GMT] An Error occurred while handling another error:
+exception 'yii\base\InvalidArgumentException' with message 'The HTTP status code is invalid: 2000' in /home/coral3rq/public_html/avensia/vendor/yiisoft/yii2/web/Response.php:285
+Stack trace:
+#0 /home/coral3rq/public_html/avensia/vendor/yiisoft/yii2/web/Response.php(306): yii\web\Response->setStatusCode(2000)
+#1 /home/coral3rq/public_html/avensia/vendor/yiisoft/yii2/web/ErrorHandler.php(103): yii\web\Response->setStatusCodeByException(Object(yii\web\HttpException))
+#2 /home/coral3rq/public_html/avensia/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(yii\web\HttpException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HttpException))
+#4 {main}
+Previous exception:
+exception 'yii\web\HttpException' with message 'Session Expired.' in /home/coral3rq/public_html/avensia/backend/controllers/SiteController.php:103
+Stack trace:
+#0 [internal function]: backend\controllers\SiteController->actionHome()
+#1 /home/coral3rq/public_html/avensia/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#2 /home/coral3rq/public_html/avensia/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#3 /home/coral3rq/public_html/avensia/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('home', Array)
+#4 /home/coral3rq/public_html/avensia/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('site/home', Array)
+#5 /home/coral3rq/public_html/avensia/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#6 /home/coral3rq/public_html/avensia/admin/index.php(15): yii\base\Application->run()
+#7 {main}
+$_SERVER = [
+    'LSPHP_ENABLE_USER_INI' => 'on',
+    'PATH' => '/usr/local/bin:/usr/bin:/bin',
+    'TEMP' => '/tmp',
+    'TMP' => '/tmp',
+    'TMPDIR' => '/tmp',
+    'PWD' => '/',
+    'HTTP_ACCEPT' => '*/*',
+    'HTTP_ACCEPT_ENCODING' => 'gzip',
+    'HTTP_CONNECTION' => 'close',
+    'CONTENT_LENGTH' => '0',
+    'HTTP_HOST' => 'coralepitome.com',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/600.1.25 (KHTML, like Gecko) Version/8.0 Safari/600.1.25',
+    'HTTP_X_FORWARDED_FOR' => '192.185.129.71',
+    'REDIRECT_UNIQUE_ID' => 'WyETkp-o5OCWZr-VUYngTgAAAA4',
+    'REDIRECT_STATUS' => '200',
+    'UNIQUE_ID' => 'WyETkp-o5OCWZr-VUYngTgAAAA4',
+    'SERVER_SIGNATURE' => '',
+    'SERVER_SOFTWARE' => 'Apache/2.4.33 (cPanel) OpenSSL/1.0.2o mod_bwlimited/1.4 Phusion_Passenger/5.1.12',
+    'SERVER_NAME' => 'coralepitome.com',
+    'SERVER_ADDR' => '192.185.129.71',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '54.86.66.252',
+    'DOCUMENT_ROOT' => '/home/coral3rq/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/home/coral3rq/public_html',
+    'SERVER_ADMIN' => 'webmaster@coralepitome.com',
+    'SCRIPT_FILENAME' => '/home/coral3rq/public_html/avensia/admin/index.php',
+    'REMOTE_PORT' => '46021',
+    'REDIRECT_URL' => '/avensia/admin/site/home',
+    'REDIRECT_QUERY_STRING' => 'site/home',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => 'site/home',
+    'REQUEST_URI' => '/avensia/admin/site/home',
+    'SCRIPT_NAME' => '/avensia/admin/index.php',
+    'PHP_SELF' => '/avensia/admin/index.php',
+    'REQUEST_TIME_FLOAT' => 1528894354.1591470241546630859375,
+    'REQUEST_TIME' => 1528894354,
+]
+[13-Jun-2018 12:52:34 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 12:52:34 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 12:52:34 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:37:54 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:37:54 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:37:54 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:38:14 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:38:14 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:38:14 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:38:31 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:38:31 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:38:31 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:38:35 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:38:35 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:38:35 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:39:24 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:39:24 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:39:24 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:39:32 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:39:32 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:39:32 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:39:47 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:39:47 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:39:47 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:39:54 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:39:54 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:39:54 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:40:04 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:40:04 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:40:04 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:40:12 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:40:12 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:40:12 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:40:16 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:40:16 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:40:16 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:40:20 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:40:20 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:40:20 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:45:04 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:45:04 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:45:04 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:45:05 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:45:05 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:45:05 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:47:19 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:47:19 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:47:19 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:49:33 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:49:33 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:49:33 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:49:45 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:49:45 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:49:45 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:50:25 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:50:25 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:50:25 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:50:28 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:50:28 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:50:28 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:50:32 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:50:32 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:50:32 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:50:35 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:50:35 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:50:35 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:50:38 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:50:38 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:50:38 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:51:32 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:51:32 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:51:32 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:58:20 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:58:20 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:58:20 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[13-Jun-2018 14:58:24 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[13-Jun-2018 14:58:24 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[13-Jun-2018 14:58:24 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 04:55:39 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 04:55:39 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 04:55:39 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 04:55:40 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 04:55:40 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 04:55:40 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 04:56:15 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 04:56:15 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 04:56:15 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 06:22:18 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 06:22:18 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 06:22:18 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 06:27:06 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 06:27:06 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 06:27:06 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 06:28:48 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 06:28:48 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 06:28:48 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 06:28:49 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 06:28:49 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 06:28:49 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 06:51:14 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 06:51:14 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 06:51:14 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 06:51:15 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 06:51:15 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 06:51:15 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 07:59:21 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 07:59:21 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 07:59:21 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 08:24:06 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 08:24:06 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 08:24:06 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 08:59:37 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 08:59:37 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 08:59:37 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 09:40:00 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 09:40:00 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 09:40:00 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 10:11:42 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 10:11:42 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 10:11:42 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 10:11:43 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 10:11:43 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 10:11:43 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 11:14:55 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 11:14:55 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 11:14:55 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 11:48:00 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 11:48:00 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 11:48:00 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 12:21:50 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 12:21:50 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 12:21:50 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 17:28:26 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 17:28:26 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 17:28:26 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[14-Jun-2018 17:28:26 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[14-Jun-2018 17:28:26 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[14-Jun-2018 17:28:26 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[15-Jun-2018 05:58:35 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[15-Jun-2018 05:58:35 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[15-Jun-2018 05:58:35 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[15-Jun-2018 05:58:36 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[15-Jun-2018 05:58:36 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[15-Jun-2018 05:58:36 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[15-Jun-2018 17:33:33 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[15-Jun-2018 17:33:33 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[15-Jun-2018 17:33:33 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[15-Jun-2018 17:33:34 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[15-Jun-2018 17:33:34 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[15-Jun-2018 17:33:34 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[15-Jun-2018 17:33:34 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[15-Jun-2018 17:33:34 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[15-Jun-2018 17:33:34 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[15-Jun-2018 17:33:35 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[15-Jun-2018 17:33:35 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[15-Jun-2018 17:33:35 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[17-Jun-2018 09:20:04 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[17-Jun-2018 09:20:04 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[17-Jun-2018 09:20:04 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[17-Jun-2018 09:20:06 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[17-Jun-2018 09:20:06 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[17-Jun-2018 09:20:06 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[18-Jun-2018 09:04:16 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[18-Jun-2018 09:04:16 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[18-Jun-2018 09:04:16 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174
+[18-Jun-2018 10:00:22 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 158
+[18-Jun-2018 10:00:22 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 167
+[18-Jun-2018 10:00:22 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/coral3rq/public_html/avensia/backend/views/layouts/main.php on line 174

@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
     <div class="login-logo">
-        <img class="img-responsive" src="<?= yii::$app->homeUrl; ?>img/logo.jpg" alt="logo" />
+        <h1><span>AFG</span> Shipping</h1>
     </div>
 
     <p>Please fill out the following fields to login:</p>

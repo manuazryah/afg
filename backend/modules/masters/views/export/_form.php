@@ -81,7 +81,22 @@ use kartik\select2\Select2;
             <?= $form->field($model, 'booking_no')->textInput(['maxlength' => true]) ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'ETA')->textInput() ?>
+            <?php
+            if (!$model->isNewRecord) {
+                $model->ETA = date('d-m-Y', strtotime($model->ETA));
+            } else {
+                $model->ETA = date('d-m-Y');
+            }
+            ?>
+            <?=
+            $form->field($model, 'ETA')->widget(DatePicker::classname(), [
+                'type' => DatePicker::TYPE_INPUT,
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-M-yyyy'
+                ]
+            ]);
+            ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'ar_no')->textInput(['maxlength' => true]) ?>
@@ -96,7 +111,22 @@ use kartik\select2\Select2;
             <?= $form->field($model, 'container_no')->textInput(['maxlength' => true]) ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'cut_off')->textInput() ?>
+            <?php
+            if (!$model->isNewRecord) {
+                $model->cut_off = date('d-m-Y', strtotime($model->cut_off));
+            } else {
+                $model->cut_off = date('d-m-Y');
+            }
+            ?>
+            <?=
+            $form->field($model, 'cut_off')->widget(DatePicker::classname(), [
+                'type' => DatePicker::TYPE_INPUT,
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-M-yyyy'
+                ]
+            ]);
+            ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'vessel')->textInput(['maxlength' => true]) ?>
@@ -179,19 +209,94 @@ use kartik\select2\Select2;
             <?= $form->field($model, 'exporting_carruer')->textInput(['maxlength' => true]) ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'date')->textInput() ?>
+            <?php
+            if (!$model->isNewRecord) {
+                $model->date = date('d-m-Y', strtotime($model->date));
+            } else {
+                $model->date = date('d-m-Y');
+            }
+            ?>
+            <?=
+            $form->field($model, 'date')->widget(DatePicker::classname(), [
+                'type' => DatePicker::TYPE_INPUT,
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-M-yyyy'
+                ]
+            ]);
+            ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'auto_recieving_date')->textInput() ?>
+            <?php
+            if (!$model->isNewRecord) {
+                $model->auto_recieving_date = date('d-m-Y', strtotime($model->auto_recieving_date));
+            } else {
+                $model->auto_recieving_date = date('d-m-Y');
+            }
+            ?>
+            <?=
+            $form->field($model, 'auto_recieving_date')->widget(DatePicker::classname(), [
+                'type' => DatePicker::TYPE_INPUT,
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-M-yyyy'
+                ]
+            ]);
+            ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'auto_cut_off')->textInput() ?>
+            <?php
+            if (!$model->isNewRecord) {
+                $model->auto_cut_off = date('d-m-Y', strtotime($model->auto_cut_off));
+            } else {
+                $model->auto_cut_off = date('d-m-Y');
+            }
+            ?>
+            <?=
+            $form->field($model, 'auto_cut_off')->widget(DatePicker::classname(), [
+                'type' => DatePicker::TYPE_INPUT,
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-M-yyyy'
+                ]
+            ]);
+            ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'vessel_cut_off')->textInput() ?>
+            <?php
+            if (!$model->isNewRecord) {
+                $model->vessel_cut_off = date('d-m-Y', strtotime($model->vessel_cut_off));
+            } else {
+                $model->vessel_cut_off = date('d-m-Y');
+            }
+            ?>
+            <?=
+            $form->field($model, 'vessel_cut_off')->widget(DatePicker::classname(), [
+                'type' => DatePicker::TYPE_INPUT,
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-M-yyyy'
+                ]
+            ]);
+            ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'sale_date')->textInput() ?>
+            <?php
+            if (!$model->isNewRecord) {
+                $model->sale_date = date('d-m-Y', strtotime($model->sale_date));
+            } else {
+                $model->sale_date = date('d-m-Y');
+            }
+            ?>
+            <?=
+            $form->field($model, 'sale_date')->widget(DatePicker::classname(), [
+                'type' => DatePicker::TYPE_INPUT,
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-M-yyyy'
+                ]
+            ]);
+            ?>
         </div>
     </div>
     <div class="row">

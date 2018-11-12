@@ -20,17 +20,17 @@ AppAsset::register($this);
         <script type="text/javascript">
             var homeUrl = '<?= Yii::$app->homeUrl; ?>';
         </script>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <?php $this->head() ?>
     </head>
     <body class="skin-blue fixed sidebar-mini sidebar-mini-expand-feature sidebar-collapse">
         <?php $this->beginBody() ?>
         <header class="main-header">
-            <!-- Logo -->
             <a href="<?= yii::$app->homeUrl; ?>" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><img class="img-responsive" src="<?= yii::$app->homeUrl; ?>img/fav.png" alt="logo"/></span>
+                <span class="logo-mini"><b>A</b>FG</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><img class="img-responsive" src="<?= yii::$app->homeUrl; ?>img/logo.jpg" alt="logo" style="width: 150px;" /></span>
+                <span class="logo-lg"><b>AFG</b><span style="color:#fff;">SHIPPING</span></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -102,7 +102,7 @@ AppAsset::register($this);
             <div class="pull-right hidden-xs">
                 <b>Version</b> 2.4.0
             </div>
-            <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+            <strong>Copyright &copy; 2017-2018 <a href="https://www.epitome.ae/">epitome.ae</a>.</strong> All rights
             reserved.
         </footer>
         <?php $this->endBody() ?>

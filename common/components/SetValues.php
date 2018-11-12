@@ -22,7 +22,6 @@ class SetValues extends Component {
     public function Attributes($model) {
 
 
-
         if (isset($model) && !Yii::$app->user->isGuest) {
             if ($model->isNewRecord) {
                 $model->CB = Yii::$app->user->identity->id;

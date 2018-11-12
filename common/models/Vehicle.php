@@ -33,25 +33,23 @@ use Yii;
  * @property VehiceCheckOptions[] $vehiceCheckOptions
  * @property VehicleAttachements[] $vehicleAttachements
  */
-class Vehicle extends \yii\db\ActiveRecord
-{
+class Vehicle extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'vehicle';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['model', 'make', 'hat', 'weight', 'value', 'status_id', 'year'], 'required'],
             [['cheque_no', 'add_chgs', 'status_id'], 'integer'],
-            [['created_at', 'updated_at', 'year','attachments'], 'safe'],
+            [['created_at', 'updated_at', 'year', 'attachments','color','title_amount'], 'safe'],
             [['model', 'make', 'hat', 'weight', 'value', 'buyer_no', 'towed_from', 'lot_no', 'towed_amount', 'storage_amount', 'vin', 'created_by'], 'string', 'max' => 45],
         ];
     }
@@ -59,8 +57,7 @@ class Vehicle extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'model' => 'Model',
@@ -79,7 +76,7 @@ class Vehicle extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
-            'status_id' => 'Status ID',
+            'status_id' => 'Status',
             'year' => 'Year',
         ];
     }
@@ -87,40 +84,34 @@ class Vehicle extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCustomerTowingInfos()
-    {
-        return $this->hasMany(CustomerTowingInfo::className(), ['vehicle_id' => 'id']);
+    public function getTowingInfos() {
+        return $this->hasOne(VehicleTowingInfo::className(), ['vehicle_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTitleInfos()
-    {
-        return $this->hasMany(TitleInfo::className(), ['vehicle_id' => 'id']);
+    public function getTitleInfos() {
+        return $this->hasOne(VehicleTitleInfo::className(), ['vehicle_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVechicleConditions()
-    {
-        return $this->hasMany(VechicleCondition::className(), ['vehicle_id' => 'id']);
+    public function getVechicleConditions() {
+        return $this->hasOne(VehicleCondition::className(), ['vehicle_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVehiceCheckOptions()
-    {
-        return $this->hasMany(VehiceCheckOptions::className(), ['vehicle_id' => 'id']);
+    public function getVehiceCheckOptions() {
+        return $this->hasOne(VehiceCheckOptions::className(), ['vehicle_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVehicleAttachements()
-    {
-        return $this->hasMany(VehicleAttachements::className(), ['vehicle_id' => 'id']);
-    }
+    
+
 }

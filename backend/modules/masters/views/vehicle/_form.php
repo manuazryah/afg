@@ -82,17 +82,20 @@ use yii\helpers\ArrayHelper;
 
     <div class="row">
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($vehicle_title, 'title')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($vehicle_title, 'title')->dropDownList(['' => '', '1' => 'Yes', '0' => 'No']) ?>
         </div>
+
+        <div class='col-md-4 col-sm-6 col-xs-12 left_padd' id="title_type">
+            <?= $form->field($vehicle_title, 'title_type')->dropDownList(['' => '', '1' => 'EXPORTABLE', '2' => 'PENDING', '3' => 'BOS', '4' => 'LIEN']) ?>
+        </div>
+
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($vehicle_title, 'title_received')->textInput() ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($vehicle_title, 'title_no')->textInput(['maxlength' => true]) ?>
         </div>
-    </div>
 
-    <div class="row">
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($vehicle_title, 'title_state')->textInput(['maxlength' => true]) ?>
         </div>
@@ -145,6 +148,20 @@ use yii\helpers\ArrayHelper;
     </div>
 
     <div class="row">
+
+        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+            <?= $form->field($model, 'status_id')->dropDownList(['' => '--Select--', '1' => 'ON HAND', '2' => 'ON THE WAY', '3' => 'SHIPPED', '4' => 'PICKED UP']) ?>
+        </div>
+        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+            <?= $form->field($model, 'vin')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+            <?= $form->field($model, 'year')->textInput() ?>
+        </div>
+        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+            <?= $form->field($model, 'color')->textInput() ?>
+        </div>
+
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'model')->textInput(['maxlength' => true]) ?>
         </div>
@@ -176,21 +193,18 @@ use yii\helpers\ArrayHelper;
             <?= $form->field($model, 'storage_amount')->textInput(['maxlength' => true]) ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+            <?= $form->field($model, 'title_amount')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'cheque_no')->textInput() ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'add_chgs')->textInput() ?>
         </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'vin')->textInput(['maxlength' => true]) ?>
-        </div>
 
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'status_id')->textInput() ?>
-        </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'year')->textInput() ?>
-        </div>
+
+
+
     </div>
     <hr class="horizontal-line">
     <div class="row">
@@ -240,7 +254,7 @@ use yii\helpers\ArrayHelper;
     </div>
 
     <div class="row">
-        <h4 class="frm-sub-title">CONDITION OF VEHICLE</h4>
+
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($vehicle_condition, 'front_windshield')->textInput() ?>
         </div>
@@ -387,6 +401,7 @@ use yii\helpers\ArrayHelper;
 
 <script>
     $(document).ready(function () {
+        $('#title_type').hide();
         $('#vehicletowinginfo-customer_name').change(function () {
             $.ajax({
                 type: 'POST',
@@ -400,6 +415,21 @@ use yii\helpers\ArrayHelper;
                 }
             });
         });
+
+        $('#vehicletitleinfo-title').change(function () {
+            if($(this).val()==1){
+                $('#title_type').show();
+            } else{
+                $('#title_type').hide();
+            }
+        });
+        var value=$('#vehicletitleinfo-title').val();
+        if(value==1){
+                $('#title_type').show();
+            } else{
+                $('#title_type').hide();
+            }
+
     });
 
 </script>

@@ -76,7 +76,8 @@ class ExportController extends Controller {
      */
     public function actionCreate() {
         $model = new Export();
-        if ($model->load(Yii::$app->request->post())) {
+         
+        if ($model->load(Yii::$app->request->post()) &&  Yii::$app->SetValues->Attributes($model)) {
             $model->vehicle_id = implode(',', $model->vehicle_id);
             $model->export_date = date('Y-m-d', strtotime($model->export_date));
             $model->loding_date = date('Y-m-d', strtotime($model->loding_date));

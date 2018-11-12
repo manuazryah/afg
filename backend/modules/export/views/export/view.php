@@ -138,15 +138,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </tr>
                                     <tr>
                                         <th>ULTIMATE CONSIGNEE DOB</th>
-                                        <td><?php ?></td>
+                                        <td><?= $model->ultimate_consignee_dob ?></td>
                                     </tr>
                                     <tr>
                                         <th>CONSIGNEE</th>
-                                        <td><?= $model->conignee_id ?></td>
+                                        <?php $consignee = \common\models\Consignee::findOne($model->conignee_id) ?>
+                                        <td><?= $consignee->consignee_name ?></td>
                                     </tr>
                                     <tr>
                                         <th>NOTIFY PARTY</th>
-                                        <td><?= $model->notify_party ?></td>
+                                        <?php $notify_party = \common\models\Consignee::findOne($model->notify_party) ?>
+                                        <td><?= $notify_party->consignee_name ?></td>
                                     </tr>
                                     <tr>
                                         <th>LABEL</th>
@@ -157,25 +159,102 @@ $this->params['breadcrumbs'][] = $this->title;
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <h4>Customer Information</h4>
                                 <table class="table table-bordered table-responsive">
-                                    <tr>
-                                        <th>CUSTOMER NAME</th>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>CUSTOMER ID</th>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>COMPANY NAME</th>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>EMAIL</th>
-                                        <td></td>
-                                    </tr>
+                                    <?php
+                                    $customer = common\models\Customers::findOne($model->customer);
+                                    if (!empty($customer)) {
+                                        ?>
+                                        <tr>
+                                            <th>CUSTOMER NAME</th>
+                                            <td><?= $customer->name ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>CUSTOMER ID</th>
+                                            <td><?= $customer->customer_id ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>COMPANY NAME</th>
+                                            <td><?= $customer->company_name ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>EMAIL</th>
+                                            <td><?= $customer->email ?></td>
+                                        </tr>
+                                    <?php } ?>
                                 </table>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <h4>Export Vehicles</h4>
+                                <?php
+                                $vehicles = explode(',', $model->vehicle_id);
+                                ?>
+                                <table class="table table-bordered table-responsive">
+                                    <tr>
+                                        <th>YEAR</th>
+                                        <th>MAKE</th>
+                                        <th>MODEL</th>
+                                        <th>COLOR</th>
+                                        <th>VIN</th>
+                                        <th>STATUS</th>
+                                        <th>TITLE NO</th>
+                                        <th>TITLE STATE</th>
+                                        <th>LOT NO</th>
+                                    </tr>
+                                    <?php
+                                    foreach ($vehicles as $vehicle) {
+                                        $vehicle_detail = \common\models\Vehicle::findOne($vehicle);
+                                        $vehicle_title_info = common\models\VehicleTitleInfo::find()->where(['vehicle_id' => $vehicle_detail->id])->one();
+                                        ?>
+                                        <tr>
+                                            <td><?= $vehicle_detail->year ?></td>
+                                            <td><?= $vehicle_detail->make ?></td>
+                                            <td><?= $vehicle_detail->model ?></td>
+                                            <td><?= $vehicle_detail->color ?></td>
+                                            <td><?= $vehicle_detail->vin ?></td>
+                                            <td><?= $vehicle_detail->status_id ?></td>
+                                            <td><?= $vehicle_title_info->title ?></td>
+                                            <td><?php ?></td>
+                                            <td><?= $vehicle_detail->lot_no ?></td>
+                                        </tr>
+<?php } ?>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                            <h4>Container Images Gallery</h4>
+                            <?php
+                            $path = Yii::getAlias('@paths') . '/export/container/' . $model->id;
+                            if (count(glob("{$path}/*")) > 0) {
+                                $k = 0;
+                                foreach (glob("{$path}/*") as $file) {
+                                    $k++;
+                                    $arry = explode('/', $file);
+                                    $img_nmee = end($arry);
+                                    $img_nmees = explode('.', $img_nmee);
+                                    if ($img_nmees['1'] != '') {
+                                        ?>
+                                        <div class = "col-md-3 img-box" id="<?= $k; ?>">
+                                            <div class="news-img">
+                                                <img class="img-responsive" src="<?= Yii::$app->homeUrl . '../uploads/export/container/' . $model->id . '/' . end($arry) ?>">
+                                            </div> 
+                                        </div>
+                                        <?php
+                                    }
+                                    if ($k % 4 == 0) {
+                                        ?>
+                                        <div class="clearfix"></div>
+                                        <?php
+                                    }
+                                }
+                            }
+                            ?>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

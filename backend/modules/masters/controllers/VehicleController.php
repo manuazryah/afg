@@ -71,24 +71,33 @@ class VehicleController extends Controller {
         $vehicle_towing = new VehicleTowingInfo();
 
         if ($model->load(Yii::$app->request->post()) && $vehicle_check_options->load(Yii::$app->request->post()) && $vehicle_condition->load(Yii::$app->request->post()) && $vehicle_title->load(Yii::$app->request->post()) && $vehicle_towing->load(Yii::$app->request->post())) {
-            if ($model->save()) {
-                $vehicle_check_options->vehicle_id = $model->id;
-                $vehicle_condition->vehicle_id = $model->id;
-                $vehicle_title->vehicle_id = $model->id;
-                $vehicle_towing->vehicle_id = $model->id;
-                $vehicle_towing->customers_id = $vehicle_towing->customer_name;
-                $vehicle_title->towing_request_date = date('Y-m-d', strtotime($vehicle_title->towing_request_date));
-                $vehicle_title->deliver_date = date('Y-m-d', strtotime($vehicle_title->deliver_date));
-                $vehicle_title->title_received = date('Y-m-d', strtotime($vehicle_title->title_received));
-                $vehicle_check_options->save();
-                $vehicle_condition->save();
-                $vehicle_title->save();
-                $vehicle_towing->save();
-
-                $files = UploadedFile::getInstances($model, 'attachments');
-                if (!empty($files))
-                    $this->Upload($files, $model);
-                return $this->redirect(['index']);
+            $transaction = Vehicle::getDb()->beginTransaction();
+            try {
+                if ($model->save()) {
+                    $vehicle_check_options->vehicle_id = $model->id;
+                    $vehicle_condition->vehicle_id = $model->id;
+                    $vehicle_title->vehicle_id = $model->id;
+                    $vehicle_towing->vehicle_id = $model->id;
+                    $vehicle_towing->customers_id = $vehicle_towing->customer_name;
+                    $vehicle_title->towing_request_date = date('Y-m-d', strtotime($vehicle_title->towing_request_date));
+                    $vehicle_title->deliver_date = date('Y-m-d', strtotime($vehicle_title->deliver_date));
+                    $vehicle_title->title_received = date('Y-m-d', strtotime($vehicle_title->title_received));
+                    $vehicle_check_options->save();
+                    $vehicle_condition->save();
+                    $vehicle_title->save();
+                    $vehicle_towing->save();
+                    $transaction->commit();
+                    $files = UploadedFile::getInstances($model, 'attachments');
+                    if (!empty($files))
+                        $this->Upload($files, $model);
+                    return $this->redirect(['index']);
+                }
+            } catch (\Exception $e) {
+                $transaction->rollBack();
+                throw $e;
+            } catch (\Throwable $e) {
+                $transaction->rollBack();
+                throw $e;
             }
         } else {
             return $this->render('create', [
@@ -182,7 +191,45 @@ class VehicleController extends Controller {
      * @return mixed
      */
     public function actionDelete($id) {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $vehicle_check_options = VehiceCheckOptions::find()->where(['vehicle_id' => $id])->one();
+        $vehicle_condition = VehicleCondition::find()->where(['vehicle_id' => $id])->one();
+        $vehicle_title = VehicleTitleInfo::find()->where(['vehicle_id' => $id])->one();
+        $vehicle_towing = VehicleTowingInfo::find()->where(['vehicle_id' => $id])->one();
+        $transaction = Vehicle::getDb()->beginTransaction();
+        try {
+            if (!empty($vehicle_check_options)) {
+                $vehicle_check_options->delete();
+            }
+            if (!empty($vehicle_condition)) {
+                $vehicle_condition->delete();
+            }
+            if (!empty($vehicle_title)) {
+                $vehicle_title->delete();
+            }
+            if (!empty($vehicle_towing)) {
+                $vehicle_towing->delete();
+            }
+            if (!empty($model)) {
+                $model->delete();
+            }
+
+            $transaction->commit();
+            $directory = Yii::$app->basePath . '/../uploads/vehicle/' . $model->id;
+            foreach (glob("{$directory}/*") as $file) {
+                if (!is_dir($file)) {
+                    unlink($file);
+                }
+            }
+            \yii\helpers\FileHelper::removeDirectory($directory);
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            throw $e;
+        } catch (\Throwable $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+        Yii::$app->getSession()->setFlash('success', 'Deleted successfully');
 
         return $this->redirect(['index']);
     }
@@ -205,7 +252,7 @@ class VehicleController extends Controller {
     public function actionCustomerDetails() {
         $customer = $_POST['customer'];
         $customer_details = \common\models\Customers::findOne($customer);
-        echo json_encode(array('customer_id' => $customer_details->customer_id, 'customer_address' => $customer_details->address1));
+        return json_encode(array('customer_id' => $customer_details->customer_id, 'customer_address' => $customer_details->address1));
     }
 
 }

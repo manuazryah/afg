@@ -52,6 +52,7 @@ class Customers extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['customer_id','email','name','company_name',],'required'],
             [['address1', 'other_emails', 'address2', 'notes'], 'string'],
             [['created_at', 'DOC', 'DOU'], 'safe'],
             [['status', 'CB', 'UB'], 'integer'],

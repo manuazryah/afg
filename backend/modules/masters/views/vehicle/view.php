@@ -34,7 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <table class="table table-bordered table-responsive">
                                     <tr>
                                         <th>COMPANY NAME</th>
-                                        <td><?= 'HEKMAT SEDIQ LTD. C/O ARIANA WORLDWIDE' ?></td>
+                                        <?php $company = \common\models\Customers::findOne($model->towingInfos->customers_id); ?>
+                                        <td><?= $company->name; ?></td>
                                     </tr>
                                     <tr>
                                         <th>HAT</th>
@@ -158,7 +159,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </tr>
                                     <tr>
                                         <th>TITLE</th>
-                                        <td><?php ?></td>
+                                        <td>
+                                            <?php
+                                            if ($model->titleInfos->title == 1) {
+                                                echo 'Yes';
+                                            } else if ($model->titleInfos->title == 2) {
+                                                echo 'No';
+                                            }
+                                            ?>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>TITLE AMOUNT</th>
@@ -170,11 +179,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </tr>
                                     <tr>
                                         <th>TITLE NO</th>
-                                        <td><?php ?></td>
+                                        <td><?= $model->titleInfos->title_no ?></td>
                                     </tr>
                                     <tr>
                                         <th>TITLE STATE</th>
-                                        <td><?php ?></td>
+                                        <td><?= $model->titleInfos->title_state ?></td>
                                     </tr>
 
                                 </table>

@@ -69,30 +69,28 @@ use Yii;
  *
  * @property ContainerImage[] $containerImages
  */
-class Export extends \yii\db\ActiveRecord
-{
+class Export extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    
     public $container_images;
-    
-    public static function tableName()
-    {
+
+    public static function tableName() {
         return 'export';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['customer', 'customer_id'], 'required'],
             [['customer_id', 'additional_info_container_type', 'conignee_id', 'notify_party', 'menifest_consignee', 'status', 'CB', 'UB'], 'integer'],
             [['cust_address', 'contact_details', 'special_instruction', 'forwading_agent', 'domestic_routing_instructions'], 'string'],
-            [['export_date', 'loding_date', 'ETA', 'cut_off', 'date', 'auto_recieving_date', 'auto_cut_off', 'vessel_cut_off', 'sale_date', 'exporter_dob', 'ultimate_consignee_dob', 'DOC', 'DOU','vehicle_id','container_images'], 'safe'],
+            [['export_date', 'loding_date', 'ETA', 'cut_off', 'date', 'auto_recieving_date', 'auto_cut_off', 'vessel_cut_off', 'sale_date', 'exporter_dob', 'ultimate_consignee_dob', 'DOC', 'DOU', 'vehicle_id', 'container_images'], 'safe'],
             [['customer', 'broker_name'], 'string', 'max' => 80],
+            [['invoice'], 'file', 'extensions' => 'jpg,png,jpeg,pdf'],
             [['booking_no', 'ar_no', 'xtn_no', 'seal_no', 'container_no', 'vessel', 'voyage', 'terminal', 'stremship_line', 'destination', 'ITN', 'port_of_loading', 'port_of_discharge', 'bol_note', 'bl_or_awb_number', 'export_referance', 'pre_carraiage_by', 'place_of_recipt_by_pre_carrrier', 'final_destintion', 'loading_terminal', 'container_type', 'number_of_packages', 'by', 'exporting_carruer', 'vehicle_location', 'exporter_id', 'exporter_type_issue', 'transpotation_value', 'invoice'], 'string', 'max' => 45],
         ];
     }
@@ -100,8 +98,7 @@ class Export extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'vehicle_id' => 'Vehicle',
@@ -168,8 +165,8 @@ class Export extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getContainerImages()
-    {
+    public function getContainerImages() {
         return $this->hasMany(ContainerImage::className(), ['export_id' => 'id']);
     }
+
 }

@@ -42,6 +42,7 @@ class Consignee extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['customers_id','consignee_name'],'required'],
             [['consignee_id', 'customers_id', 'status', 'CB', 'UB'], 'integer'],
             [['customers_id'], 'required'],
             [['DOC', 'DOU'], 'safe'],

@@ -438,9 +438,7 @@ use common\models\Consignee;
         <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'container_images[]')->fileInput(['multiple' => true]) ?>
         </div>
-        <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'container_images[]')->fileInput(['multiple' => true]) ?>
-        </div>
+       
     </div>
 
     <div class="row">

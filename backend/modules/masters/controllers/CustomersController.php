@@ -62,15 +62,14 @@ class CustomersController extends Controller {
      */
     public function actionCreate() {
         $model = new Customers();
-        //if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
-        if ($model->load(Yii::$app->request->post())) {
-            $uploads = UploadedFile::getInstance($model, 'upload_documents');
+        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
+             $files = UploadedFile::getInstances($model, 'upload_documents');
             if (!empty($uploads)) {
                 $model->upload_documents = $uploads->extension;
             }
             if ($model->validate() && $model->save()) {
-                if (!empty($uploads))
-                    $this->Upload($model, $uploads);
+                if (!empty($files))
+                        $this->Upload($files, $model);
             }
 
             Yii::$app->getSession()->setFlash('success', "Create Successfully");
@@ -91,16 +90,16 @@ class CustomersController extends Controller {
         $model = $this->findModel($id);
         $uploads_ = $model->upload_documents;
 
-        if ($model->load(Yii::$app->request->post())) {
-            $uploads = UploadedFile::getInstance($model, 'upload_documents');
+        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model)) {
+            $files = UploadedFile::getInstances($model, 'upload_documents');
             if (!empty($uploads)) {
                 $model->upload_documents = $uploads->extension;
             } else {
                 $model->upload_documents = $uploads_;
             }
             if ($model->validate() && $model->save()) {
-                if (!empty($uploads))
-                    $this->Upload($model, $uploads);
+                if (!empty($files))
+                        $this->Upload($files, $model);
             }
 
             Yii::$app->getSession()->setFlash('success', "Updated Successfully");
@@ -112,7 +111,7 @@ class CustomersController extends Controller {
         }
     }
 
-    public function Upload($model, $uploads) {
+    public function Uploads($model, $uploads) {
         $path = Yii::$app->basePath . '/../uploads/customers/' . $model->id;
         FileHelper::createDirectory($path, $mode = 0775, $recursive = true);
         if (!empty($uploads)) {
@@ -124,6 +123,46 @@ class CustomersController extends Controller {
         }
 
         return TRUE;
+    }
+    
+    
+    public function Upload($files, $model) {
+        if ($files != '' && $model != '') {
+            $paths = Yii::$app->basePath . '/../uploads/customers/' . $model->id . '/';
+            $path = $this->CheckPath($paths);
+            foreach ($files as $file) {
+                $name = $this->fileExists($path, $file->baseName . '.' . $file->extension, $file, 1);
+                $file->saveAs($path . '/' . $name);
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function CheckPath($paths) {
+        if (!is_dir($paths)) {
+            mkdir($paths);
+        }
+        return $paths;
+    }
+
+    public function fileExists($path, $name, $file, $sufix) {
+        if (file_exists($path . '/' . $name)) {
+
+            $name = basename($path . '/' . $file->baseName, '.' . $file->extension) . '_' . $sufix . '.' . $file->extension;
+            return $this->fileExists($path, $name, $file, $sufix + 1);
+        } else {
+            return $name;
+        }
+    }
+
+    public function actionRemove($file, $id) {
+        $path = Yii::$app->basePath . '/../uploads/customers/' . $id . '/' . $file;
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     /**

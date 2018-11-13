@@ -48,10 +48,44 @@ use yii\widgets\ActiveForm;
 
         </div> <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'notes')->textarea(['rows' => 6]) ?>
 
-        </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'upload_documents')->fileInput() ?>
+        </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'upload_documents[]')->fileInput(['multiple'=>true]) ?>
 
         </div>
     </div>
+    <div class="row">
+        <?php
+        $path = Yii::getAlias('@paths') . '/customers/' . $model->id;
+        if (count(glob("{$path}/*")) > 0) {
+            $k = 0;
+            foreach (glob("{$path}/*") as $file) {
+                $k++;
+                $arry = explode('/', $file);
+                $img_nmee = end($arry);
+
+                $img_nmees = explode('.', $img_nmee);
+                if ($img_nmees['1'] != '') {
+                    ?>
+
+                    <div class = "col-md-3 img-box" id="<?= $k; ?>">
+                        <div class="news-img">
+                            <img class="img-responsive" src="<?= Yii::$app->homeUrl . '../uploads/customers/' . $model->id . '/' . end($arry) ?>">
+                            <?= Html::a('<i class="fa fa-remove"></i>', ['/masters/customers/remove', 'file' => end($arry), 'id' => $model->id], ['class' => 'gal-img-remove']) ?>
+                        </div> 
+                    </div>
+
+
+                    <?php
+                }
+                if ($k % 4 == 0) {
+                    ?>
+                    <div class="clearfix"></div>
+                    <?php
+                }
+            }
+        }
+        ?>
+    </div>
+    
     <div class="row">
         <div class='col-md-12 col-sm-12 col-xs-12'>
             <div class="form-group">

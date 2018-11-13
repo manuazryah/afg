@@ -43,7 +43,7 @@ class ExportController extends Controller {
                     'dataProvider' => $dataProvider,
         ]);
     }
-    
+
     /**
      * Lists all Export models.
      * @return mixed
@@ -76,8 +76,7 @@ class ExportController extends Controller {
      */
     public function actionCreate() {
         $model = new Export();
-         
-        if ($model->load(Yii::$app->request->post()) &&  Yii::$app->SetValues->Attributes($model)) {
+        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model)) {
             $model->vehicle_id = implode(',', $model->vehicle_id);
             $model->export_date = date('Y-m-d', strtotime($model->export_date));
             $model->loding_date = date('Y-m-d', strtotime($model->loding_date));
@@ -133,6 +132,7 @@ class ExportController extends Controller {
             $invoice = UploadedFile::getInstance($model, 'invoice');
             if (!empty($invoice)) {
                 $model->invoice = $invoice->extension;
+                $this->UploadImages($model, $invoice);
             } else {
                 $model->invoice = $invoice_;
             }
@@ -193,7 +193,6 @@ class ExportController extends Controller {
 
     public function fileExists($path, $name, $file, $sufix) {
         if (file_exists($path . '/' . $name)) {
-
             $name = basename($path . '/' . $file->baseName, '.' . $file->extension) . '_' . $sufix . '.' . $file->extension;
             return $this->fileExists($path, $name, $file, $sufix + 1);
         } else {
@@ -216,7 +215,26 @@ class ExportController extends Controller {
      * @return mixed
      */
     public function actionDelete($id) {
-        $this->findModel($id)->delete();
+        if ($this->findModel($id)->delete()) {
+            $directory = Yii::$app->basePath . '/../uploads/export/container/' . $id;
+            if (is_dir($directory)) {
+                foreach (glob("{$directory}/*") as $file) {
+                    if (!is_dir($file)) {
+                        unlink($file);
+                    }
+                }
+                rmdir($directory);
+            }
+            $directory1 = Yii::$app->basePath . '/../uploads/export/invoice/' . $id;
+            if (is_dir($directory1)) {
+                foreach (glob("{$directory1}/*") as $file) {
+                    if (!is_dir($file)) {
+                        unlink($file);
+                    }
+                }
+                rmdir($directory1);
+            }
+        }
 
         return $this->redirect(['index']);
     }

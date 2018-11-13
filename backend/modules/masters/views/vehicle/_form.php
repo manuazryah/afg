@@ -90,7 +90,22 @@ use yii\helpers\ArrayHelper;
         </div>
 
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($vehicle_title, 'title_received')->textInput() ?>
+             <?php
+            if (!$vehicle_title->isNewRecord) {
+                $vehicle_title->title_received = date('d-m-Y', strtotime($vehicle_title->title_received));
+            } else {
+                $vehicle_title->title_received = date('d-m-Y');
+            }
+            ?>
+            <?=
+            $form->field($vehicle_title, 'title_received')->widget(DatePicker::classname(), [
+                'type' => DatePicker::TYPE_INPUT,
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-M-yyyy'
+                ]
+            ]);
+            ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($vehicle_title, 'title_no')->textInput(['maxlength' => true]) ?>

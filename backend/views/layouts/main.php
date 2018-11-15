@@ -138,7 +138,7 @@ AppAsset::register($this);
                         </ul>
                     </li>
                     <li>
-                        <?= Html::a('<i class="fa fa-money"></i> <span>Prices</span>', ['/site/index'], ['class' => '']) ?>
+                        <?= Html::a('<i class="fa fa-money"></i> <span>Prices</span>', ['/masters/prices'], ['class' => '']) ?>
                     </li>
                     <li>
                         <?= Html::a('<i class="fa fa-bullhorn"></i> <span>Notifications</span>', ['/site/index'], ['class' => '']) ?>

@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
+use kartik\mpdf\Pdf;
 
 /**
  * ExportController implements the CRUD actions for Export model.
@@ -209,7 +210,25 @@ class ExportController extends Controller {
     }
 
     public function actionDockpdf($id) {
-        
+//        echo $id;exit;
+        $content = '<h1>adasdas adas </h1>';
+        $pdf = new Pdf([
+            'mode' => Pdf::MODE_CORE,
+            'format' => Pdf::FORMAT_A4,
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $content,
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            'cssInline' => '.kv-heading-1{font-size:18px}',
+            'options' => ['title' => 'Item Sales Report'],
+            'methods' => [
+                'SetHeader' => ['Sale Invoice System'],
+                'SetFooter' => ['{PAGENO}'],
+            ]
+        ]);
+        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+        Yii::$app->response->headers->add('Content-Type', 'application/pdf');
+        return $pdf->render();
     }
 
     /**

@@ -166,12 +166,15 @@ body {
     border-color: #3ec1d5;
 }
 .btn-success {
-    background-color: #3ec1d5;
-    border-color: #3ec1d5;
-}
-.btn-success:hover, .btn-success:active, .btn-success.hover {
     background-color: #39d8f1;
     border-color: #39d8f1;
+    outline: none;
+    width: auto;
+}
+.btn-success:hover, .btn-success:active, .btn-success.hover, .btn-success:focus {
+    background-color: #3ec1d5;
+    border-color: #3ec1d5;
+    box-shadow: none;
 }
 .btn-primary {
     background-color: #3ec1d5;
@@ -268,48 +271,6 @@ body {
     font-size: 12px;
 }
 
-#page_border table, #page_border table tr td {
-    /* table-layout: fixed; */
-    border: 1px solid black;
-    border-collapse: collapse;
-    vertical-align: top;
-    padding: 1px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-#page_border table tbody {
-    text-align: center;
-}
-#page_border table, #page_border table tr td {
-    /* table-layout: fixed; */
-    border: 1px solid black;
-    border-collapse: collapse;
-    vertical-align: top;
-    padding: 1px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-#cars_no_border {
-    border: 0px solid #000 !important;
-}
-/***********houston cover letter**********/
-#btncover table.inner th {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-size: 18px; 
-}
-#btncover table.inner th {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-size: 18px;
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-#btncover table.inner td {
-    border: 1px solid black; 
-    border-collapse: collapse;
-}
-#btncover tr td {
-    line-height: 2;
-}
 #page_border table, #page_border table tr td {
     /* table-layout: fixed; */
     border: 1px solid black;

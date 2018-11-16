@@ -60,12 +60,98 @@ $this->title = 'AFGShipping';
             </div>
         </div>
     </div>
+    <div class="col-md-12">
+        <button type="button" class="btn btn-block btn-success btn-sm inventory-report">Inventory Report</button>
+    </div>
     <div class="col-md-6">
-
+        <div class="vehicle-stat-home">
+            <h4>VEHICLE STATUS</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>SORT TYPE</th>
+                        <th>QUANTITY</th>
+                        <th>INVENTORY</th>
+                        <th>VIEW</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ALL VEHICLES</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>ON THE WAY</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>ON HAND</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>MANIFEST</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>PICKED UP</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>CAR SHIPPED</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>WITH TITLE</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>W/O TITLE</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>CAR TOWED</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NOT TOWED</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="col-md-6">
         <div id="piechart"></div>
     </div>
+</div>
+<div class="modal fade inventory-report-modal" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
 <style>
     #piechart rect{
@@ -75,11 +161,11 @@ $this->title = 'AFGShipping';
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script type="text/javascript">
-// Load google charts
+    // Load google charts
     google.charts.load('current', {'packages': ['corechart']});
     google.charts.setOnLoadCallback(drawChart);
 
-// Draw the chart and set the chart values
+    // Draw the chart and set the chart values
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
             ['Task', 'Order Status'],
@@ -96,6 +182,22 @@ $this->title = 'AFGShipping';
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
     }
+</script>
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.inventory-report', function () {
+            $.ajax({
+                url: '<?= Yii::$app->homeUrl; ?>site/inventory-content',
+                type: "POST",
+                data: {},
+                success: function (data) {
+                    var res = $.parseJSON(data);
+                    $('.modal-content').html(res.result['report']);
+                    $('#modal-default').modal('show');
+                }
+            });
+        });
+    });
 </script>
 
 

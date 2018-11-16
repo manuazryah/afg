@@ -41,8 +41,7 @@ Modal::end();
                             <?= Html::button('Dock Receipt', ['value' => Url::to(['dockexport', 'id' => $model->id]), 'class' => 'btn btn-warning  btn-icon btn-icon-standalone modalButton']); ?>
                             <?= Html::button('Houston Cover Letter', ['value' => Url::to(['houston-cover-letter', 'id' => $model->id]), 'class' => 'btn btn-warning  btn-icon btn-icon-standalone modalButton']); ?>
                             <?= Html::button('Customs Cover Letter', ['value' => Url::to(['custom-cover-letter', 'id' => $model->id]), 'class' => 'btn btn-warning  btn-icon btn-icon-standalone modalButton']); ?>
-                            <button onclick="jQuery('#customs-cover-letter').modal('show');" class="btn btn-warning  btn-icon btn-icon-standalone" >Customs Cover Letter</button>
-                            <button onclick="jQuery('#manifest').modal('show');" class="btn btn-warning  btn-icon btn-icon-standalone" >Manifest</button>
+                            <?= Html::button('Manifest', ['value' => Url::to(['manifest', 'id' => $model->id]), 'class' => 'btn btn-warning  btn-icon btn-icon-standalone modalButton']); ?>
                             <button onclick="jQuery('#bill-of-lading').modal('show');" class="btn btn-warning  btn-icon btn-icon-standalone" >Bill of Lading</button>
                             <button onclick="jQuery('#non-haz').modal('show');" class="btn btn-warning  btn-icon btn-icon-standalone" >Non-Haz</button>
 

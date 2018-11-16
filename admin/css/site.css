@@ -310,6 +310,7 @@ body {
 #btncover tr td {
     line-height: 2;
 }
+/***************************/
 #page_border table, #page_border table tr td {
     /* table-layout: fixed; */
     border: 1px solid black;
@@ -374,3 +375,19 @@ body {
     line-height: 1em;
     font-size: 11px;
 }
+/***********manifest***********/
+.manifesta .ui-widget-header {
+    background-color: #caf0ee;
+    border-color: #caf0ee;
+    /* color: #eaf5f7; */
+    color: #515151;
+    font-weight: bold;
+}
+active, .manifesta .ui-widget-header .ui-state-active {
+    background-color: #0aa89e !important;
+    border-color: #0aa89e;
+    font-weight: normal;
+    color: #ffffff;
+}
+
+/****************************/

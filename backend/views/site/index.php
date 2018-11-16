@@ -77,12 +77,11 @@ $this->title = 'AFGShipping';
 // Draw the chart and set the chart values
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Task', 'Hours per Day'],
-            ['Work', 8],
-            ['Eat', 2],
-            ['TV', 4],
-            ['Gym', 2],
-            ['Sleep', 8]
+            ['Task', 'Order Status'],
+            ['MANIFEST', 8],
+            ['CAR ON WAY', 8],
+            ['SHIPPED', 4],
+            ['ON HAND', 6],
         ]);
 
         // Optional; add a title and set the width and height of the chart

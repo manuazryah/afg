@@ -26,7 +26,7 @@ class AppAsset extends AssetBundle {
 //        'js/jquery.min.js',
 //        'js/jquery-ui.min.js',
         'js/bootstrap.min.js',
-//        'js/raphael.min.js',
+        'js/printThis.js',
         'js/morris.min.js',
         'js/jquery.sparkline.min.js',
         'js/jquery-jvectormap-1.2.2.min.js',

@@ -67,6 +67,11 @@ $this->title = 'AFGShipping';
         <div id="piechart"></div>
     </div>
 </div>
+<style>
+    #piechart rect{
+        fill: #ecf0f5;
+    }
+</style>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script type="text/javascript">

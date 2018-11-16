@@ -208,6 +208,22 @@ class ExportController extends Controller {
         }
         return $this->redirect(Yii::$app->request->referrer);
     }
+    
+    public function actionDockexport($id) {
+       
+            return $this->renderAjax('docexport', [
+            ]);
+    }
+    public function actionHoustonCoverLetter($id) {
+       
+            return $this->renderAjax('houston_cover_letter', [
+            ]);
+    }
+    public function actionCustomCoverLetter($id) {
+       
+            return $this->renderAjax('custom_cover_letter', [
+            ]);
+    }
 
     public function actionDockpdf($id) {
 //        echo $id;exit;

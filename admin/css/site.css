@@ -290,3 +290,23 @@ body {
 #cars_no_border {
     border: 0px solid #000 !important;
 }
+/***********houston cover letter**********/
+#btncover table.inner th {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 18px; 
+}
+#btncover table.inner th {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 18px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+#btncover table.inner td {
+    border: 1px solid black; 
+    border-collapse: collapse;
+}
+#btncover tr td {
+    line-height: 2;
+}

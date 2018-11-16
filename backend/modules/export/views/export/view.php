@@ -26,6 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?= Html::a('<i class="fa fa-list"></i><span> Manage Export</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                             <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                             <button onclick="jQuery('#dockexport').modal('show');" class="btn btn-warning  btn-icon btn-icon-standalone" >Dock Receipt</button>
+                            <button onclick="jQuery('#houston-cover-letter').modal('show');" class="btn btn-warning  btn-icon btn-icon-standalone" >Houston Cover Letter</button>
+                            <button onclick="jQuery('#customs-cover-letter').modal('show');" class="btn btn-warning  btn-icon btn-icon-standalone" >Customs Cover Letterr</button>
+                            <button onclick="jQuery('#manifest').modal('show');" class="btn btn-warning  btn-icon btn-icon-standalone" >Manifest</button>
+                            <button onclick="jQuery('#bill-of-lading').modal('show');" class="btn btn-warning  btn-icon btn-icon-standalone" >Bill of Lading</button>
+                            <button onclick="jQuery('#non-haz').modal('show');" class="btn btn-warning  btn-icon btn-icon-standalone" >Non-Haz</button>
 
                         </p>
                         <div class="row">
@@ -274,7 +279,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div id="modalContentreport">
 
                     <button type="button" id="btnPrintThisdock" class="btn btn-primary"><i class="fa fa-print"></i> Print</button>
-                    <?= Html::a('<i class="fa fa-file-pdf-o "></i> Open as Pdf', ['dockpdf', 'id' => $model->id], ['class' => 'btn btn-primary','target'=>'_blank']) ?>
+                    <?= Html::a('<i class="fa fa-file-pdf-o "></i> Open as Pdf', ['dockpdf', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank']) ?>
                     <a class="btn btn-primary" href="/export/dockpdf?id=42543" title="Will open the generated PDF file in a new window" target="_blank" data-toggle="tooltip"><i class="fa fa-file-pdf-o "></i> Open as Pdf</a>
                     <div id="btndock" class="condition_reportss" contenteditable="true">
                         <div class="cond_here">
@@ -508,7 +513,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
 
 
-                   
+
                     <script>
                         $(function () {
                             $("#btnPrintThisdock").click(function () {

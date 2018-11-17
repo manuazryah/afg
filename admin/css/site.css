@@ -67,7 +67,7 @@ body {
     color: #fff;
     padding: 0;
     margin: 0;
-    font-size: 36px;
+    font-size: 30px;
     font-weight: bold;
     line-height: 1;
 }
@@ -166,12 +166,15 @@ body {
     border-color: #3ec1d5;
 }
 .btn-success {
-    background-color: #3ec1d5;
-    border-color: #3ec1d5;
-}
-.btn-success:hover, .btn-success:active, .btn-success.hover {
     background-color: #39d8f1;
     border-color: #39d8f1;
+    outline: none;
+    width: auto;
+}
+.btn-success:hover, .btn-success:active, .btn-success.hover, .btn-success:focus {
+    background-color: #3ec1d5;
+    border-color: #3ec1d5;
+    box-shadow: none;
 }
 .btn-primary {
     background-color: #3ec1d5;
@@ -205,6 +208,7 @@ body {
 }
 .main-header .logo .logo-lg {
     color: #3ec1d5;
+    font-size: 15px;
 }
 .table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
     border: 1px solid #cac8c8;

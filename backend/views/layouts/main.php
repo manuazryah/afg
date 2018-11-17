@@ -30,7 +30,7 @@ AppAsset::register($this);
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>FG</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>AFG</b><span style="color:#fff;">SHIPPING</span></span>
+                <span class="logo-lg"><b>AFG</b><span style="color:#fff;"> GLOBAL SHIPPER LLC</span></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">

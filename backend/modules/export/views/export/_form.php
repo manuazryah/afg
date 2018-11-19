@@ -35,6 +35,23 @@ use common\models\Consignee;
             ]);
             ?>
         </div>
+        <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
+            <table class="table hide" id="body_vehicle">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Color</th>
+                        <th>VIN</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="row">
@@ -103,6 +120,9 @@ use common\models\Consignee;
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'booking_no')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+            <?= $form->field($model, 'oti_no')->textInput(['maxlength' => true]) ?>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?php
@@ -438,7 +458,7 @@ use common\models\Consignee;
         <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'container_images[]')->fileInput(['multiple' => true]) ?>
         </div>
-       
+
     </div>
 
     <div class="row">
@@ -483,6 +503,25 @@ use common\models\Consignee;
 </div>
 <script>
     $(document).ready(function () {
+        $('#export-vehicle_id').change(function () {
+            var vin = $(this).val();
+            $("#body_vehicle tbody").empty();
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                data: {vin: vin},
+                url: '<?= Yii::$app->homeUrl ?>masters/vehicle/vehicle-details',
+                success: function (data) {
+                    var $data = JSON.parse(data);
+                    if ($data.msg === 'success') {
+                        $("#body_vehicle tbody").append($data.row);
+                        $('#body_vehicle').removeClass('hide');
+                    } else {
+                        $('#body_vehicle').addClass('hide');
+                    }
+                }
+            });
+        });
         $('#export-customer').change(function () {
             $.ajax({
                 type: 'POST',

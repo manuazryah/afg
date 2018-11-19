@@ -255,4 +255,19 @@ class VehicleController extends Controller {
         return json_encode(array('customer_id' => $customer_details->customer_id, 'customer_address' => $customer_details->address1));
     }
 
+    public function actionVehicleDetails() {
+        $vin = $_POST['vin'];
+        $row = "";
+        if ($vin) {
+            foreach ($vin as $v) {
+                $vehicle = Vehicle::findOne($v);
+                $row .= '<tr><td>' . $vehicle->year . '</td><td>' . $vehicle->make . '</td><td>' . $vehicle->model . '</td>
+                <td>' . $vehicle->color . '</td><td>' . $vehicle->vin . '</td><td>' . $vehicle->status_id . '</td>
+                    </tr>';
+            }
+        }
+        $msg = !empty($row) ? 'success' : 'failed';
+        return json_encode(array('msg' => $msg, 'row' => $row));
+    }
+
 }

@@ -393,5 +393,126 @@ active, .manifesta .ui-widget-header .ui-state-active {
     font-weight: normal;
     color: #ffffff;
 }
+.manifesta #olpa {
+    border: 1px solid #000;
+}
 
+/****************************/
+/***********Bill of lading*************/
+.bola {
+    /* width: 800px; */
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#btnlanding.condition_reports td {
+    text-align: initial !important;
+}
+.bola .shipa {
+    float: left;
+    width: 50%;
+    margin-top: 5px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-top-color: #000;
+    border-bottom-color: #000;
+    height: 115px;
+}
+.bola .shipa1 {
+    float: left;
+    width: 50%;
+    margin-top: 5px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-top-color: #000;
+    border-bottom-color: #000;
+    height: 115px;
+    border-left-width: 2px;
+    border-left-style: solid;
+    border-left-color: #000;
+}
+.bola .shipa221 {
+    float: left;
+    width: 50%;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #000;
+    height: 110px;
+}
+.bola .shipa1234 {
+    float: left;
+    width: 50%;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #000;
+    height: 110px;
+    border-left-width: 2px;
+    border-left-style: solid;
+    border-left-color: #000;
+}
+.kiki {
+    width: 100%;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #000;
+    float: left;
+}
+.kiki .pipi1 {
+    width: 50%;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #000;
+    float: left;
+}
+.kiki .pipi2 {
+    width: 49%;
+    float: left;
+}
+.bola .shipa2212 {
+    float: left;
+    width: 50%;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #000;
+    height: 50px;
+}
+.simi {
+    height: 50px;
+    width: 145px;
+    float: left;
+    border-right-width: 2px;
+    border-right-style: solid;
+    border-right-color: #000;
+}
+.bola .shipa12342 {
+    float: left;
+    width: 50%;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #000;
+    height: 50px;
+    border-left-width: 2px;
+    border-left-style: solid;
+    border-left-color: #000;
+}
+.bola .desc {
+    width: 100%;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #000;
+    float: left;
+}
+/****************************/
+/***********Non Haz************/
+#impa {
+    text-align: center;
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: underline;
+}
 /****************************/

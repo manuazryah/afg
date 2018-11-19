@@ -42,8 +42,8 @@ Modal::end();
                             <?= Html::button('Houston Cover Letter', ['value' => Url::to(['houston-cover-letter', 'id' => $model->id]), 'class' => 'btn btn-warning  btn-icon btn-icon-standalone modalButton']); ?>
                             <?= Html::button('Customs Cover Letter', ['value' => Url::to(['custom-cover-letter', 'id' => $model->id]), 'class' => 'btn btn-warning  btn-icon btn-icon-standalone modalButton']); ?>
                             <?= Html::button('Manifest', ['value' => Url::to(['manifest', 'id' => $model->id]), 'class' => 'btn btn-warning  btn-icon btn-icon-standalone modalButton']); ?>
-                            <button onclick="jQuery('#bill-of-lading').modal('show');" class="btn btn-warning  btn-icon btn-icon-standalone" >Bill of Lading</button>
-                            <button onclick="jQuery('#non-haz').modal('show');" class="btn btn-warning  btn-icon btn-icon-standalone" >Non-Haz</button>
+                            <?= Html::button('Bill Of Lading', ['value' => Url::to(['bill-of-lading', 'id' => $model->id]), 'class' => 'btn btn-warning  btn-icon btn-icon-standalone modalButton']); ?>
+                            <?= Html::button('Non-Haz', ['value' => Url::to(['non-haz', 'id' => $model->id]), 'class' => 'btn btn-warning  btn-icon btn-icon-standalone modalButton']); ?>
 
                         </p>
                         <div class="row">
@@ -290,6 +290,5 @@ Modal::end();
 
     });
 </script>
-<?= Yii::$app->controller->renderPartial('houston_cover_letter'); ?>
 
 

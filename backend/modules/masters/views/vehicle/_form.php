@@ -90,7 +90,7 @@ use yii\helpers\ArrayHelper;
         </div>
 
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-             <?php
+            <?php
             if (!$vehicle_title->isNewRecord) {
                 $vehicle_title->title_received = date('d-m-Y', strtotime($vehicle_title->title_received));
             } else {
@@ -167,8 +167,11 @@ use yii\helpers\ArrayHelper;
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'status_id')->dropDownList(['' => '--Select--', '1' => 'ON HAND', '2' => 'ON THE WAY', '3' => 'SHIPPED', '4' => 'PICKED UP']) ?>
         </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+        <div class='col-md-3 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'vin')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class='col-md-1 col-sm-6 col-xs-12 left_padd'>
+            <button type="button" class="btn" id="vehicle-btn-auto">Auto Fill</button>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'year')->textInput() ?>
@@ -416,6 +419,29 @@ use yii\helpers\ArrayHelper;
 
 <script>
     $(document).ready(function () {
+        $('#vehicle-btn-auto').click(function () {
+            var vin = $('#vehicle-vin').val();
+            $('#vehicle-year').val('');
+            $('#vehicle-model').val('');
+            $('#vehicle-make').val('');
+            $.ajax({
+                url: 'https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/' + vin + '?format=json',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    vin: vin
+                },
+                success: function (data, textStatus, xhr) {
+                    for (var i = 0; i < data.Results.length; i++) {
+                        $('#vehicle-year').val(data.Results[i].ModelYear);
+                        $('#vehicle-model').val(data.Results[i].Model);
+                        $('#vehicle-make').val(data.Results[i].Make);
+                    }
+                }, error: function (xhr, textStatus, errorThrown) {
+                    console.log('Error in Database');
+                }
+            });
+        });
         $('#title_type').hide();
         $('#vehicletowinginfo-customer_name').change(function () {
             $.ajax({
@@ -430,20 +456,19 @@ use yii\helpers\ArrayHelper;
                 }
             });
         });
-
         $('#vehicletitleinfo-title').change(function () {
-            if($(this).val()==1){
+            if ($(this).val() == 1) {
                 $('#title_type').show();
-            } else{
+            } else {
                 $('#title_type').hide();
             }
         });
-        var value=$('#vehicletitleinfo-title').val();
-        if(value==1){
-                $('#title_type').show();
-            } else{
-                $('#title_type').hide();
-            }
+        var value = $('#vehicletitleinfo-title').val();
+        if (value == 1) {
+            $('#title_type').show();
+        } else {
+            $('#title_type').hide();
+        }
 
     });
 

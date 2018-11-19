@@ -234,6 +234,16 @@ class ExportController extends Controller {
              'model' => $this->findModel($id),
         ]);
     }
+    public function actionBillOfLading($id) {
+        return $this->renderAjax('bill_of_lading', [
+             'model' => $this->findModel($id),
+        ]);
+    }
+    public function actionNonHaz($id) {
+        return $this->renderAjax('non_haz', [
+             'model' => $this->findModel($id),
+        ]);
+    }
 
     public function actionDockpdf($id) {
         $content = $this->renderPartial('dockpdf', [

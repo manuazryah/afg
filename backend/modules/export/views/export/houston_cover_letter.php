@@ -16,7 +16,7 @@ use yii\helpers\Html;
                                 <span style="font-size:18px;"><strong>VEHICLE EXPORT COVER SHEET</strong></span>
                             </td>
                         </tr><tr>
-                            <td align="left" style="padding-left:4px; border:1px solid black;">PORT OF EXPORT : <span style="font-family:Arial, Helvetica, sans-serif;">HOUSTON APM BARBOURS CUT</span></td>
+                            <td align="left" style="padding-left:4px; border:1px solid black;">PORT OF EXPORT : <span style="font-family:Arial, Helvetica, sans-serif;"><?= $model->port_of_loading ?></span></td>
                         </tr>
 
                     </tbody></table>
@@ -26,52 +26,33 @@ use yii\helpers\Html;
                 <table width="100%">
 
                 </table>
-
-                <table width="100%" class="inner">
-                    <thead>
-                        <tr><th colspan="7" class="spec1"><strong>DESCRIPTION OF VEHICLE/EQUIPMENT</strong></th></tr>
-                        <tr class="car_list_heading"><th width="5%">YEAR</th><th width="15%">MAKE</th><th width="15%">MODEL</th><th width="25%">VIN</th><th width="25%">TITLE NUMBER</th><th width="20%">STATE</th><th width="10%">VALUE</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr class="car_list">
-                            <td align="center">2016</td>
-                            <td align="center" style="border-left: 1px solid black;">KIA</td>
-                            <td align="center" style="border-left: 1px solid black;">OPTIMA</td>
-                            <td align="center" style="border-left: 1px solid black;">5XXGT4L35GG025617</td>
-                            <td align="center" style="border-left: 1px solid black;">S1013522</td>
-                            <td align="center" style="border-left: 1px solid black;">RI</td>
-                            <td align="center" style="border-left: 1px solid black;">$1200</td>
-                        </tr>
-                        <tr class="car_list">
-                            <td align="center">2016</td>
-                            <td align="center" style="border-left: 1px solid black;">KIA</td>
-                            <td align="center" style="border-left: 1px solid black;">SOUL</td>
-                            <td align="center" style="border-left: 1px solid black;">KNDJP3A52G7238672</td>
-                            <td align="center" style="border-left: 1px solid black;">18292698454</td>
-                            <td align="center" style="border-left: 1px solid black;">Illinois</td>
-                            <td align="center" style="border-left: 1px solid black;">$1800</td>
-                        </tr>
-                        <tr class="car_list">
-                            <td align="center">2017</td>
-                            <td align="center" style="border-left: 1px solid black;">TOYOTA</td>
-                            <td align="center" style="border-left: 1px solid black;">COROLLA</td>
-                            <td align="center" style="border-left: 1px solid black;">2T1BURHE9HC925833</td>
-                            <td align="center" style="border-left: 1px solid black;">18803202000049</td>
-                            <td align="center" style="border-left: 1px solid black;">Indiana</td>
-                            <td align="center" style="border-left: 1px solid black;">$5700</td>
-                        </tr>
-                        <tr class="car_list">
-                            <td align="center">2017</td>
-                            <td align="center" style="border-left: 1px solid black;">TOYOTA</td>
-                            <td align="center" style="border-left: 1px solid black;">COROLLA</td>
-                            <td align="center" style="border-left: 1px solid black;">2T1BURHE0HC856644</td>
-                            <td align="center" style="border-left: 1px solid black;">00S15NY</td>
-                            <td align="center" style="border-left: 1px solid black;">Minnesota</td>
-                            <td align="center" style="border-left: 1px solid black;">$6400</td>
-                        </tr>
-                    </tbody>
-                </table>
-
+                <?php if ($model->vehicle_id) { ?>
+                    <table width="100%" class="inner">
+                        <thead>
+                            <tr><th colspan="7" class="spec1"><strong>DESCRIPTION OF VEHICLE/EQUIPMENT</strong></th></tr>
+                            <tr class="car_list_heading"><th width="5%">YEAR</th><th width="15%">MAKE</th><th width="15%">MODEL</th><th width="25%">VIN</th><th width="25%">TITLE NUMBER</th><th width="20%">STATE</th><th width="10%">VALUE</th></tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $vehicles = explode(',', $model->vehicle_id);
+                            foreach ($vehicles as $vehicle) {
+                                $vehicle_detail = common\models\Vehicle::findOne($vehicle);
+                                ?>
+                                <tr class="car_list">
+                                    <td align="center"><?= $vehicle_detail->year ?></td>
+                                    <td align="center" style="border-left: 1px solid black;"><?= $vehicle_detail->make ?></td>
+                                    <td align="center" style="border-left: 1px solid black;"><?= $vehicle_detail->model ?></td>
+                                    <td align="center" style="border-left: 1px solid black;"><?= $vehicle_detail->vin ?></td>
+                                    <td align="center" style="border-left: 1px solid black;"><?= $vehicle_detail->title_amount ?></td>
+                                    <td align="center" style="border-left: 1px solid black;">RI</td>
+                                    <td align="center" style="border-left: 1px solid black;"><?= $vehicle_detail->value ?></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                <?php } ?>
 
             </div>
 
@@ -87,18 +68,18 @@ use yii\helpers\Html;
                             <td width="50%">VALUE : <span class="inputtext"></span></td>
                         </tr>
                         <tr>
-                            <td width="50%">CARRIER : <span class="inputtext">ONE</span></td>
-                            <td width="50%">VESSEL : <span class="inputtext">MOL PARAMOUNT</span></td>
+                            <td width="50%">CARRIER : <span class="inputtext"><?= $model->stremship_line ?></span></td>
+                            <td width="50%">VESSEL : <span class="inputtext"><?= $model->vessel ?></span></td>
                         </tr>
                         <tr>
-                            <td colspan="2" width="100%">BoL/AWB/BOOKING # : <span class="inputtext">900704001</span></td>
+                            <td colspan="2" width="100%">BoL/AWB/BOOKING # : <span class="inputtext"><?= $model->bl_or_awb_number ?></span></td>
                         </tr>
                         <tr>
-                            <td width="50%">EXPORT DATE : <span class="inputtext"></span></td>
+                            <td width="50%">EXPORT DATE : <span class="inputtext"><?= $model->export_date ?></span></td>
                             <td width="50%">PORT OF UNLADING : </td>
                         </tr>
                         <tr>
-                            <td colspan="2" width="100%">ULTIMATE DESTINATION : <span class="inputtext">JEBEL ALI</span></td>
+                            <td colspan="2" width="100%">ULTIMATE DESTINATION : <span class="inputtext"><?= $model->port_of_discharge ?></span></td>
                         </tr>
                         <tr>
                             <td colspan="2" width="100%">VEHICLE LOCATION : <span class="inputtext"></span></td>
@@ -108,20 +89,25 @@ use yii\helpers\Html;
                 <br>
                 <table width="100%" class="inner">
                     <tbody><tr><th colspan="4">SHIPPER/EXPORTER</th></tr>
+                        <?php
+                        if ($model->customer) {
+                            $custmer = \common\models\Customers::findOne($model->customer);
+                        }
+                        ?>
                         <tr>
-                            <td colspan="3" width="60%">NAME : <span class="inputtext">AL QAMAR AL SATEE USED CARS TR LLC</span></td>
+                            <td colspan="3" width="60%">NAME : <span class="inputtext"><?= !empty($custmer) ? $custmer->name : '' ?></span></td>
                             <td width="40%">DOB :  </td>
                         </tr>
                         <tr>
-                            <td colspan="4" width="100%">ADDRESS: <span class="inputtext">20925 ROSCIE BLVD NO .</span></td>
+                            <td colspan="4" width="100%">ADDRESS: <span class="inputtext"><?= $model->cust_address ?></span></td>
                         </tr>
                         <tr>
-                            <td colspan="2" width="35%">CITY : <span class="inputtext">CANOGA PARK</span></td>
-                            <td width="30%">STATE : <span class="inputtext">CA</span></td>
-                            <td width="35%">ZIP CODE : <span class="inputtext">91304</span></td>
+                            <td colspan="2" width="35%">CITY : <span class="inputtext"><?= !empty($custmer) ? $custmer->city : '' ?></span></td>
+                            <td width="30%">STATE : <span class="inputtext"><?= !empty($custmer) ? $custmer->state : '' ?></span></td>
+                            <td width="35%">ZIP CODE : <span class="inputtext"><?= !empty($custmer) ? $custmer->zipcode : '' ?></span></td>
                         </tr>
                         <tr>
-                            <td colspan="4">PHONE : TEL:<span class="inputtext">310-593-9604	</span>,FAX:<span class="inputtext"></span></td>
+                            <td colspan="4">PHONE : TEL:<span class="inputtext"><?= !empty($custmer) ? $custmer->phone_usa : '' ?>	</span>,FAX:<span class="inputtext"></span></td>
                         </tr>
                         <tr>
                             <td colspan="2" width="35%">ID # : </td>
@@ -133,9 +119,13 @@ use yii\helpers\Html;
                 <table width="100%" class="inner">
                     <tbody><tr><th colspan="4">ULTIMATE CONSIGNEE<span style="font-weight:normal;"> ([&nbsp;&nbsp;&nbsp;&nbsp;] CHECK IF SHIPPER)</span></th></tr>
 
-
+                        <?php
+                        if ($model->conignee_id) {
+                            $consignee = \common\models\Consignee::findOne($model->conignee_id);
+                        }
+                        ?>
                         <tr>
-                            <td colspan="3" width="60%">NAME : <span class="inputtext">AL QAMAR AL SATEE USED CARS TR LLC</span></td>
+                            <td colspan="3" width="60%">NAME : <span class="inputtext"><?= !empty($consignee) ? $consignee->consignee_name : '' ?></span></td>
                             <td width="40%">DOB : </td>
                         </tr>
                         <tr>
@@ -185,8 +175,8 @@ use yii\helpers\Html;
                 $("#btncover").printThis();
             });
         });
-    //                        $("#btnPrintThisdock").click(function () {
-    //                            $("#btndock").printThis({"debug": false, "importCSS": true, "importStyle": false, "pageTitle": "", "removeInline": false, "printDelay": 50, "header": null, "formValues": true});
-    //                        });
+        //                        $("#btnPrintThisdock").click(function () {
+        //                            $("#btndock").printThis({"debug": false, "importCSS": true, "importStyle": false, "pageTitle": "", "removeInline": false, "printDelay": 50, "header": null, "formValues": true});
+        //                        });
     </script>
 </div>

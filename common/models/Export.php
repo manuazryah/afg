@@ -134,7 +134,7 @@ class Export extends \yii\db\ActiveRecord {
             'domestic_routing_instructions' => 'Domestic Routing Instructions',
             'pre_carraiage_by' => 'Pre Carraiage By',
             'place_of_recipt_by_pre_carrrier' => 'Place Of Recipt By Pre Carrrier',
-            'final_destintion' => 'Final Destintion',
+            'final_destintion' => 'Final Destination',
             'loading_terminal' => 'Loading Terminal',
             'container_type' => 'Container Type',
             'number_of_packages' => 'Number Of Packages',

@@ -6,6 +6,7 @@ use kartik\date\DatePicker;
 use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
 use common\models\Consignee;
+use common\models\Vehicle;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Export */
@@ -19,7 +20,7 @@ use common\models\Consignee;
     <div class="row">
         <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
             <?php
-            $vehicles = ArrayHelper::map(common\models\Vehicle::find()->all(), 'id', 'vin');
+            $vehicles = ArrayHelper::map(Vehicle::find()->all(), 'id', 'vin');
             if (!$model->isNewRecord) {
                 $model->vehicle_id = explode(',', $model->vehicle_id);
             }
@@ -36,7 +37,7 @@ use common\models\Consignee;
             ?>
         </div>
         <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
-            <table class="table hide" id="body_vehicle">
+            <table class="table table-bordered<?= $model->isNewRecord ? 'hide' : '' ?>" id="body_vehicle">
                 <thead>
                     <tr>
                         <th>Year</th>
@@ -48,7 +49,25 @@ use common\models\Consignee;
                     </tr>
                 </thead>
                 <tbody>
-
+                    <?php
+                    if (!$model->isNewRecord) {
+                        foreach ($model->vehicle_id as $vh) {
+                            $vehicle_detail = Vehicle::findone($vh);
+                            if ($vehicle_detail) {
+                                ?>
+                                <tr>
+                                    <td><?= $vehicle_detail->year?></td>
+                                    <td><?= $vehicle_detail->make?></td>
+                                    <td><?= $vehicle_detail->model?></td>
+                                    <td><?= $vehicle_detail->color?></td>
+                                    <td><?= $vehicle_detail->vin?></td>
+                                    <td><?= $vehicle_detail->status_id?></td>
+                                </tr>
+                                <?php
+                            }
+                        }
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>

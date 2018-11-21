@@ -219,6 +219,7 @@ class ExportController extends Controller {
     public function actionHoustonCoverLetter($id) {
 
         return $this->renderAjax('houston_cover_letter', [
+                    'model' => $this->findModel($id),
         ]);
     }
 
@@ -227,26 +228,28 @@ class ExportController extends Controller {
         return $this->renderAjax('custom_cover_letter', [
         ]);
     }
-    
+
     public function actionManifest($id) {
 
         return $this->renderAjax('manifest', [
-             'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
+
     public function actionBillOfLading($id) {
         return $this->renderAjax('bill_of_lading', [
-             'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
+
     public function actionNonHaz($id) {
         return $this->renderAjax('non_haz', [
-             'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
 
     public function actionDockpdf($id) {
-        $content = $this->renderPartial('dockpdf', [
+        $content = $this->renderPartial('dockpdf', ['model' => $this->findModel($id),
         ]);
         $pdf = new Pdf([
             'mode' => Pdf::MODE_CORE, // leaner size using standard fonts

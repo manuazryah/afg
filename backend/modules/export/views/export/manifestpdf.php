@@ -1,20 +1,21 @@
 <?php
 
 use yii\helpers\Html;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 ?>
-<!--<div class="modal-body">-->
 <div id="modalContentreport">
-    <button type="button" id="btnPrintThiscover" class="btn btn-primary"><i class="fa fa-print"></i> Print</button>
-    <?= Html::a('<i class="fa fa-envelope"></i> Email', ['manifestpdf', 'id' => $model->id, 'mail' => 1], ['class' => 'btn btn-primary', 'target' => '_blank', 'title' => 'Will send the mail to customer']) ?>
-    <?= Html::a('<i class="fa fa-file-pdf-o"></i> Open as Pdf', ['manifestpdf', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank', 'title' => 'Will open the generated PDF file in a new window']) ?>
-    <!--<a class="btn btn-primary" href="/export/manifestpdf?id=42543" title="Will open the generated PDF file in a new window" target="_blank" data-toggle="tooltip"><i class="fa fa-file-pdf-o"></i> Open as Pdf</a>-->
     <div id="btncover" class="condition_reports menifest_modal_print" contenteditable="true">
         <div class="cond_here">
 
             <div class="manifesta">
 
 
-                <table class="table ui-widget-header" width="100%" contenteditable="false">
+                <table class="table table-bordered ui-widget-header" width="100%" contenteditable="false">
                     <tbody><tr>
                             <td width="70%" rowspan="2" id="lli">AFG</td>
                             <td width="12%">Manifest #:</td><td width="18%"></td>
@@ -27,7 +28,7 @@ use yii\helpers\Html;
                         <tr><td>ETA:</td><td></td></tr>
                     </tbody></table>
 
-                <table width="100%">
+                <table class="table table-bordered" width="100%">
                     <tbody><tr>
                             <td width="50%" style="border: 1px solid #000;background-color: #d9fbfa;">
                                 <table id="shipi" class="lefti" width="100%" style="float:left;">
@@ -45,7 +46,7 @@ use yii\helpers\Html;
 
                 <div class="row" width="100%">
                     <div class="col-md-6" width="50%">
-                        <table class="" id="olpa">
+                        <table class="table table-bordered" id="olpa">
                             <tbody>
                                 <?php
                                 if ($model->customer) {
@@ -59,9 +60,9 @@ use yii\helpers\Html;
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-md-6" width="50%">
-
-                        <table id="olpa" class="manifest_second_table">
+                    <div class="col-md-5" width="50%">
+                        
+                        <table class="table table-bordered ">
                             <tbody>
                                 <tr><td colspan="4">AFG<br>1205 CENTURION STAR TOWER, DEIRA</td>
                                 </tr>
@@ -74,14 +75,14 @@ use yii\helpers\Html;
                 </div>
 
 
-                <table class=" line_under" width="100%">
+                <table class="table table-bordered line_under" width="100%">
                     <tbody><tr class="ui-widget-header"><th>Description</th></tr>
                         <tr>
                             <td></td>
                         </tr>
                     </tbody></table>
 
-                <table class="" width="100%">
+                <table class="table table-bordered" width="100%">
                     <tbody><tr>
                             <td class="ui-state-active" width="17%"><b>Vessel/Voyage:</b></td><td width="28%"><?= $model->vessel ?>&nbsp;/&nbsp;<?= $model->voyage ?></td>
                             <td width="16%"></td>
@@ -109,7 +110,7 @@ use yii\helpers\Html;
                             <td class="ui-state-active"><b>Export Date:</b></td><td><?= $model->export_date ?></td><td></td></tr>
                     </tbody></table>
 
-                <table width="100%" class="">
+                <table width="100%" class="table table-bordered">
                     <thead>
                         <tr class="ui-state-active">
                             <th width="6%">Year</th>
@@ -174,7 +175,7 @@ use yii\helpers\Html;
                     </tbody>
                 </table>
                 <hr class="line_under">
-                <table class="" width="100%">
+                <table class="table table-bordered" width="100%">
                     <tbody>
                         <tr><td width="23%">Received in Good Order</td><td width="34%" class="line_under"></td><td width="10%">Date/Time</td><td width="33%" class="line_under"></td></tr>
                         <tr><td>Drivers Signature</td><td class="line_under"></td><td>Date/Time</td><td class="line_under"></td></tr>
@@ -200,15 +201,6 @@ use yii\helpers\Html;
 
         </div>
     </div>
-    <script>
-        $(function () {
-            $("#btnPrintThiscover").click(function () {
-                $("#btncover").printThis();
-            });
-        });
-        //                        $("#btnPrintThisdock").click(function () {
-        //                            $("#btndock").printThis({"debug": false, "importCSS": true, "importStyle": false, "pageTitle": "", "removeInline": false, "printDelay": 50, "header": null, "formValues": true});
-        //                        });
-    </script>
+    
 </div>
-<!--</div>-->
+

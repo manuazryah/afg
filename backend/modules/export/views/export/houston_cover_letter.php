@@ -129,13 +129,13 @@ use yii\helpers\Html;
                             <td width="40%">DOB : </td>
                         </tr>
                         <tr>
-                            <td colspan="4" width="100%">ADDRESS: <span class="inputtext">AL QAMAR AL SATEE USED CARS TR LLC&nbsp;INDUSTRIAL AREA NO. 2</span></td>
+                            <td colspan="4" width="100%">ADDRESS: <span class="inputtext"><?= !empty($consignee) ? $consignee->address1 : '' ?></span></td>
                         </tr>
                         <tr>
-                            <td colspan="2" width="35%">CITY : <span class="inputtext"> SHARJAH </span></td><td width="30%">STATE : <span class="inputtext">  </span></td><td width="35%"><span class="inputtext">COUNTRY :  UAE </span></td>
+                            <td colspan="2" width="35%">CITY : <span class="inputtext"> <?= !empty($consignee) ? $consignee->city : '' ?> </span></td><td width="30%">STATE : <span class="inputtext"> <?= !empty($consignee) ? $consignee->state : '' ?> </span></td><td width="35%"><span class="inputtext">COUNTRY :  <?= !empty($consignee) ? $consignee->country : '' ?> </span></td>
                         </tr>
                         <tr>
-                            <td colspan="4">PHONE : <span class="inputtext"> TEL: +97165321800, CELL: +971501870399 </span></td>
+                            <td colspan="4">PHONE : <span class="inputtext"> <?= !empty($consignee) ? $consignee->phone : '' ?> </span></td>
                         </tr>
 
                     </tbody></table>

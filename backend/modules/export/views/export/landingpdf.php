@@ -1,23 +1,23 @@
 <?php
 
 use yii\helpers\Html;
-?>
-<!--<div class="modal-body">-->
-<div id="modalContentreport">
-    <button type="button" id="btnPrintThiscover" class="btn btn-primary"><i class="fa fa-print"></i> Print</button>
-    <?= Html::a('<i class="fa fa-envelope"></i> Email', ['landingpdf', 'id' => $model->id, 'mail' => 1], ['class' => 'btn btn-primary', 'target' => '_blank', 'title' => 'Will send the mail to customer']) ?>
-    <?= Html::a('<i class="fa fa-file-pdf-o"></i> Open as Pdf', ['landingpdf', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank', 'title' => 'Will open the generated PDF file in a new window']) ?>
-    
-    <div id="btncover" class="condition_reports">
 
-        <div class="bola" >
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+?>
+<div id="modalContentreport">             
+    
+        <div class="bola">
 
             <table class="" width="100%">
                 <tbody><tr><td width="73%" id="lopa"><b>AFG </b></td><td width="27%"><b>BILL OF LADING INSTRUCTIONS</b></td></tr>
                 </tbody></table>
 
             <div class="shipa">
-                <table width="100%">
+                <table class="table table-bordered" width="100%">
                     <thead><tr><td><b>SHIPPER / EXPORTER</b></td></tr></thead>
 
                     <tbody>
@@ -38,14 +38,14 @@ use yii\helpers\Html;
             <div class="shipa1">
                 <div class="kiki">
                     <div class="pipi1">
-                        <table width="100%">
+                        <table class="table table-bordered" width="100%">
                             <tbody><tr><td><b>BOOKING #</b></td></tr>
                                 <tr><td contenteditable="true"><?= $model->booking_no ?></td></tr>	
                             </tbody></table>
 
                     </div>
                     <div class="pipi2">
-                        <table width="100%">
+                        <table class="table table-bordered" width="100%">
                             <tbody><tr><td><b>REFERENCE #</b></td></tr>
                                 <tr><td contenteditable="true"><?= $model->ar_no ?></td></tr>	
                             </tbody></table>
@@ -53,7 +53,7 @@ use yii\helpers\Html;
                 </div>
                 <div class="kiki">
                     <div class="pipi1">
-                        <table width="100%">
+                        <table class="table table-bordered" width="100%">
                             <tbody><tr>
                                     <td><b>PLACE OF RECEIPT</b></td></tr>
                                 <tr><td contenteditable="true"><?= $model->place_of_recipt_by_pre_carrrier ?></td></tr>	
@@ -61,7 +61,7 @@ use yii\helpers\Html;
 
                     </div>
                     <div class="pipi2">
-                        <table width="100%">
+                        <table class="table table-bordered" width="100%">
                             <tbody><tr>
                                     <td><b>PORT OF LOADING</b></td></tr>
                                 <tr><td contenteditable="true"><?= $model->port_of_loading ?></td></tr>	
@@ -70,7 +70,7 @@ use yii\helpers\Html;
                 </div>
 
                 <div class="pipi12">
-                    <table width="100%">
+                    <table class="table table-bordered" width="100%">
                         <tbody><tr><td width="50%"><b>PORT OF DISCHARGE:</b></td>
                                 <td width="50%" contenteditable="true"><?= $model->port_of_discharge ?></td></tr>
                         </tbody></table>
@@ -80,7 +80,7 @@ use yii\helpers\Html;
             </div>
 
             <div class="shipa221">
-                <table width="100%">
+                <table class="table table-bordered" width="100%">
                     <thead><tr><td><b>CONSIGNEE</b></td></tr></thead>
                     <tbody>
                         <?php
@@ -103,7 +103,7 @@ use yii\helpers\Html;
             <div class="shipa1234">
                 <div class="kiki">
                     <div class="pipi1">
-                        <table width="100%">
+                        <table class="table table-bordered" width="100%">
                             <tbody><tr>
                                     <td><b>PIER</b></td></tr>
                                 <tr><td contenteditable="true"><?= $model->terminal ?></td></tr>	
@@ -120,7 +120,7 @@ use yii\helpers\Html;
                 </div>
                 <div class="kiki">
                     <div class="pipi1">
-                        <table width="100%">
+                        <table class="table table-bordered" width="100%">
                             <tbody><tr>
                                     <td><b>LOADING PIER / TERMINAL</b></td></tr>
                                 <tr><td contenteditable="true"><?= $model->loading_terminal ?></td></tr>	
@@ -138,7 +138,7 @@ use yii\helpers\Html;
 
             </div>
             <div class="shipa221">
-                <table width="100%">
+                <table class="table table-bordered" width="100%">
                     <thead><tr><td><b>NOTIFY</b></td></tr></thead>
                     <tbody>
                         <?php
@@ -159,7 +159,7 @@ use yii\helpers\Html;
 
 
             <div class="shipa1234">
-                <table id="KIAM" width="100%">
+                <table class="table table-bordered" id="KIAM" width="100%">
                     <tbody><tr><td><b>FOR RELEASE OF CARGO PLEASE CONTACT:</b></td></tr>
                         <tr>
                             <td height="49"></td>
@@ -180,7 +180,7 @@ use yii\helpers\Html;
 
                 </div>
                 <div class="simi">
-                    <table width="100%">
+                    <table class="table table-bordered" width="100%">
                         <tbody><tr>
                                 <td><b>CONTAINER TYPE</b></td></tr>
                             <?php
@@ -196,7 +196,7 @@ use yii\helpers\Html;
 
                 </div>
                 <div class="simi1">
-                    <table width="100%">
+                    <table class="table table-bordered" width="100%">
                         <tbody><tr><td><b>SEAL #</b></td></tr>
                             <tr><td contenteditable="true"><?= $model->seal_no ?></td></tr>
                         </tbody></table>
@@ -205,7 +205,7 @@ use yii\helpers\Html;
 
 
             <div class="shipa12342">
-                <table id="KIAM" width="100%">
+                <table class="table table-bordered" id="KIAM" width="100%">
                     <tbody><tr><td contenteditable="true"><b>SPECIAL INSTRUCTIONS:</b></td></tr>
                         <tr>
                             <td contenteditable="true">
@@ -216,7 +216,7 @@ use yii\helpers\Html;
 
             </div>
             <div class="desc">
-                <table width="100%">
+                <table class="table table-bordered" width="100%">
                     <tbody>
                         <tr><?php $vehicles = explode(',', $model->vehicle_id); ?>
                             <th width="72%" colspan="4"><b>SHIPPERS DESCRIPTIONS OF GOODS</b><br><?= count($vehicles) ?> UNITS USED VEHICLE</th>
@@ -227,8 +227,8 @@ use yii\helpers\Html;
                         $vehicles = explode(',', $model->vehicle_id);
                         $weight = 0;
                         foreach ($vehicles as $vehicle) {
-                            $vehicle_detail = common\models\Vehicle::findOne($vehicle);
                             $weight = $weight + $vehicle_detail->weight;
+                            $vehicle_detail = common\models\Vehicle::findOne($vehicle);
                             ?>
                             <tr class = "">
                                 <td align = "center" width = "15%" contenteditable = "true"><?= $vehicle_detail->year ?></td>
@@ -293,15 +293,6 @@ use yii\helpers\Html;
 
         </div>
     </div>
-    <script>
-        $(function () {
-            $("#btnPrintThiscover").click(function () {
-                $("#btncover").printThis();
-            });
-        });
-        //                        $("#btnPrintThisdock").click(function () {
-        //                            $("#btndock").printThis({"debug": false, "importCSS": true, "importStyle": false, "pageTitle": "", "removeInline": false, "printDelay": 50, "header": null, "formValues": true});
-        //                        });
-    </script>
+    
 </div>
-<!--</div>-->
+

@@ -29,6 +29,7 @@ AppAsset::register($this);
         <?php $this->beginBody() ?>
         <div id="preloader"></div>
         <header>
+            <?php if($this->context->action->id!='login'){ ?>
             <!-- header-area start -->
             <div id="sticker" class="header-area">
                 <div class="container">
@@ -86,9 +87,11 @@ AppAsset::register($this);
                 </div>
             </div>
             <!-- header-area end -->
+            <?php } ?>
         </header>
         <?= $content ?>
         <!-- Start Footer bottom Area -->
+         <?php if($this->context->action->id!='login'){ ?>
         <footer>
             <div class="footer-area">
                 <div class="container">
@@ -170,7 +173,7 @@ AppAsset::register($this);
                 </div>
             </div>
         </footer>
-
+         <?php } ?>
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
             <?php $this->endBody() ?>
     </body>

@@ -91,10 +91,19 @@ class SiteController extends Controller {
 
     public function actionHome() {
         if (isset(Yii::$app->user->identity->id)) {
+
+            $onway = \common\models\Vehicle::find()->where(['status_id' => 2])->count();
+            $shipped = \common\models\Vehicle::find()->where(['status_id' => 3])->count();
+            $onhand = \common\models\Vehicle::find()->where(['status_id' => 1])->count();
+            $manifest = \common\models\Vehicle::find()->where(['status_id' => 4])->count();
             if (Yii::$app->user->isGuest) {
                 return $this->redirect(array('site/index'));
             }
             return $this->render('index', [
+                        'onway' => $onway,
+                        'shipped' => $shipped,
+                        'onhand' => $onhand,
+                        'manifest' => $manifest,
             ]);
         } else {
             throw new \yii\web\HttpException(2000, 'Session Expired.');

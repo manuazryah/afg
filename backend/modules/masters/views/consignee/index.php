@@ -31,7 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         'dataProvider' => $dataProvider,
                         'filterModel' => $searchModel,
                         'columns' => [
-                                ['class' => 'yii\grid\SerialColumn'],
+                            ['class' => 'yii\grid\SerialColumn'],
+                            [
+                                'attribute' => 'customers_id',
+                                'format' => 'raw',
+                                'value' => function($model) {
+                                    $customer = common\models\Customers::findOne($model->customers_id);
+                                    return \yii\helpers\Html::a($customer->name, ['/masters/customers/view', 'id' => $model->customers_id], ['target' => '_blank']);
+                                }
+                            ],
                             'consignee_name',
 //                            'consignee_id',
                             'address1',
@@ -47,8 +55,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             // 'UB',
                             // 'DOC',
                             // 'DOU',
-                            ['class' => 'yii\grid\ActionColumn',
-                                'template' => '{view}{update}'],
+                            [
+                                'class' => 'yii\grid\ActionColumn',
+                                'template' => '{view}{update}'
+                            ],
                         ],
                     ]);
                     ?>

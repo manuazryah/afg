@@ -67,6 +67,7 @@ $this->title = 'AFGShipping';
         <div class="vehicle-stat-home">
             <h4>VEHICLE STATUS</h4>
             <table class="table table-bordered">
+                <?php $total = $onway + $onhand + $manifest + $shipped ?>
                 <thead>
                     <tr>
                         <th>SORT TYPE</th>
@@ -78,19 +79,19 @@ $this->title = 'AFGShipping';
                 <tbody>
                     <tr>
                         <td>ALL VEHICLES</td>
-                        <td></td>
+                        <td><?= $total ?></td>
                         <td></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td>ON THE WAY</td>
-                        <td></td>
+                        <td><?= $onway ?></td>
                         <td></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td>ON HAND</td>
-                        <td></td>
+                        <td><?= $onhand ?></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -102,13 +103,13 @@ $this->title = 'AFGShipping';
                     </tr>
                     <tr>
                         <td>PICKED UP</td>
-                        <td></td>
+                        <td><?= $manifest ?></td>
                         <td></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td>CAR SHIPPED</td>
-                        <td></td>
+                        <td><?= $shipped ?></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -159,20 +160,18 @@ $this->title = 'AFGShipping';
     }
 </style>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+<!---------------------Script for showing order status in home page-------------------------->
 <script type="text/javascript">
-    // Load google charts
     google.charts.load('current', {'packages': ['corechart']});
     google.charts.setOnLoadCallback(drawChart);
 
-    // Draw the chart and set the chart values
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
             ['Task', 'Order Status'],
-            ['MANIFEST', 8],
-            ['CAR ON WAY', 8],
-            ['SHIPPED', 4],
-            ['ON HAND', 6],
+            ['MANIFEST', <?= $manifest ?>],
+            ['CAR ON WAY', <?= $onway ?>],
+            ['SHIPPED', <?= $shipped ?>],
+            ['ON HAND', <?= $onhand ?>],
         ]);
 
         // Optional; add a title and set the width and height of the chart

@@ -2,6 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\bootstrap\Modal;
+//use yii\widgets\DetailView;
+use yii\widgets\Pjax;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Vehicle */
@@ -9,6 +13,16 @@ use yii\widgets\DetailView;
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Vehicles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+?>
+<?php
+Modal::begin([
+    'header' => '',
+    'id' => 'modal',
+    'size' => 'modal-lg',
+]);
+echo "<div id = 'modalContent'></div>";
+Modal::end();
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -25,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <p>
                             <?= Html::a('<i class="fa fa-list"></i><span> Manage Vehicle</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                             <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-
+                            <?= Html::button('Vehicle Condition Report', ['value' => Url::to(['vehicle-condition-report', 'id' => $model->id]), 'class' => 'btn btn-warning  btn-icon btn-icon-standalone modalButton']); ?>
                         </p>
 
                         <div class="row">
@@ -232,5 +246,11 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
-
+<script>
+    $(document).on('click', '.modalButton', function () {
+        $('#modal').modal('show')
+                .find('#modalContent')
+                .load($(this).attr("value"));
+    });
+</script>
 

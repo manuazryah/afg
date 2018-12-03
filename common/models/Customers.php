@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\web\IdentityInterface;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "customers".
@@ -36,8 +38,10 @@ use Yii;
  * @property Consignee[] $consignees
  * @property CustomerTowingInfo[] $customerTowingInfos
  */
-class Customers extends \yii\db\ActiveRecord
+class Customers extends ActiveRecord implements IdentityInterface
 {
+    
+     private $_user;
     /**
      * {@inheritdoc}
      */
@@ -52,15 +56,28 @@ class Customers extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_id','email','name','company_name',],'required'],
+           // [['customer_id','email','name','company_name',],'required'],
             [['address1', 'other_emails', 'address2', 'notes'], 'string'],
-            [['created_at', 'DOC', 'DOU'], 'safe'],
+            [['created_at', 'DOC', 'DOU','user_name'], 'safe'],
             [['status', 'CB', 'UB'], 'integer'],
             [['customer_id'], 'string', 'max' => 255],
             [['name', 'phone_usa', 'trn_usa', 'country', 'state', 'upload_documents', 'company_name', 'phone_uae', 'trn_uae', 'city', 'zipcode'], 'string', 'max' => 45],
             [['email'], 'string', 'max' => 150],
             [['fax'], 'string', 'max' => 100],
+            [['user_name', 'password'], 'required', 'on' => 'login'],
+            [['password'], 'validatePassword', 'on' => 'login'],
         ];
+    }
+    
+        public function validatePassword($attribute, $params) {
+
+        if (!$this->hasErrors()) {
+
+            $user = $this->getUser();
+            if (!$user || !Yii::$app->security->validatePassword($this->password, $user->password)) {
+                $this->addError($attribute, 'Incorrect username or password.');
+            }
+        }
     }
 
     /**
@@ -112,4 +129,72 @@ class Customers extends \yii\db\ActiveRecord
     {
         return $this->hasMany(CustomerTowingInfo::className(), ['customers_id' => 'id']);
     }
+    
+    
+    
+    public function login() {
+        if ($this->validate()) {
+            return Yii::$app->user->login($this->getUser(), /* $this->rememberMe ? 3600 * 24 * 30 : */ 0);
+        } else {
+            return false;
+        }
+    }
+
+    protected function getUser() {
+       
+        if ($this->_user === null) {
+            $this->_user = static::find()->where('user_name = :uname and status = :stat', ['uname' => $this->user_name, 'stat' => '1'])->one();
+        }
+        return $this->_user;
+    }
+
+    public function validatedata($data) {
+        if ($data == '') {
+            $this->addError('password', 'Incorrect username or password');
+            return true;
+        }
+    }
+
+    /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */
+    public static function findByUsername($username) {
+        return static::findOne(['user_name' => $username, 'status' => 1]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentity($id) {
+        return static::findOne(['id' => $id, 'status' => 1]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentityByAccessToken($token, $type = null) {
+        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+    }
+
+    public function getId() {
+        return $this->getPrimaryKey();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAuthKey() {
+        return $this->auth_key;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function validateAuthKey($authKey) {
+        return $this->getAuthKey() === $authKey;
+    }
+
 }

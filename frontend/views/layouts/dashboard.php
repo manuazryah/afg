@@ -72,7 +72,7 @@ use yii\helpers\Html;
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li>
-                        <?= Html::a('<i class="fa fa-home"></i> <span>Home</span>', ['/site/index'], ['class' => '']) ?>
+                        <?= Html::a('<i class="fa fa-home"></i> <span>Home</span>', ['/dashboard/home'], ['class' => '']) ?>
                     </li>
                     
                     

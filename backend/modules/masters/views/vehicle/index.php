@@ -56,6 +56,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                             ],
                             'lot_no',
+                                    
+                                    
                             [
                                 'attribute' => 'status_id',
                                 'value' => function($model) {

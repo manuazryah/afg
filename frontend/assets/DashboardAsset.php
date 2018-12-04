@@ -15,6 +15,7 @@ class DashboardAsset extends AssetBundle {
         'css/bootstrap.min.css',
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
         'css/ionicons.min.css',
+        'css/font-awesome.min.css',
         'css/AdminLTE.min.css',
         'css/morris.css',
         'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic',

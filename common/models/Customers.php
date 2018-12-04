@@ -56,16 +56,17 @@ class Customers extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-           // [['customer_id','email','name','company_name',],'required'],
+            [['customer_id','email','name','company_name','user_name','password'],'required','on'=>'create'],
             [['address1', 'other_emails', 'address2', 'notes'], 'string'],
-            [['created_at', 'DOC', 'DOU','user_name'], 'safe'],
+            [['created_at', 'DOC', 'DOU','user_name','upload_documents','password'], 'safe'],
             [['status', 'CB', 'UB'], 'integer'],
             [['customer_id'], 'string', 'max' => 255],
-            [['name', 'phone_usa', 'trn_usa', 'country', 'state', 'upload_documents', 'company_name', 'phone_uae', 'trn_uae', 'city', 'zipcode'], 'string', 'max' => 45],
+            [['name', 'phone_usa', 'trn_usa', 'country', 'state',  'company_name', 'phone_uae', 'trn_uae', 'city', 'zipcode'], 'string', 'max' => 45],
             [['email'], 'string', 'max' => 150],
             [['fax'], 'string', 'max' => 100],
             [['user_name', 'password'], 'required', 'on' => 'login'],
             [['password'], 'validatePassword', 'on' => 'login'],
+            [['user_name'],'unique','on'=>'create']
         ];
     }
     

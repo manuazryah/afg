@@ -18,7 +18,15 @@ use yii\widgets\ActiveForm;
 
         </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-        </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'company_name')->textInput(['maxlength' => true]) ?>
+        </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'user_name')->textInput(['maxlength' => true]) ?>
+
+        </div>
+        <?php if ($model->isNewRecord) { ?>
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+
+            </div>
+        <?php } ?>
+        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'company_name')->textInput(['maxlength' => true]) ?>
 
         </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'phone_usa')->textInput(['maxlength' => true]) ?>
 
@@ -30,11 +38,21 @@ use yii\widgets\ActiveForm;
 
         </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'fax')->textInput(['maxlength' => true]) ?>
 
-        </div><div class='col-md-6 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'address1')->textarea(['rows' => 6]) ?>
+        </div>
+    </div>
+    
+    <div class="row">
+
+        <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'address1')->textarea(['rows' => 6]) ?>
 
         </div><div class='col-md-6 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'address2')->textarea(['rows' => 6]) ?>
 
-        </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'country')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
+    
+    <div class="row">
+
+        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'country')->textInput(['maxlength' => true]) ?>
 
         </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
 
@@ -48,7 +66,7 @@ use yii\widgets\ActiveForm;
 
         </div> <div class='col-md-12 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'notes')->textarea(['rows' => 6]) ?>
 
-        </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'upload_documents[]')->fileInput(['multiple'=>true]) ?>
+        </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'upload_documents[]')->fileInput(['multiple' => true]) ?>
 
         </div>
     </div>
@@ -85,7 +103,7 @@ use yii\widgets\ActiveForm;
         }
         ?>
     </div>
-    
+
     <div class="row">
         <div class='col-md-12 col-sm-12 col-xs-12'>
             <div class="form-group">

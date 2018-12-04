@@ -59,7 +59,7 @@ class VehicleTitleInfo extends \yii\db\ActiveRecord
             'title_no' => 'Title No',
             'title_state' => 'Title State',
             'towing_request_date' => 'Towing Request Date',
-            'deliver_date' => 'Deliver Date',
+            'deliver_date' => 'Delivery Date',
             'note' => 'Note',
             'created_at' => 'Created At',
             'vehicle_id' => 'Vehicle ID',

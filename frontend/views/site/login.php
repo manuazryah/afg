@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-12">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+            <?= \common\widgets\Alert::widget()?>
             <?php
             $fieldOptions2 = [
                 'options' => ['class' => 'form-group has-feedback'],

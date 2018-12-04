@@ -62,8 +62,10 @@ class CustomersController extends Controller {
      */
     public function actionCreate() {
         $model = new Customers();
+        $model->setScenario('create');
         if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
              $files = UploadedFile::getInstances($model, 'upload_documents');
+             $model->password = Yii::$app->security->generatePasswordHash($model->password);
             if (!empty($uploads)) {
                 $model->upload_documents = $uploads->extension;
             }
@@ -190,6 +192,22 @@ class CustomersController extends Controller {
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    
+    public function actionChangePassword() {
+        $model = new \common\models\ChangePassword();
+        $id = Yii::$app->user->identity->id;
+        $user = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            Yii::$app->session->setFlash('success', 'Password changed successfully.');
+            $model = new \common\models\ChangePassword();
+        }
+        return $this->render('change_password', [
+                    'model' => $model,
+                    'user' => $user,
+        ]);
     }
 
 }

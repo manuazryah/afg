@@ -18,11 +18,14 @@ class VehicleSearch extends Vehicle {
     public $requested_date;
     public $dely_date;
     public $keys;
+    public $title;
+    public $title_received;
+    public $towed;
 
     public function rules() {
         return [
             [['id', 'cheque_no', 'add_chgs', 'status_id'], 'integer'],
-            [['model', 'make', 'hat', 'weight', 'value', 'buyer_no', 'towed_from', 'lot_no', 'towed_amount', 'storage_amount', 'vin', 'created_at', 'updated_at', 'created_by', 'year', 'requested_date', 'dely_date','keys'], 'safe'],
+            [['model', 'make', 'hat', 'weight', 'value', 'buyer_no', 'towed_from', 'lot_no', 'towed_amount', 'storage_amount', 'vin', 'created_at', 'updated_at', 'created_by', 'year', 'requested_date', 'dely_date','keys','color'], 'safe'],
         ];
     }
 

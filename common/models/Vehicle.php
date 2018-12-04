@@ -35,6 +35,8 @@ use Yii;
  */
 class Vehicle extends \yii\db\ActiveRecord {
 
+    
+    
     /**
      * {@inheritdoc}
      */

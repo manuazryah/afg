@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = 'Update';
             </div>
             <div class="panel-body">
                 <?= Html::a('<i class="fa fa-list"></i><span> Manage Customers</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone link-btn']) ?>
+               
                 <div class="panel-body"><div class="customers-create">
                         <?=
                         $this->render('_form', [

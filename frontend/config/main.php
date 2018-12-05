@@ -40,13 +40,16 @@ return [
             'rules' => [
             ],
         ],
-        'assetManager' => [
+           'assetManager' => [
             'bundles' => [
-                'yii\bootstrap\BootstrapPluginAsset' => [
+                'yii\web\JqueryAsset' => [
                     'js' => []
                 ],
                 'yii\bootstrap\BootstrapAsset' => [
                     'css' => [],
+                ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'js' => []
                 ],
             ],
         ],

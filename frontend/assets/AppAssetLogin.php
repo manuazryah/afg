@@ -21,7 +21,7 @@ class AppAssetLogin extends AssetBundle {
         'css/site.css',
     ];
     public $js = [
-        'js/jquery.min.js',
+        'lib/jquery/jquery.min.js',
         'js/bootstrap.min.js',
         'js/icheck.min.js',
         'js/demo.js',

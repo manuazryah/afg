@@ -9,6 +9,7 @@ use yii\web\UploadedFile;
 use common\models\Vehicle;
 use common\models\VehicleSearch;
 use kartik\mpdf\Pdf;
+use common\models\Export;
 
 class DashboardController extends Controller {
 
@@ -54,15 +55,19 @@ class DashboardController extends Controller {
 
     public function actionView($id) {
         $model = Vehicle::findOne($id);
-        $vehicle_title_info = new \common\models\VehicleTitleInfo();
+        $customer_notes = \common\models\CustomerNotes::find()->where(['customer_id' => \Yii::$app->user->identity->id, 'vehicle_id' => $id])->one();
+        if (empty($customer_notes))
+            $customer_notes = new \common\models\CustomerNotes();
 
-        if ($vehicle_title_info->load(\Yii::$app->request->post())) {
-            $vehicle_title_info->save();
+        if ($customer_notes->load(\Yii::$app->request->post())) {
+            $customer_notes->customer_id = \Yii::$app->user->identity->id;
+            $customer_notes->save();
+            Yii::$app->getSession()->setFlash('success', "Notes added successfully");
         }
 
         return $this->render('view', [
                     'model' => $model,
-                    'vehicle_title_info' => $vehicle_title_info,
+                    'customer_notes' => $customer_notes,
         ]);
     }
 
@@ -82,6 +87,23 @@ class DashboardController extends Controller {
             ]
         ]);
         return $pdf->render();
+    }
+
+    public function actionContainers() {
+        $exports= Export::find()->where(['customer' => Yii::$app->user->identity->id])->all();
+        return $this->render('containers', [
+                    'exports' => $exports,
+        ]);
+    }
+    
+    public function actionContainerDetail($id,$vehicle) {
+        $container= Export::findOne($id);
+        $vehicle= Vehicle::findOne($vehicle);
+ 
+        return $this->render('container-detail', [
+                    'container' => $container,
+                    'vehicle' => $vehicle,
+        ]);
     }
 
 }

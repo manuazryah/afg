@@ -21,11 +21,12 @@ class VehicleSearch extends Vehicle {
     public $title;
     public $title_received;
     public $towed;
+    public $pickup_date;
 
     public function rules() {
         return [
             [['id', 'cheque_no', 'add_chgs', 'status_id'], 'integer'],
-            [['model', 'make', 'hat', 'weight', 'value', 'buyer_no', 'towed_from', 'lot_no', 'towed_amount', 'storage_amount', 'vin', 'created_at', 'updated_at', 'created_by', 'year', 'requested_date', 'dely_date','keys','color'], 'safe'],
+            [['model', 'make', 'hat', 'weight', 'value', 'buyer_no', 'towed_from', 'lot_no', 'towed_amount', 'storage_amount', 'vin', 'created_at', 'updated_at', 'created_by', 'year', 'requested_date', 'dely_date','keys','color','title','title_received','pickup_date','towed'], 'safe'],
         ];
     }
 
@@ -105,7 +106,9 @@ class VehicleSearch extends Vehicle {
                 ->andFilterWhere(['like', 'vin', $this->vin])
                 ->andFilterWhere(['like', 'vehicle_title_info.towing_request_date', $this->requested_date])
                 ->andFilterWhere(['like', 'vehicle_title_info.deliver_date', $this->dely_date])
+                ->andFilterWhere(['like', 'vehicle_title_info.pickup_date', $this->pickup_date])
                 ->andFilterWhere(['like', 'vehicle_towing_info.keys', $this->keys])
+                ->andFilterWhere(['like', 'vehicle_towing_info.towed', $this->towed])
                 ->andFilterWhere(['like', 'created_by', $this->created_by]);
 
         return $dataProvider;

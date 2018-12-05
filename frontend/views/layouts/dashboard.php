@@ -16,16 +16,17 @@ use yii\helpers\Html;
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="<?= Yii::$app->homeUrl; ?>img/favicon.png" rel="icon">
         <?= Html::csrfMetaTags() ?>
-        <title><?= Html::encode($this->title) ?></title>
+       <title>AFG Global Shipper LLC</title>
+        <script src="<?= Yii::$app->homeUrl; ?>js/jquery.min.js"></script>
         <script type="text/javascript">
             var homeUrl = '<?= Yii::$app->homeUrl; ?>';
         </script>
         <?php $this->head() ?>
     </head>
-    <body class="skin-blue fixed sidebar-mini sidebar-mini-expand-feature sidebar-collapse">
+    <body class="skin-blue sidebar-mini sidebar-collapse">
         <?php $this->beginBody() ?>
         <header class="main-header">
-            <a href="<?= yii::$app->homeUrl; ?>" class="logo">
+            <a href="<?= yii::$app->homeUrl; ?>dashboard/home" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>FG</span>
                 <!-- logo for regular state and mobile devices -->

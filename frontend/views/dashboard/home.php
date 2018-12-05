@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use common\models\StaffInfo;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\ServiceSearch */
@@ -42,6 +43,9 @@ $this->params['breadcrumbs'][] = $this->title;
     .admin_status_field{
         padding: 0px 0px !important;
     }
+    .table>caption+thead>tr:first-child>td, .table>caption+thead>tr:first-child>th, .table>colgroup+thead>tr:first-child>td, .table>colgroup+thead>tr:first-child>th, .table>thead:first-child>tr:first-child>td, .table>thead:first-child>tr:first-child>th{
+        color: #333;
+    }
 </style>
 <div class="customers-index">
 
@@ -50,11 +54,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
+                    <h3 class="panel-title">Current Inventory</h3>
 
 
                 </div>
                 <div class="panel-body">
+
+                    <button class="btn btn-white" id="search-option" style="float: right;background: #7fb335;color: #fff;margin-left: 5px;">
+                        <i class="linecons-search"></i>
+                        <span>Search</span>
+                    </button>
+
+                    <p>
+                        <?= Html::a('<i class="fa fa-th"></i><span>  My Containers </span>', ['containers'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone', 'style' => 'float:right']) ?>
+                    </p>
+
+
+
                     <ul class="nav nav-tabs">
                         <li class="<?= $status == '' ? 'active' : '' ?>">
                             <?= Html::a('<span class="visible-xs"><i class="fa-home"></i></span><i class="fa fa-th-list" aria-hidden="true"></i><span class="hidden-xs">All </span>', ['home'], ['class' => '']) ?>
@@ -91,6 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'vin',
                             [
                                 'attribute' => 'status_id',
+                                'filter' => [1 => 'ON HAND', 2 => 'ON THE WAY', 3 => 'SHIPPED', 4 => 'PICKED UP'],
                                 'value' => function($model) {
                                     if ($model->status_id == 1) {
                                         return 'ON HAND';
@@ -105,6 +122,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                             [
                                 'attribute' => 'title',
+                                'filter' => [1 => 'Yes', 2 => 'No'],
                                 'value' => function($model) {
                                     if ($model->titleInfos->title == 1) {
                                         return 'Yes';
@@ -122,22 +140,45 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                             ],
                             [
+                                'header' => 'Towing Request Date',
                                 'attribute' => 'requested_date',
                                 'value' => function($model) {
                                     return date('Y-m-d', strtotime($model->titleInfos->towing_request_date));
                                 }
                             ],
                             [
+                                'attribute' => 'pickup_date',
+                                'value' => function($model) {
+                                    if (isset($model->titleInfos->pickup_date))
+                                        return date('Y-m-d', strtotime($model->titleInfos->pickup_date));
+                                    else
+                                        return '';
+                                }
+                            ],
+                            [
+                                'header' => 'Delivery Date',
                                 'attribute' => 'dely_date',
                                 'value' => function($model) {
                                     return date('Y-m-d', strtotime($model->titleInfos->deliver_date));
                                 }
                             ],
-                       
+                            [
+                                'attribute' => 'towed',
+                                'value' => function($model) {
+                                    return $model->towingInfos->towed;
+                                },
+                                'filter' => ['Yes' => 'Yes', 'No' => 'No'],
+                            ],
+                            'buyer_no',
                             [
                                 'class' => 'yii\grid\ActionColumn',
                                 'template' => '{view}',
-                            ]
+                                'buttons' => [
+                                    'view' => function ($url, $model) {
+                                        return Html::a('<span class="glyphicon glyphicon-eye-open" title="View Details"></span>', $url, ['data-pjax' => 0, 'target' => "_blank"]);
+                                    },
+                                ],
+                            ],
                         ],
                     ]);
                     ?>
@@ -148,5 +189,11 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
-
-
+<script>
+    $(document).ready(function () {
+        $(".filters").slideToggle();
+        $("#search-option").click(function () {
+            $(".filters").slideToggle();
+        });
+    });
+</script>

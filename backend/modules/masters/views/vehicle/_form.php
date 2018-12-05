@@ -132,6 +132,31 @@ use yii\helpers\ArrayHelper;
             ]);
             ?>
         </div>
+        
+        
+        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+            <?php
+            if (!$vehicle_title->isNewRecord) {
+                $vehicle_title->pickup_date = date('d-m-Y', strtotime($vehicle_title->pickup_date));
+            } else {
+                $vehicle_title->pickup_date = date('d-m-Y');
+            }
+            ?>
+            <?=
+            $form->field($vehicle_title, 'pickup_date')->widget(DatePicker::classname(), [
+                'type' => DatePicker::TYPE_INPUT,
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-M-yyyy'
+                ]
+            ]);
+            ?>
+        </div>
+        
+    </div>
+
+    <div class="row">
+        
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?php
             if (!$vehicle_title->isNewRecord) {
@@ -150,9 +175,7 @@ use yii\helpers\ArrayHelper;
             ]);
             ?>
         </div>
-    </div>
-
-    <div class="row">
+        
         <div class='col-md-8 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($vehicle_title, 'note')->textInput(['maxlength' => true]) ?>
         </div>

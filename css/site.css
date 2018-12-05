@@ -2,6 +2,9 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
 }
+a{
+    color: #333 ;
+}
 /**************************** Login css Start ***********************/
 .login-page, .register-page {
     background: url(../img/bg.jpg);
@@ -110,7 +113,7 @@ body {
     font-size: 13px;
 }
 .sidebar-menu li>a:hover{
-    background: #3ec1d5;
+    background: #5c5c5c;
 }
 .sidebar-menu .active>.treeview-menu{
     background: #9c7c1f;
@@ -215,6 +218,7 @@ body {
 }
 .table-bordered {
     border: 1px solid #cac8c8;
+    font-size:12px;
 }
 .btn-success.active.focus, .btn-success.active:focus, .btn-success.active:hover, .btn-success:active.focus, .btn-success:active:focus, .btn-success:active:hover, .open>.dropdown-toggle.btn-success.focus, .open>.dropdown-toggle.btn-success:focus, .open>.dropdown-toggle.btn-success:hover {
     color: #fff;

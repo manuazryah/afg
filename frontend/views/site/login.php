@@ -23,14 +23,14 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php
             $fieldOptions2 = [
                 'options' => ['class' => 'form-group has-feedback'],
-                'inputTemplate' => "{input}"
+                'inputTemplate' => "{input}<span class='glyphicon glyphicon-user form-control-feedback'></span>"
             ];
             ?>
             <?= $form->field($model, 'user_name', $fieldOptions2)->label('User Name')->textInput() ?>
             <?php
             $fieldOptions3 = [
                 'options' => ['class' => 'form-group has-feedback'],
-                'inputTemplate' => "{input}"
+                'inputTemplate' => "{input}<span class='glyphicon glyphicon-lock form-control-feedback'></span>"
             ];
             ?>
             <?= $form->field($model, 'password', $fieldOptions3)->label('Password')->passwordInput() ?>

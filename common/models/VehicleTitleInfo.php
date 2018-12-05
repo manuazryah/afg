@@ -37,7 +37,7 @@ class VehicleTitleInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title_received', 'towing_request_date', 'deliver_date', 'created_at'], 'safe'],
+            [['title_received', 'towing_request_date', 'deliver_date', 'created_at','pickup_date'], 'safe'],
             [['note'], 'string'],
             [['vehicle_id'], 'required'],
             [['vehicle_id'], 'integer'],

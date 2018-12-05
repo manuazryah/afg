@@ -26,6 +26,7 @@ class DashboardAsset extends AssetBundle {
         'js/adminlte.min.js',
         'js/jquery.slimscroll.min.js',
         'js/fastclick.js',
+        'js/icheck.min.js',
         'js/demo.js',
     ];
     public $depends = [

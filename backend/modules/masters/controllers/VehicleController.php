@@ -82,6 +82,7 @@ class VehicleController extends Controller {
                     $vehicle_towing->customers_id = $vehicle_towing->customer_name;
                     $vehicle_title->towing_request_date = date('Y-m-d', strtotime($vehicle_title->towing_request_date));
                     $vehicle_title->deliver_date = date('Y-m-d', strtotime($vehicle_title->deliver_date));
+                    $vehicle_title->pickup_date = date('Y-m-d', strtotime($vehicle_title->pickup_date));
                     $vehicle_title->title_received = date('Y-m-d', strtotime($vehicle_title->title_received));
                     $vehicle_check_options->save();
                     $vehicle_condition->save();
@@ -129,6 +130,7 @@ class VehicleController extends Controller {
             $vehicle_title->towing_request_date = date('Y-m-d', strtotime($vehicle_title->towing_request_date));
             $vehicle_title->deliver_date = date('Y-m-d', strtotime($vehicle_title->deliver_date));
             $vehicle_title->title_received = date('Y-m-d', strtotime($vehicle_title->title_received));
+            $vehicle_title->pickup_date = date('Y-m-d', strtotime($vehicle_title->pickup_date));
             if ($model->save() && $vehicle_check_options->save() && $vehicle_condition->save() && $vehicle_title->save() && $vehicle_towing->save()) {
                 $files = UploadedFile::getInstances($model, 'attachments');
                 if (!empty($files))
@@ -166,6 +168,7 @@ class VehicleController extends Controller {
         }
         return $paths;
     }
+
 
     public function fileExists($path, $name, $file, $sufix) {
         if (file_exists($path . '/' . $name)) {

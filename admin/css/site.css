@@ -362,6 +362,13 @@ body {
     float: left;
     margin-right: 20px;
 }
+.inventory-report-modal .modal-header .print-link {
+    width: fit-content;
+    display: inline-block;
+    float: left;
+    margin-right: 20px;
+    margin-top: 5px;
+}
 .inventory-report-modal .modal-header .excel-link{
     width: fit-content;
 }
@@ -516,3 +523,6 @@ active, .manifesta .ui-widget-header .ui-state-active {
     text-decoration: underline;
 }
 /****************************/
+.vehicle-report-modal{
+    width: 88%;
+}

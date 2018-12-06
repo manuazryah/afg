@@ -438,10 +438,18 @@ use yii\helpers\ArrayHelper;
     <?php ActiveForm::end(); ?>
 
 </div>
-
+<input type="text" id="datepicker" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
 
 <script>
     $(document).ready(function () {
+        $("#datepicker").datepicker({
+            format: "yyyy",
+            viewMode: "years",
+            minViewMode: "years"
+        });
+        
         $('#vehicle-btn-auto').click(function () {
             var vin = $('#vehicle-vin').val();
             $('#vehicle-year').val('');
@@ -492,7 +500,10 @@ use yii\helpers\ArrayHelper;
         } else {
             $('#title_type').hide();
         }
+        
+      
 
     });
 
 </script>
+

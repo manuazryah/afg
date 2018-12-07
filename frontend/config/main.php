@@ -38,6 +38,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'dashboard/container-detail/<id:\d+>/<vehicle:\d+>' => 'dashboard/container-detail',
             ],
         ],
            'assetManager' => [

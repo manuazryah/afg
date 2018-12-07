@@ -104,6 +104,7 @@ class VehicleSearch extends Vehicle {
                 ->andFilterWhere(['like', 'towed_amount', $this->towed_amount])
                 ->andFilterWhere(['like', 'storage_amount', $this->storage_amount])
                 ->andFilterWhere(['like', 'vin', $this->vin])
+                ->andFilterWhere(['like', 'vehicle_title_info.title_received', $this->title_received])
                 ->andFilterWhere(['like', 'vehicle_title_info.towing_request_date', $this->requested_date])
                 ->andFilterWhere(['like', 'vehicle_title_info.deliver_date', $this->dely_date])
                 ->andFilterWhere(['like', 'vehicle_title_info.pickup_date', $this->pickup_date])

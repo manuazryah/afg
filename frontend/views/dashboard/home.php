@@ -59,7 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 </div>
                 <div class="panel-body">
-
                     <button class="btn btn-white" id="search-option" style="float: right;background: #7fb335;color: #fff;margin-left: 5px;">
                         <i class="linecons-search"></i>
                         <span>Search</span>
@@ -68,8 +67,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     <p>
                         <?= Html::a('<i class="fa fa-th"></i><span>  My Containers </span>', ['containers'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone', 'style' => 'float:right']) ?>
                     </p>
-
-
 
                     <ul class="nav nav-tabs">
                         <li class="<?= $status == '' ? 'active' : '' ?>">
@@ -135,6 +132,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                             [
                                 'attribute' => 'title_received',
+                                'filter' => DatePicker::widget([
+                                    'model' => $searchModel,
+                                    'attribute' => 'title_received',
+                                    'pluginOptions' => [
+                                        'format' => 'yyyy-mm-dd',
+                                    ]
+                                ]),
                                 'value' => function($model) {
                                     return date('Y-m-d', strtotime($model->titleInfos->title_received));
                                 }
@@ -142,12 +146,26 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'header' => 'Towing Request Date',
                                 'attribute' => 'requested_date',
+                                'filter' => DatePicker::widget([
+                                    'model' => $searchModel,
+                                    'attribute' => 'requested_date',
+                                    'pluginOptions' => [
+                                        'format' => 'yyyy-mm-dd',
+                                    ]
+                                ]),
                                 'value' => function($model) {
                                     return date('Y-m-d', strtotime($model->titleInfos->towing_request_date));
                                 }
                             ],
                             [
                                 'attribute' => 'pickup_date',
+                                'filter' => DatePicker::widget([
+                                    'model' => $searchModel,
+                                    'attribute' => 'pickup_date',
+                                    'pluginOptions' => [
+                                        'format' => 'yyyy-mm-dd',
+                                    ]
+                                ]),
                                 'value' => function($model) {
                                     if (isset($model->titleInfos->pickup_date))
                                         return date('Y-m-d', strtotime($model->titleInfos->pickup_date));
@@ -158,6 +176,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'header' => 'Delivery Date',
                                 'attribute' => 'dely_date',
+                                'filter' => DatePicker::widget([
+                                    'model' => $searchModel,
+                                    'attribute' => 'dely_date',
+                                    'pluginOptions' => [
+                                        'format' => 'yyyy-mm-dd',
+                                    ]
+                                ]),
                                 'value' => function($model) {
                                     return date('Y-m-d', strtotime($model->titleInfos->deliver_date));
                                 }

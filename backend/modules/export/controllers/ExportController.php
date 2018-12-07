@@ -17,6 +17,11 @@ use kartik\mpdf\Pdf;
  */
 class ExportController extends Controller {
 
+    public function beforeAction($action) {
+        $this->enableCsrfValidation = false;
+        return parent::beforeAction($action);
+    }
+
     /**
      * @inheritdoc
      */
@@ -283,10 +288,11 @@ class ExportController extends Controller {
         ]);
         if (empty($mail)) {
             return $pdf->render();
-        }else{
-            return $pdf->render();//temporary
+        } else {
+            return $pdf->render(); //temporary
         }
     }
+
     public function actionLandingpdf($id, $mail = NULL) {
         $content = $this->renderPartial('landingpdf', ['model' => $this->findModel($id),
         ]);
@@ -304,8 +310,8 @@ class ExportController extends Controller {
         ]);
         if (empty($mail)) {
             return $pdf->render();
-        }else{
-            return $pdf->render();//temporary
+        } else {
+            return $pdf->render(); //temporary
         }
     }
 
@@ -353,6 +359,13 @@ class ExportController extends Controller {
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionVehicleDeatil() {
+
+        $container = $this->findModel($_POST['val']);
+        $view = $this->renderPartial('container-vehicles', ['val' => $_POST['val'], 'container' => $container]);
+        return $view;
     }
 
 }

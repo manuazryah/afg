@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 ?>
+
 <div id="modalContentreport">
     <button type="button" id="btnPrintThisdock" class="btn btn-primary"><i class="fa fa-print"></i> Print</button>
     <?= Html::a('<i class="fa fa-file-pdf-o "></i> Open as Pdf', ['vehicle-condition-reportpdf', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank']) ?>
@@ -221,7 +222,7 @@ use yii\helpers\Html;
                     </table>
                 </div>
 
-                <div style="clear:both"></div>
+
                 <div class="row">
                     <div class="col-md-6" style="margin-top: 20px">
                         <div class="picas1" style="width: 100%;height: 140px;margin-bottom: 10px;border: 1px solid #000;">
@@ -254,15 +255,13 @@ use yii\helpers\Html;
                     </div>
                 </div>
 
-                <div style="clear:both"></div>
-
                 <div class="row">
                     <div class="col-md-6">
                         <div class="picas3" style="border: 1px solid #000;border-left-width: 1px;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-left-color: #000;">
                             <div class="">
                                 <img src="<?= Yii::$app->homeUrl; ?>img/vehicle-driverside.jpg" width="384" height="141" style="margin-left: 2px;margin-top: 2px;margin-bottom: 2px;"></div>
                             <div id="yoba" style="border-top-width: 1px;border-top-style: solid;border-top-color: #000;float: left;width: 100%;"> 
-                                <table width="100%" style="border: 1px solid #000">
+                                <table width="100%">
                                     <tbody><tr>
                                             <td width="6%">11</td><td class="line_right" align="center" width="28%" style="border-right-width: 1px;border-right-style: solid;border-right-color: #000;"></td>
                                             <td width="6%">12</td><td class="line_right" align="center" width="27%" style="border-right-width: 1px;border-right-style: solid;border-right-color: #000;"></td>
@@ -270,8 +269,9 @@ use yii\helpers\Html;
                                         </tr>
                                     </tbody></table>
                             </div>
+
                             <div id="yoba" style="border-top-width: 1px;border-top-style: solid;border-top-color: #000;float: left;width: 100%;">
-                                <table width="100%" style="border: 1px solid #000">
+                                <table width="100%">
                                     <tbody><tr>
                                             <td width="6%">14</td><td align="center" class="line_right" width="28%" style="border-right-width: 1px;border-right-style: solid;border-right-color: #000;"></td>
                                             <td width="6%">15</td><td align="center" class="line_right" width="27%" style="border-right-width: 1px;border-right-style: solid;border-right-color: #000;"></td>
@@ -279,13 +279,14 @@ use yii\helpers\Html;
                                         </tr>
                                     </tbody></table>
                             </div>
+
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="picas3" style="border: 1px solid #000;border-left-width: 1px;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-left-color: #000;">
                             <div class="">
                                 <img src="<?= Yii::$app->homeUrl; ?>img/vehicle-passengerside.jpg" width="384" height="141" style="margin-left: 2px;margin-top: 2px;margin-bottom: 2px;"></div>
-                            <div id="yoba" style="border-top-width: 1px;border-top-style: solid;border-top-color: #000;border-top-color: #000;width: 100%;"> 
+                            <div id="yoba" style="border-top-width: 1px;border-top-style: solid;border-top-color: #000;border-top-color: #000;"> 
                                 <table width="100%">
                                     <tbody><tr>
                                             <td width="6%">17</td><td align="center" class="line_right" width="28%" style="border-right-width: 1px;border-right-style: solid;border-right-color: #000;"></td>
@@ -295,8 +296,8 @@ use yii\helpers\Html;
                                     </tbody></table>
                             </div>
 
-                            <div id="yoba" style="border-top-width: 1px;border-top-style: solid;border-top-color: #000;float: left;width: 100%;">
-                                <table width="100%" style="border: 1px solid #000">
+                            <div id="yoba" style="border-top-width: 1px;border-top-style: solid;border-top-color: #000;border-top-color: #000;float: left">
+                                <table width="100%">
                                     <tbody><tr>
                                             <td width="6%">20</td><td align="center" class="line_right" width="28%" style="border-right-width: 1px;border-right-style: solid;border-right-color: #000;"></td>
                                             <td width="6%">21</td><td align="center" class="line_right" width="27%" style="border-right-width: 1px;border-right-style: solid;border-right-color: #000;"></td>
@@ -307,9 +308,9 @@ use yii\helpers\Html;
                         </div>
                     </div>
                 </div>
-                <div style="clear:both"></div>
 
-                <div class="papugay" style="width: 99%;float: left;margin-top: 10px;border: 1px solid #000;margin-left: 3px;">
+
+                <div class="papugay" style="width: 99%;float: left;margin-top: 5px;border: 1px solid #000;margin-left: 3px;">
                     <table width="100%">
                         <tbody><tr><td><b>1.</b> Liability-Shipper (customer) must have door-to-door insurance while goods are in warehouse and during transit. Ariana Worldwide will not
                                     assume any responsibility for uninsured or underinsured shipment(s).</td></tr>
@@ -381,7 +382,7 @@ use yii\helpers\Html;
                         $img_nmees = explode('.', $img_nmee);
                         if ($img_nmees['1'] != '') {
                             ?>
-                <img width="230px" height="230px" src="<?= Yii::$app->homeUrl . '../uploads/vehicle/' . $model->id . '/' . end($arry) ?>" style="margin-left: 20px;">
+                            <div class="col-md-4"><img width="230px" height="230px" src="<?= Yii::$app->homeUrl . '../uploads/vehicle/' . $model->id . '/' . end($arry) ?>"></div>
                                 <?php
                             }
                             if ($k % 4 == 0) {

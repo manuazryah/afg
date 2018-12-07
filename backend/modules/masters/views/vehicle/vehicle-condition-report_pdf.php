@@ -5,7 +5,7 @@ use yii\helpers\Html;
 <table class="header-tbl">
     <tr>
         <td class="col1"><strong style="color:#3ec1d5;">AFG</strong> GLOBAL SHIPPER LLC</td>
-        <td class="col2">131 East Gardena Boulevard Gardena, CA 90248 Tel: (310) 532-8557</td>
+        <td class="col2">A108 Adam Street NY 535022, USA Tel: +1 5589 55488 55</td>
         <td class="col3">Vehicle Condition Report</td>
     </tr>
 </table>
@@ -13,25 +13,27 @@ use yii\helpers\Html;
     <div class="top-content">
         <div class="main-left">
             <table class="inner-tbl-left">
+                <?php
+                $customer_details = common\models\Customers::findOne($model->towingInfos->customers_id);
+                ?>
                 <tr>
                     <th>Customer</th>
-                    <td colspan="3">SYED MAHMOOD AND IBRAHIM USED
-                        CARS & SPARE PARTS
+                    <td colspan="3"><?= $customer_details->name ?>
                     </td>
                 </tr>
                 <tr>
                     <th>Address </th>
-                    <td colspan="3">NY</td>
+                    <td colspan="3"><?= $customer_details->address1 ?></td>
                 </tr>
                 <tr>
                     <th>Phone #</th>
-                    <td>732-881-2047</td>
+                    <td><?= $customer_details->phone_usa ?></td>
                     <th>Weight</th>
-                    <td>CLASS 1C: 4,001 - 5,000 LB (1,814 - 2,268 KG)</td>
+                    <td><?= $model->weight ?></td>
                 </tr>
                 <tr>
                     <th>Lot #</th>
-                    <td>44330518</td>
+                    <td><?= $model->lot_no ?></td>
                     <th>Inv #</th>
                     <td>446</td>
                 </tr>
@@ -40,10 +42,16 @@ use yii\helpers\Html;
                     <td colspan="3"></td>
                 </tr>
                 <tr>
+                    <?php
+                    $condition = '';
+                    if (isset($model->towingInfos->condition) && $model->towingInfos->condition != '') {
+                        $condition = $model->towingInfos->condition;
+                    }
+                    ?>
                     <th>Condition</th>
-                    <td>Non Operable</td>
+                    <td><?= $condition ?></td>
                     <th>Damaged</th>
-                    <td>Yes</td>
+                    <td><?= $model->towingInfos->damaged ?></td>
                 </tr>
             </table>
         </div>
@@ -51,19 +59,19 @@ use yii\helpers\Html;
             <table class="inner-tbl-right">
                 <tr>
                     <th>Year</th>
-                    <td colspan="2">2017</td>
+                    <td colspan="2"><?= $model->year ?></td>
                     <th>Color</th>
-                    <td colspan="2">GREEN</td>
+                    <td colspan="2"><?= $model->color ?></td>
                 </tr>
                 <tr>
                     <th>Model</th>
-                    <td colspan="2">ROGUE</td>
+                    <td colspan="2"><?= $model->model ?></td>
                     <th>Make</th>
-                    <td colspan="2">NISSAN</td>
+                    <td colspan="2"><?= $model->make ?></td>
                 </tr>
                 <tr>
                     <th>VIN</th>
-                    <td colspan="5">5N1AT2MV6HC810123</td>
+                    <td colspan="5"><?= $model->vin ?></td>
                 </tr>
                 <tr>
                     <th>License#</th>
@@ -71,26 +79,68 @@ use yii\helpers\Html;
                 </tr>
                 <tr>
                     <th>Towed From</th>
-                    <td colspan="5"></td>
+                    <td colspan="5"><?= $model->towed_from ?></td>
                 </tr>
                 <tr>
                     <th>Towed Amount</th>
-                    <td colspan="2"></td>
+                    <td colspan="2"><?= $model->towed_amount ?></td>
                     <th>Storage Amount</th>
-                    <td colspan="2"></td>
+                    <td colspan="2"><?= $model->storage_amount ?></td>
                 </tr>
                 <tr>
                     <th>Towed</th>
-                    <td></td>
+                    <td><?= $model->towingInfos->towed ?></td>
                     <th>Title Provided</th>
-                    <td></td>
+                    <td>
+                        <?php
+                        if ($model->titleInfos->title == 1) {
+                            echo 'Yes';
+                        } else if ($model->titleInfos->title == 2) {
+                            echo 'No';
+                        }
+                        ?></td>
                     <th>Pictures</th>
-                    <td>Yes</td>
+                    <td><?= $model->towingInfos->pictures ?></td>
                 </tr>
             </table>
         </div>
     </div>
     <div class="vehicle-condition">
+        
+        <table class="head">
+            <tr>
+                <td>CHECK OPTIONS INCLUDED IN VEHICLE</td>
+            </tr>
+        </table>
+        
+        <table class="specification">
+            <tr>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->keys == 1) { ?> checked <?php } ?>></th>
+                <td>Keys</td>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->cd_changer == 1) { ?> checked <?php } ?>></th>
+                <td>CD Changer </td>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->gps_navigation_system == 1) { ?> checked <?php } ?>></th>
+                <td>GPS Navigation System</td>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->spare_tire_jack == 1) { ?> checked <?php } ?>></th>
+                <td>Spare Tire/Jack</td>
+                 <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->wheel_covers == 1) { ?> checked <?php } ?>></th>
+                <td>Wheel Covers </td>
+            </tr>
+            <tr>
+               
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->radio == 1) { ?> checked <?php } ?>></th>
+                <td>Radio  </td>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->cd_player == 1) { ?> checked <?php } ?>></th>
+                <td>CD Player </td>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->mirror == 1) { ?> checked <?php } ?>></th>
+                <td>Mirror</td>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->speaker == 1) { ?> checked <?php } ?>></th>
+                <td>Speaker</td>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->other == 1) { ?> checked <?php } ?>></th>
+                <td>Other...</td>
+            </tr>
+        </table>
+        
         <table class="head">
             <tr>
                 <td>CONDITION OF VEHICLE</td>
@@ -150,19 +200,19 @@ use yii\helpers\Html;
                         </tr>
                         <tr>
                             <th>02</th>
-                            <td colspan="2">DG</td>
+                            <td colspan="2"></td>
                         </tr>
                         <tr>
                             <th>03</th>
-                            <td colspan="2">DG</td>
+                            <td colspan="2"></td>
                         </tr>
                         <tr>
                             <th>04</th>
-                            <td colspan="2">DG</td>
+                            <td colspan="2"></td>
                         </tr>
                         <tr>
                             <th>05</th>
-                            <td colspan="2">DG</td>
+                            <td colspan="2"></td>
                         </tr>
                     </table>
                 </td>
@@ -175,19 +225,19 @@ use yii\helpers\Html;
                         </tr>
                         <tr>
                             <th colspan="2">07</th>
-                            <td>DG</td>
+                            <td></td>
                         </tr>
                         <tr>
                             <th>08</th>
-                            <td colspan="2">DG</td>
+                            <td colspan="2"></td>
                         </tr>
                         <tr>
                             <th>09</th>
-                            <td colspan="2">DG</td>
+                            <td colspan="2"></td>
                         </tr>
                         <tr>
                             <th colspan="2">10</th>
-                            <td>DG</td>
+                            <td></td>
                         </tr>
                     </table>
                 </td>
@@ -200,7 +250,7 @@ use yii\helpers\Html;
                     <table class="tbl4">
                         <tr>
                             <th>11</th>
-                            <td>DG</td>
+                            <td></td>
                             <th>12</th>
                             <td></td>
                             <th>13</th>

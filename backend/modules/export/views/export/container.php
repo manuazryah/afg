@@ -18,8 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-
-
                 </div>
                 <div class="panel-body">
 
@@ -27,6 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     GridView::widget([
                         'dataProvider' => $dataProvider,
                         'filterModel' => $searchModel,
+                        'rowOptions' => function($model) {
+                            return ['id' => $model->id];
+                        },
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
                             'loding_date',
@@ -34,56 +35,18 @@ $this->params['breadcrumbs'][] = $this->title;
                             'ETA',
                             'booking_no',
                             'ar_no',
-                            
                             'terminal',
-                            // 'xtn_no',
-                            // 'seal_no',
-                            // 'container_no',
-                            // 'cut_off',
                             'vessel',
-                            // 'voyage',
-                            // 'terminal',
-                            // 'stremship_line',
-                             'destination',
-                            // 'ITN',
-                            // 'contact_details:ntext',
-                            // 'special_instruction:ntext',
-                            // 'port_of_loading',
-                            // 'port_of_discharge',
-                            // 'bol_note',
-                            // 'bl_or_awb_number',
-                            // 'export_referance',
-                            // 'forwading_agent:ntext',
-                            // 'domestic_routing_instructions:ntext',
-                            // 'pre_carraiage_by',
-                            // 'place_of_recipt_by_pre_carrrier',
-                            // 'final_destintion',
-                            // 'loading_terminal',
-                            // 'container_type',
-                            // 'number_of_packages',
-                            // 'by',
-                            // 'exporting_carruer',
-                            // 'date',
-                            // 'auto_recieving_date',
-                            // 'auto_cut_off',
-                            // 'vessel_cut_off',
-                            // 'sale_date',
-                            // 'vehicle_location',
-                            // 'exporter_id',
-                            // 'exporter_type_issue',
-                            // 'transpotation_value',
-                            // 'exporter_dob',
-                            // 'ultimate_consignee_dob',
-                            // 'conignee_id',
-                            // 'notify_party',
-                            //  'menifest_consignee',
-                            // 'invoice',
-                            // 'status',
-                            // 'CB',
-                            // 'UB',
-                            // 'DOC',
-                            // 'DOU',
-                            
+                            'destination',
+                            [
+                                'class' => 'yii\grid\ActionColumn',
+                                'template' => '{view}',
+                                'buttons' => [
+                                    'view' => function ($url, $model) {
+                                        return Html::a('<span class="glyphicon glyphicon-eye-open gridview-accordn" type="' . $model->id . '" title="View Details"></span>', '#', ['data-pjax' => 0, 'target' => "_blank"]);
+                                    },
+                                ],
+                            ],
                         ],
                     ]);
                     ?>
@@ -93,4 +56,43 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.gridview-accordn', function (e) {
+            e.preventDefault();
+            var val = $(this).attr('type');
+            $(this).removeClass('gridview-accordn');
+            $(this).addClass('gridview-remove');
+            $.ajax({
+                type: 'POST',
+                url: homeUrl + 'export/export/vehicle-deatil',
+                data: {val: val},
+                success: function (data) {
+                    $("#" + val).after(data);
+                }
+            });
 
+           
+
+        });
+
+
+        $(document).on('click', '.gridview-remove', function (e) {
+            e.preventDefault();
+            var val = $(this).attr('type');
+            $(this).removeClass('gridview-remove');
+            $(this).addClass('gridview-accordn');
+            $('#append_' + val).hide();
+
+        });
+
+    });
+</script>
+
+<style>
+    .append-table th{
+        font-size: 12px;
+        background: #3ec1d5;
+    color: #fff !important;
+    }
+</style>

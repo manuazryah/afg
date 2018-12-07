@@ -27,11 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="panel-body" >
 
-                    <button class="btn btn-white" id="search-option" style="float: right;background: #7fb335;color: #fff;margin-left: 5px;">
-                        <i class="linecons-search"></i>
-                        <span>Search</span>
-                    </button>
-
                     <p>
                         <?= Html::a('<i class="fa fa-list"></i><span>  Current Inventory </span>', ['home'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone', 'style' => 'float:right']) ?>
                     </p>

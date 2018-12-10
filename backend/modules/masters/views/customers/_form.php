@@ -12,6 +12,12 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
+        <?php
+        if ($model->isNewRecord) {
+            $model->customer_id = mt_rand(100000, 999999);
+        }
+        ?>
+
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'customer_id')->textInput(['maxlength' => true]) ?>
 
         </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
@@ -40,7 +46,7 @@ use yii\widgets\ActiveForm;
 
         </div>
     </div>
-    
+
     <div class="row">
 
         <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'address1')->textarea(['rows' => 6]) ?>
@@ -49,7 +55,7 @@ use yii\widgets\ActiveForm;
 
         </div>
     </div>
-    
+
     <div class="row">
 
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'country')->textInput(['maxlength' => true]) ?>
@@ -114,3 +120,6 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+
+

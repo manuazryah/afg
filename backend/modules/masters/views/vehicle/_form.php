@@ -12,7 +12,6 @@ use yii\helpers\ArrayHelper;
 ?>
 
 <div class="vehicle-form form-inline">
-
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
         <h4 class="frm-sub-title">CUSTOMER INFO</h4>
@@ -194,7 +193,7 @@ use yii\helpers\ArrayHelper;
             <?= $form->field($model, 'vin')->textInput(['maxlength' => true]) ?>
         </div>
         <div class='col-md-1 col-sm-6 col-xs-12 left_padd'>
-            <button type="button" class="btn" id="vehicle-btn-auto">Auto Fill</button>
+            <button type="button" class="btn" id="vehicle-btn-auto" style="margin-top: 22px;">Auto Fill</button>
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'year')->textInput() ?>
@@ -439,17 +438,9 @@ use yii\helpers\ArrayHelper;
 
 </div>
 <input type="text" id="datepicker" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
 
 <script>
     $(document).ready(function () {
-        $("#datepicker").datepicker({
-            format: "yyyy",
-            viewMode: "years",
-            minViewMode: "years"
-        });
-
         $('#vehicle-btn-auto').click(function () {
             var vin = $('#vehicle-vin').val();
             $('#vehicle-year').val('');
@@ -501,9 +492,6 @@ use yii\helpers\ArrayHelper;
             $('#title_type').hide();
         }
 
-
-
     });
-
 </script>
 

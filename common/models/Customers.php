@@ -64,7 +64,8 @@ class Customers extends ActiveRecord implements IdentityInterface {
             [['fax'], 'string', 'max' => 100],
             [['user_name', 'password'], 'required', 'on' => 'login'],
             [['password'], 'validatePassword', 'on' => 'login'],
-            [['user_name'], 'unique', 'on' => 'create']
+            [['user_name'], 'unique', 'on' => 'create'],
+            [['customer_id'], 'unique', 'on' => 'create']
         ];
     }
 

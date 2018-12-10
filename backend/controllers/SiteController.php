@@ -225,8 +225,10 @@ class SiteController extends Controller {
     }
 
     public function actionInventoryContent() {
+        $customers = \common\models\Customers::find()->where(['status' => 1])->all();
         if (Yii::$app->request->isAjax) {
             $report = $this->renderPartial('inventory_content', [
+                'customers' => $customers
             ]);
             $report_content = array('report' => $report);
             $data['result'] = $report_content;
@@ -253,8 +255,9 @@ class SiteController extends Controller {
     }
 
     public function actionInventoryExport() {
-        $content = $this->renderPartial('report', [
-        ]);
+
+        
+        $content = $this->renderPartial('report', []);
         $file = "daily-report.xls";
         header("Content-type: application/vnd.ms-excel");
         header("Content-Disposition: attachment; filename=$file");

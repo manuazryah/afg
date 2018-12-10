@@ -56,12 +56,12 @@ use common\models\Vehicle;
                             if ($vehicle_detail) {
                                 ?>
                                 <tr>
-                                    <td><?= $vehicle_detail->year?></td>
-                                    <td><?= $vehicle_detail->make?></td>
-                                    <td><?= $vehicle_detail->model?></td>
-                                    <td><?= $vehicle_detail->color?></td>
-                                    <td><?= $vehicle_detail->vin?></td>
-                                    <td><?= $vehicle_detail->status_id?></td>
+                                    <td><?= $vehicle_detail->year ?></td>
+                                    <td><?= $vehicle_detail->make ?></td>
+                                    <td><?= $vehicle_detail->model ?></td>
+                                    <td><?= $vehicle_detail->color ?></td>
+                                    <td><?= $vehicle_detail->vin ?></td>
+                                    <td><?= $vehicle_detail->status_id ?></td>
                                 </tr>
                                 <?php
                             }
@@ -456,7 +456,7 @@ use common\models\Vehicle;
     <hr class="horizontal-line">
     <div class="row">
         <h4 class="frm-sub-title">Container Images</h4>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+        <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'invoice')->fileInput() ?>
             <?php
             if (isset($model->invoice) && $model->invoice != '') {
@@ -471,13 +471,9 @@ use common\models\Vehicle;
             }
             ?>
         </div>
-    </div>
-
-    <div class="row">
         <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'container_images[]')->fileInput(['multiple' => true]) ?>
         </div>
-
     </div>
 
     <div class="row">

@@ -28,9 +28,13 @@ AppAsset::register($this);
         <header class="main-header">
             <a href="<?= yii::$app->homeUrl; ?>" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>A</b>FG</span>
+                <span class="logo-mini">
+                    <img width="" class="img-responsive" src="<?= Yii::$app->homeUrl; ?>img/favicon.png"/>
+                </span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>AFG</b><span style="color:#fff;"> GLOBAL SHIPPER LLC</span></span>
+                <span class="logo-lg">
+                    <img width="" class="img-responsive" src="<?= Yii::$app->homeUrl; ?>img/logo.png"/>
+                </span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">

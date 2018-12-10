@@ -12,23 +12,23 @@ body {
     padding-top: 75px;
 }
 .login-box-body, .register-box-body {
-    background: rgba(0, 0, 0, 0.40);
+    background: rgba(158, 158, 158, 0.29);
     border-radius: 5px;
 }
 .login-box .has-feedback label~.form-control-feedback {
     top: 25px;
     left: 0px;
-    color: #b7b7b7;
+    color: #868585;
 }
 #login-form .control-label {
-    color: #e8e5e5;
+    color: #464648;
     font-weight: 600;
     font-size: 15px;
     width: 100%;
     text-transform: none;
 }
 .checkbox label{
-    color: #e8e5e5;
+    color: #4e4e4e;
     font-weight: 600;
     font-size: 15px;
 }
@@ -37,8 +37,8 @@ body {
     padding: 6px 30px;
 }
 #login-form .btn-primary {
-    background-color: #3ec1d5;
-    border-color: #3ec1d5;
+    background-color: #0e75bc;
+    border-color: #0e75bc;
     width: 100%;
     padding: 8px 0px;
     text-transform: uppercase;
@@ -46,8 +46,8 @@ body {
     font-size: 18px;
 }
 #login-form .btn-primary:hover {
-    background-color: #369bab;
-    border-color: #369bab;
+    background-color: #0d67a5;
+    border-color: #0d67a5;
 }
 .log-layout .btn-default {
     background-color: #3ec1d5;
@@ -71,8 +71,11 @@ body {
     font-weight: bold;
     line-height: 1;
 }
+.login-logo img{
+    margin: 0 auto;
+}
 .site-login p{
-    color: #fff;
+    color: #000;
     font-size: 15px;
     font-weight: 600;
     margin-bottom: 20px;
@@ -110,7 +113,7 @@ body {
     font-size: 13px;
 }
 .sidebar-menu li>a:hover{
-    background: #3ec1d5;
+    background: #6d6e71;
 }
 .sidebar-menu .active>.treeview-menu{
     background: #9c7c1f;
@@ -148,6 +151,15 @@ body {
 .content {
     padding: 30px 30px;
 }
+.logo-lg img{
+    width: 130px;
+    margin: 0 auto;
+}
+.logo-mini img{
+    width: 40px;
+    margin: 0 auto;
+    padding-top: 7px;
+}
 .link-btn{
     margin-left: 15px;
 }
@@ -166,19 +178,32 @@ body {
     border-color: #3ec1d5;
 }
 .btn-success {
-    background-color: #39d8f1;
-    border-color: #39d8f1;
+    background-color: #0e75bc;
+    border-color: #0e75bc;
     outline: none;
     width: auto;
 }
 .btn-success:hover, .btn-success:active, .btn-success.hover, .btn-success:focus {
-    background-color: #3ec1d5;
-    border-color: #3ec1d5;
+    background-color: #0d66a2;
+    border-color: #0d66a2;
     box-shadow: none;
 }
 .btn-primary {
     background-color: #3ec1d5;
     border-color: #3ec1d5;
+}
+.btn-warning {
+    background-color: #0e75bc;
+    border-color: #0e75bc;
+}
+.btn-warning:hover, .btn-warning:active, .btn-warning.hover {
+    background-color: #065f9c;
+    border-color: #065f9c;
+}
+.btn-warning.active.focus, .btn-warning.active:focus, .btn-warning.active:hover, .btn-warning:active.focus, .btn-warning:active:focus, .btn-warning:active:hover, .open>.dropdown-toggle.btn-warning.focus, .open>.dropdown-toggle.btn-warning:focus, .open>.dropdown-toggle.btn-warning:hover {
+    color: #fff;
+    background-color: #065f9c;
+    border-color: #065f9c;
 }
 .btn-primary:hover, .btn-primary:active, .btn-primary.hover {
     background-color: #39d8f1;
@@ -196,11 +221,11 @@ body {
 }
 .frm-sub-title{
     margin-left: 13px;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 15px;
     text-transform: uppercase;
-    font-size: 16px;
-    color: #3ec1d5;
+    font-size: 15px;
+    color: #0e75bc;
     text-decoration: underline;
 }
 .main-header .logo .logo-mini {
@@ -218,8 +243,8 @@ body {
 }
 .btn-success.active.focus, .btn-success.active:focus, .btn-success.active:hover, .btn-success:active.focus, .btn-success:active:focus, .btn-success:active:hover, .open>.dropdown-toggle.btn-success.focus, .open>.dropdown-toggle.btn-success:focus, .open>.dropdown-toggle.btn-success:hover {
     color: #fff;
-    background-color: #3ec1d5;
-    border-color: #3ec1d5;
+    background-color: #0d66a2;
+    border-color: #0d66a2;
 }
 .change-pwd{
     background: #a90707;
@@ -525,4 +550,16 @@ active, .manifesta .ui-widget-header .ui-state-active {
 /****************************/
 .vehicle-report-modal{
     width: 88%;
+}
+.grid-view th{
+    white-space: nowrap;
+    color:#6d6e71;
+    font-size: 13px;
+}
+.grid-view td{
+    white-space: nowrap;
+    font-size: 13px;
+}
+.grid-view th a{
+    color:#6d6e71;
 }

@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
     <div class="login-logo">
-        <h1><span>AFG</span> GLOBAL SHIPPER LLC</h1>
+        <img width="" class="img-responsive" src="<?= Yii::$app->homeUrl; ?>img/logo.png"/>
     </div>
 
     <p>Please fill out the following fields to login:</p>
@@ -25,14 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'inputTemplate' => "{input}<span class='glyphicon glyphicon-user form-control-feedback'></span>"
             ];
             ?>
-            <?= $form->field($model, 'user_name', $fieldOptions2)->label('User Name')->textInput() ?>
+            <?= $form->field($model, 'user_name', $fieldOptions2)->label('User Name')->textInput(['placeholder' => 'Username']) ?>
             <?php
             $fieldOptions3 = [
                 'options' => ['class' => 'form-group has-feedback'],
                 'inputTemplate' => "{input}<span class='glyphicon glyphicon-lock form-control-feedback'></span>"
             ];
             ?>
-            <?= $form->field($model, 'password', $fieldOptions3)->label('Password')->passwordInput() ?>
+            <?= $form->field($model, 'password', $fieldOptions3)->label('Password')->passwordInput(['placeholder' => 'Password']) ?>
 
             <?= $form->field($model, 'rememberMe')->checkbox() ?>
 

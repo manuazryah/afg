@@ -37,7 +37,7 @@ use common\models\Vehicle;
             ?>
         </div>
         <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
-            <table class="table table-bordered<?= $model->isNewRecord ? 'hide' : '' ?>" id="body_vehicle">
+            <table class="table table-bordered" id="body_vehicle" style="display:<?= $model->isNewRecord ? 'none' : 'block' ?>">
                 <thead>
                     <tr>
                         <th>Year</th>
@@ -530,9 +530,9 @@ use common\models\Vehicle;
                     var $data = JSON.parse(data);
                     if ($data.msg === 'success') {
                         $("#body_vehicle tbody").append($data.row);
-                        $('#body_vehicle').removeClass('hide');
+                        $('#body_vehicle').css("display", "inline-table");
                     } else {
-                        $('#body_vehicle').addClass('hide');
+                        $('#body_vehicle').css("display", "none");
                     }
                 }
             });

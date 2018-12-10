@@ -568,4 +568,5 @@ active, .manifesta .ui-widget-header .ui-state-active {
 }
 .form-control{
     font-size: 13px;
+    border-radius: 5px;
 }

@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?=
                     GridView::widget([
                         'dataProvider' => $dataProvider,
-                        'filterModel' => $searchModel,
+//                        'filterModel' => $searchModel,
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
 //                            'id',
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'value' => function ($data) {
                                     if (!empty($data->file))
                                         $img = '<img width="120px" src="' . Yii::$app->homeUrl . 'img/pdf-download.gif"/>';
-                                 return  Html::a($img, ['/../uploads/prices/'.$data->id.'/price.'.$data->file],['target'=>'_blank']);
+                                    return Html::a($img, ['/../uploads/prices/' . $data->id . '/price.' . $data->file], ['target' => '_blank']);
                                 },
                             ],
                             'month',

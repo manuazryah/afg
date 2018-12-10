@@ -38,39 +38,37 @@ use yii\db\ActiveRecord;
  * @property Consignee[] $consignees
  * @property CustomerTowingInfo[] $customerTowingInfos
  */
-class Customers extends ActiveRecord implements IdentityInterface
-{
-    
-     private $_user;
+class Customers extends ActiveRecord implements IdentityInterface {
+
+    private $_user;
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'customers';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['customer_id','email','name','company_name','user_name','password'],'required','on'=>'create'],
+            [['customer_id', 'email', 'name', 'company_name', 'user_name', 'password'], 'required', 'on' => 'create'],
             [['address1', 'other_emails', 'address2', 'notes'], 'string'],
-            [['created_at', 'DOC', 'DOU','user_name','upload_documents','password'], 'safe'],
+            [['created_at', 'DOC', 'DOU', 'user_name', 'upload_documents', 'password'], 'safe'],
             [['status', 'CB', 'UB'], 'integer'],
             [['customer_id'], 'string', 'max' => 255],
-            [['name', 'phone_usa', 'trn_usa', 'country', 'state',  'company_name', 'phone_uae', 'trn_uae', 'city', 'zipcode'], 'string', 'max' => 45],
+            [['name', 'phone_usa', 'trn_usa', 'country', 'state', 'company_name', 'phone_uae', 'trn_uae', 'city', 'zipcode'], 'string', 'max' => 45],
             [['email'], 'string', 'max' => 150],
             [['fax'], 'string', 'max' => 100],
             [['user_name', 'password'], 'required', 'on' => 'login'],
             [['password'], 'validatePassword', 'on' => 'login'],
-            [['user_name'],'unique','on'=>'create']
+            [['user_name'], 'unique', 'on' => 'create']
         ];
     }
-    
-        public function validatePassword($attribute, $params) {
+
+    public function validatePassword($attribute, $params) {
 
         if (!$this->hasErrors()) {
 
@@ -84,8 +82,7 @@ class Customers extends ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'customer_id' => 'Customer ID',
@@ -118,21 +115,17 @@ class Customers extends ActiveRecord implements IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getConsignees()
-    {
+    public function getConsignees() {
         return $this->hasMany(Consignee::className(), ['customers_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCustomerTowingInfos()
-    {
+    public function getCustomerTowingInfos() {
         return $this->hasMany(CustomerTowingInfo::className(), ['customers_id' => 'id']);
     }
-    
-    
-    
+
     public function login() {
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), /* $this->rememberMe ? 3600 * 24 * 30 : */ 0);
@@ -142,7 +135,7 @@ class Customers extends ActiveRecord implements IdentityInterface
     }
 
     protected function getUser() {
-       
+
         if ($this->_user === null) {
             $this->_user = static::find()->where('user_name = :uname and status = :stat', ['uname' => $this->user_name, 'stat' => '1'])->one();
         }

@@ -22,9 +22,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 </div>
                 <div class="panel-body">
-                    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-                    <?= Html::a('<i class="fa fa-list"></i><span> Create Consignee</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <?= Html::a('<i class="fa fa-list"></i><span> Create Consignee</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                        </div>
+                        <div class="col-md-8">
+                            <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+                        </div>
+                    </div>
                     <?= common\widgets\Alert::widget() ?>
                     <?=
                     GridView::widget([

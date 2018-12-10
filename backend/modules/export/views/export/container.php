@@ -20,11 +20,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
                 </div>
                 <div class="panel-body">
-
+                    <div class="row">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-8">
+                            <?php echo $this->render('_search_container', ['model' => $searchModel]); ?>
+                        </div>
+                    </div>
                     <?=
                     GridView::widget([
                         'dataProvider' => $dataProvider,
-                        'filterModel' => $searchModel,
+//                        'filterModel' => $searchModel,
                         'rowOptions' => function($model) {
                             return ['id' => $model->id];
                         },
@@ -72,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             });
 
-           
+
 
         });
 
@@ -93,6 +99,6 @@ $this->params['breadcrumbs'][] = $this->title;
     .append-table th{
         font-size: 12px;
         background: #3ec1d5;
-    color: #fff !important;
+        color: #fff !important;
     }
 </style>

@@ -12,13 +12,16 @@ use common\models\Export;
  */
 class ExportSearch extends Export {
 
+    public $export_global_search;
+    public $export_vehicle_global_search;
+
     /**
      * @inheritdoc
      */
     public function rules() {
         return [
             [['id', 'customer_id', 'additional_info_container_type', 'conignee_id', 'notify_party', 'menifest_consignee', 'status', 'CB', 'UB'], 'integer'],
-            [['vehicle_id', 'customer', 'cust_address', 'export_date', 'loding_date', 'broker_name', 'booking_no', 'ETA', 'ar_no', 'xtn_no', 'seal_no', 'container_no', 'cut_off', 'vessel', 'voyage', 'terminal', 'stremship_line', 'destination', 'ITN', 'contact_details', 'special_instruction', 'port_of_loading', 'port_of_discharge', 'bol_note', 'bl_or_awb_number', 'export_referance', 'forwading_agent', 'domestic_routing_instructions', 'pre_carraiage_by', 'place_of_recipt_by_pre_carrrier', 'final_destintion', 'loading_terminal', 'container_type', 'number_of_packages', 'by', 'exporting_carruer', 'date', 'auto_recieving_date', 'auto_cut_off', 'vessel_cut_off', 'sale_date', 'vehicle_location', 'exporter_id', 'exporter_type_issue', 'transpotation_value', 'exporter_dob', 'ultimate_consignee_dob', 'invoice', 'DOC', 'DOU', 'oti_no'], 'safe'],
+            [['vehicle_id', 'customer', 'cust_address', 'export_date', 'loding_date', 'broker_name', 'booking_no', 'ETA', 'ar_no', 'xtn_no', 'seal_no', 'container_no', 'cut_off', 'vessel', 'voyage', 'terminal', 'stremship_line', 'destination', 'ITN', 'contact_details', 'special_instruction', 'port_of_loading', 'port_of_discharge', 'bol_note', 'bl_or_awb_number', 'export_referance', 'forwading_agent', 'domestic_routing_instructions', 'pre_carraiage_by', 'place_of_recipt_by_pre_carrrier', 'final_destintion', 'loading_terminal', 'container_type', 'number_of_packages', 'by', 'exporting_carruer', 'date', 'auto_recieving_date', 'auto_cut_off', 'vessel_cut_off', 'sale_date', 'vehicle_location', 'exporter_id', 'exporter_type_issue', 'transpotation_value', 'exporter_dob', 'ultimate_consignee_dob', 'invoice', 'DOC', 'DOU', 'oti_no', 'export_global_search', 'export_vehicle_global_search'], 'safe'],
         ];
     }
 
@@ -118,6 +121,19 @@ class ExportSearch extends Export {
                 ->andFilterWhere(['like', 'exporter_type_issue', $this->exporter_type_issue])
                 ->andFilterWhere(['like', 'transpotation_value', $this->transpotation_value])
                 ->andFilterWhere(['like', 'invoice', $this->invoice]);
+
+        if (!empty($this->export_global_search)) {
+            $query->orFilterWhere(['like', 'broker_name', $this->export_global_search]);
+            $query->orFilterWhere(['like', 'booking_no', $this->export_global_search]);
+            $query->orFilterWhere(['like', 'xtn_no', $this->export_global_search]);
+            $query->orFilterWhere(['like', 'seal_no', $this->export_global_search]);
+            $query->orFilterWhere(['like', 'container_no', $this->export_global_search]);
+            $query->orFilterWhere(['like', 'voyage', $this->export_global_search]);
+        }
+        if (!empty($this->export_vehicle_global_search)) {
+            $query->orFilterWhere(['like', 'broker_name', $this->export_vehicle_global_search]);
+            $query->orFilterWhere(['like', 'booking_no', $this->export_vehicle_global_search]);
+        }
 
         return $dataProvider;
     }

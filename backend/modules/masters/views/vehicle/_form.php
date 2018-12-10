@@ -132,8 +132,8 @@ use yii\helpers\ArrayHelper;
             ]);
             ?>
         </div>
-        
-        
+
+
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?php
             if (!$vehicle_title->isNewRecord) {
@@ -152,11 +152,11 @@ use yii\helpers\ArrayHelper;
             ]);
             ?>
         </div>
-        
+
     </div>
 
     <div class="row">
-        
+
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?php
             if (!$vehicle_title->isNewRecord) {
@@ -175,7 +175,7 @@ use yii\helpers\ArrayHelper;
             ]);
             ?>
         </div>
-        
+
         <div class='col-md-8 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($vehicle_title, 'note')->textInput(['maxlength' => true]) ?>
         </div>
@@ -449,7 +449,7 @@ use yii\helpers\ArrayHelper;
             viewMode: "years",
             minViewMode: "years"
         });
-        
+
         $('#vehicle-btn-auto').click(function () {
             var vin = $('#vehicle-vin').val();
             $('#vehicle-year').val('');
@@ -500,8 +500,8 @@ use yii\helpers\ArrayHelper;
         } else {
             $('#title_type').hide();
         }
-        
-      
+
+
 
     });
 

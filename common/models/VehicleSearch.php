@@ -22,11 +22,12 @@ class VehicleSearch extends Vehicle {
     public $title_received;
     public $towed;
     public $pickup_date;
+    public $vehicle_global_search;
 
     public function rules() {
         return [
             [['id', 'cheque_no', 'add_chgs', 'status_id'], 'integer'],
-            [['model', 'make', 'hat', 'weight', 'value', 'buyer_no', 'towed_from', 'lot_no', 'towed_amount', 'storage_amount', 'vin', 'created_at', 'updated_at', 'created_by', 'year', 'requested_date', 'dely_date','keys','color','title','title_received','pickup_date','towed'], 'safe'],
+            [['model', 'make', 'hat', 'weight', 'value', 'buyer_no', 'towed_from', 'lot_no', 'towed_amount', 'storage_amount', 'vin', 'created_at', 'updated_at', 'created_by', 'year', 'requested_date', 'dely_date', 'keys', 'color', 'title', 'title_received', 'pickup_date', 'towed', 'vehicle_global_search'], 'safe'],
         ];
     }
 
@@ -63,7 +64,7 @@ class VehicleSearch extends Vehicle {
             'asc' => ['vehicle_title_info.towing_request_date' => SORT_ASC],
             'desc' => ['vehicle_title_info.towing_request_date' => SORT_DESC],
         ];
-        
+
         $dataProvider->sort->attributes['dely_date'] = [
             // The tables are the ones our relation are configured to
             // in my case they are prefixed with "tbl_"
@@ -81,6 +82,7 @@ class VehicleSearch extends Vehicle {
             // $query->where('0=1');
             return $dataProvider;
         }
+
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -111,6 +113,29 @@ class VehicleSearch extends Vehicle {
                 ->andFilterWhere(['like', 'vehicle_towing_info.keys', $this->keys])
                 ->andFilterWhere(['like', 'vehicle_towing_info.towed', $this->towed])
                 ->andFilterWhere(['like', 'created_by', $this->created_by]);
+
+        if (!empty($this->vehicle_global_search)) {
+            $query->orFilterWhere(['like', 'vin', $this->vehicle_global_search]);
+            $query->orFilterWhere(['like', 'model', $this->vehicle_global_search]);
+            $query->orFilterWhere(['like', 'make', $this->vehicle_global_search]);
+            $query->orFilterWhere(['like', 'lot_no', $this->vehicle_global_search]);
+            $query->orFilterWhere(['like', 'color', $this->vehicle_global_search]);
+            $customers = Customers::find()->where(['like', 'name', $this->vehicle_global_search])->all();
+            $arr = [];
+            if (!empty($customers)) {
+                foreach ($customers as $customer) {
+                    $vehicle_customers = VehicleTowingInfo::find()->where(['customers_id' => $customer->id])->all();
+                    if (!empty($vehicle_customers)) {
+                        foreach ($vehicle_customers as $vehicle_customer) {
+                            $arr[] = $vehicle_customer->vehicle_id;
+                        }
+                    }
+                }
+            }
+            if (!empty($arr)) {
+                $query->orFilterWhere(['vehicle.id' => $arr]);
+            }
+        }
 
         return $dataProvider;
     }

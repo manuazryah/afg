@@ -563,3 +563,9 @@ active, .manifesta .ui-widget-header .ui-state-active {
 .grid-view th a{
     color:#6d6e71;
 }
+.mrg-top-23{
+    margin-top: 23px;
+}
+.form-control{
+    font-size: 13px;
+}

@@ -23,25 +23,31 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 </div>
                 <div class="panel-body">
-                    <?php // echo $this->render('_search', ['model' => $searchModel]);   ?>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <?= Html::a('<i class="fa fa-list"></i><span> Create Vehicle</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                        </div>
+                        <div class="col-md-6">
+                            <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+                        </div>
+                    </div>
 
-                    <?= Html::a('<i class="fa fa-list"></i><span> Create Vehicle</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                     <?=
                     GridView::widget([
                         'dataProvider' => $dataProvider,
-                        'filterModel' => $searchModel,
+//                        'filterModel' => $searchModel,
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
                             'hat',
                             [
                                 'attribute' => 'requested_date',
                                 'filter' => DatePicker::widget([
-                                            'model' => $searchModel,
-                                            'attribute' => 'requested_date',
-                                            'pluginOptions' => [
-                                                'format' => 'yyyy-mm-dd', 
-                                            ]
-                                        ]),
+                                    'model' => $searchModel,
+                                    'attribute' => 'requested_date',
+                                    'pluginOptions' => [
+                                        'format' => 'yyyy-mm-dd',
+                                    ]
+                                ]),
                                 'value' => function($model) {
                                     return date('Y-m-d', strtotime($model->titleInfos->towing_request_date));
                                 }

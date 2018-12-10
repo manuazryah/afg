@@ -570,3 +570,15 @@ active, .manifesta .ui-widget-header .ui-state-active {
     font-size: 13px;
     border-radius: 5px;
 }
+.action-column{
+    width: 40px;
+}
+.grid-view table>thead{
+    background: #e4e4e4;
+}
+.grid-view .glyphicon-eye-open{
+    color:green;
+}
+.grid-view .glyphicon-trash{
+    color: #ef0606;
+}

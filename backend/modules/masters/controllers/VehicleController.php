@@ -20,6 +20,11 @@ use kartik\mpdf\Pdf;
  */
 class VehicleController extends Controller {
 
+    public function beforeAction($action) {
+        $this->enableCsrfValidation = false;
+        return parent::beforeAction($action);
+    }
+
     /**
      * @inheritdoc
      */
@@ -259,7 +264,19 @@ class VehicleController extends Controller {
 
     public function actionVehicleDetails() {
         $vin = $_POST['vin'];
+        if (isset($_POST['removed']) && $_POST['removed'] != '') {
+            foreach ($_POST['removed'] as $removed) {
+                if (in_array($removed, Yii::$app->session['cart'])) {
+                    $cart_items = Yii::$app->session['cart'];
+                    if (($key = array_search($removed, $cart_items)) !== false) {
+                        unset($cart_items[$key]);
+                        Yii::$app->session['cart']=$cart_items;
+                    }
+                }
+            }
+        }
         $row = "";
+        $cart_count=count(Yii::$app->session['cart']);
         if ($vin) {
             foreach ($vin as $v) {
                 $vehicle = Vehicle::findOne($v);
@@ -278,7 +295,7 @@ class VehicleController extends Controller {
             }
         }
         $msg = !empty($row) ? 'success' : 'failed';
-        return json_encode(array('msg' => $msg, 'row' => $row));
+        return json_encode(array('msg' => $msg, 'row' => $row,'cart_count'=>$cart_count));
     }
 
     public function actionVehicleConditionReport($id) {
@@ -300,6 +317,22 @@ class VehicleController extends Controller {
             ]
         ]);
         return $pdf->render();
+    }
+
+    public function actionCart() {
+        if (Yii::$app->request->isAjax) {
+            $session = Yii::$app->session;
+            if (!isset($session['cart']) || count($session['cart']) == 0) {
+                $session['cart'] = array($_POST['vehicle_id']);
+            } else {
+                $myarr = $session['cart'];
+                if (!in_array($_POST['vehicle_id'], $myarr)) {
+                    $myarr[] = $_POST['vehicle_id'];
+                    $session['cart'] = $myarr;
+                }
+            }
+            return count($session['cart']);
+        }
     }
 
 }

@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
 /* @var $model common\models\Export */
 
@@ -20,11 +19,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
             <div class="panel-body">
-                <?=  Html::a('<i class="fa fa-list"></i><span> Manage Export</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone link-btn']) ?>
+                <?= Html::a('<i class="fa fa-list"></i><span> Manage Export</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone link-btn']) ?>
                 <div class="panel-body"><div class="export-create">
-                        <?= $this->render('_form', [
-                        'model' => $model,
-                        ]) ?>
+                        <?=
+                        $this->render('_form', [
+                            'model' => $model,
+                            'cart' => $cart
+                        ])
+                        ?>
                     </div>
                 </div>
             </div>

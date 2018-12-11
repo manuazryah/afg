@@ -80,7 +80,7 @@ class ExportController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate() {
+    public function actionCreate($cart = null) {
         $model = new Export();
         if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model)) {
             $model->vehicle_id = implode(',', $model->vehicle_id);
@@ -109,6 +109,7 @@ class ExportController extends Controller {
         } else {
             return $this->render('create', [
                         'model' => $model,
+                        'cart' => $cart
             ]);
         }
     }
@@ -366,6 +367,16 @@ class ExportController extends Controller {
         $container = $this->findModel($_POST['val']);
         $view = $this->renderPartial('container-vehicles', ['val' => $_POST['val'], 'container' => $container]);
         return $view;
+    }
+
+    public function actionCartData() {
+        if (Yii::$app->request->isAjax) {
+            if (isset(Yii::$app->session['cart'])) {
+                $report_content = array('cart_val' => Yii::$app->session['cart']);
+                $data['result'] = $report_content;
+                return json_encode($data);
+            }
+        }
     }
 
 }

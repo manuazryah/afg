@@ -24,7 +24,6 @@ $this->title = 'AFGShipping';
         <div class="small-box bg-green">
             <div class="inner">
                 <h3>53<sup style="font-size: 20px">%</sup></h3>
-
                 <p>ON HAND</p>
             </div>
             <div class="icon">
@@ -38,7 +37,6 @@ $this->title = 'AFGShipping';
         <div class="small-box bg-yellow">
             <div class="inner">
                 <h3>44</h3>
-
                 <p>MANIFEST</p>
             </div>
             <div class="icon">
@@ -52,7 +50,6 @@ $this->title = 'AFGShipping';
         <div class="small-box bg-red">
             <div class="inner">
                 <h3>65</h3>
-
                 <p>SHIPPED</p>
             </div>
             <div class="icon">
@@ -86,25 +83,25 @@ $this->title = 'AFGShipping';
                     <tr>
                         <td>ON THE WAY</td>
                         <td><?= $onway ?></td>
-                        <td></td>
+                        <td><button class="btn home-report" type="2">Report</button></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td>ON HAND</td>
                         <td><?= $onhand ?></td>
-                        <td></td>
+                        <td><button class="btn home-report" type="1">Report</button></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td>MANIFEST</td>
                         <td></td>
-                        <td></td>
+                        <td><button class="btn home-report" type="">Report</button></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td>PICKED UP</td>
                         <td><?= $manifest ?></td>
-                        <td></td>
+                        <td><button class="btn home-report" type="4">Report</button></td>
                         <td></td>
                     </tr>
                     <tr>
@@ -196,6 +193,24 @@ $this->title = 'AFGShipping';
                 }
             });
         });
+
+
+        $(document).on('click', '.home-report', function () {
+            var type = $(this).attr('type');
+            $.ajax({
+                url: '<?= Yii::$app->homeUrl; ?>site/vehicle-status-report',
+                type: "POST",
+                data: {type: type},
+                success: function (data) {
+                    var res = $.parseJSON(data);
+                    $('.modal-content').html(res.result['report']);
+                    $('#modal-default').modal('show');
+                }
+            });
+
+        });
+
+
     });
 </script>
 

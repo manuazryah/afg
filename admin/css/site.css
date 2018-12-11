@@ -582,3 +582,17 @@ active, .manifesta .ui-widget-header .ui-state-active {
 .grid-view .glyphicon-trash{
     color: #ef0606;
 }
+.home-report{
+    background-color: #0f75bc;
+    color: #fff;
+    padding: 0px 10px;
+    border-radius: 5px;
+    height: 25px;
+}
+.home-report:hover{
+     color: #fff;
+}
+.nav>li>a:hover, .nav>li>a:active, .nav>li>a:focus {
+    color: #444;
+    background: #747576;
+}

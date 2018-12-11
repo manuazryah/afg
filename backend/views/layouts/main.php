@@ -46,6 +46,19 @@ AppAsset::register($this);
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
+                        <li>
+                            <?php
+                            $cart_count = 0;
+                            if (isset(Yii::$app->session['cart'])) {
+                                $cart_count = count(Yii::$app->session['cart']);
+                            }
+                            ?>
+                            <a class="top-icons-style" href="<?= Yii::$app->homeUrl ?>export/export/create?cart=1">
+                                <i class="fa fa-shopping-cart" style="color: #fff;"></i>
+                                <span class="badge badge-orange cart-count"><?= $cart_count ?></span>
+                            </a>
+                        </li>
+
                         <li class="dropdown user user-menu">
                             <?php
                             echo ''

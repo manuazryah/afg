@@ -11,6 +11,7 @@ use common\models\Vehicle;
 /* @var $this yii\web\View */
 /* @var $model common\models\Export */
 /* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="export-form form-inline">
@@ -37,7 +38,7 @@ use common\models\Vehicle;
             ?>
         </div>
         <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
-            <table class="table table-bordered" id="body_vehicle" style="display:<?= $model->isNewRecord ? 'none' : 'block' ?>">
+            <table class="table table-bordered" id="body_vehicle" style="display:<?= $model->isNewRecord ? 'none' : 'inline-table' ?>">
                 <thead>
                     <tr>
                         <th>Year</th>
@@ -518,18 +519,38 @@ use common\models\Vehicle;
 </div>
 <script>
     $(document).ready(function () {
-        $('#export-vehicle_id').change(function () {
+
+        $(document).on('change', '#export-vehicle_id', function (e) {
             var vin = $(this).val();
+            var that = this;
+            removed = []
+            $($(this).data('originalvalues')).each(function (k, v) {
+                if (!$(that).val()) {
+                    removed[removed.length] = v;
+                    return false;
+                }
+                if ($(that).val().indexOf(v) == -1) {
+                    removed[removed.length] = v;
+                }
+            });
+            if ($(this).val()) {
+                $(this).data('originalvalues', $(this).val());
+            } else {
+                $(this).data('originalvalues', []);
+            }
+
+
             $("#body_vehicle tbody").empty();
             $.ajax({
                 type: 'POST',
                 cache: false,
-                data: {vin: vin},
+                data: {vin: vin,removed:removed},
                 url: '<?= Yii::$app->homeUrl ?>masters/vehicle/vehicle-details',
                 success: function (data) {
                     var $data = JSON.parse(data);
                     if ($data.msg === 'success') {
                         $("#body_vehicle tbody").append($data.row);
+                         $('.cart-count').html($data.cart_count);
                         $('#body_vehicle').css("display", "inline-table");
                     } else {
                         $('#body_vehicle').css("display", "none");
@@ -537,6 +558,7 @@ use common\models\Vehicle;
                 }
             });
         });
+
         $('#export-customer').change(function () {
             $.ajax({
                 type: 'POST',
@@ -550,6 +572,22 @@ use common\models\Vehicle;
                 }
             });
         });
+
+        var cart = '<?= $cart ?>';
+        if (cart) {
+            $.ajax({
+                url: '<?= Yii::$app->homeUrl; ?>export/export/cart-data',
+                type: "POST",
+                data: {},
+                success: function (data) {
+                    //var data=["1", "2", "5"];
+                    var res = $.parseJSON(data);
+                    $("#export-vehicle_id").val(res.result['cart_val']).trigger("change");
+                }
+            });
+        }
+
     });
 
 </script>
+

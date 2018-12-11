@@ -47,8 +47,8 @@ AppAsset::register($this);
                                         <span class="icon-bar"></span>
                                     </button>
                                     <!-- Brand -->
-                                    <a class="navbar-brand page-scroll sticky-logo" href="index.html">
-                                        <h1><span>AFG</span>Shipping</h1>
+                                    <a class="navbar-brand page-scroll sticky-logo" href="<?= Yii::$app->homeUrl?>">
+                                        <img width="" class="img-responsive" src="<?= Yii::$app->homeUrl; ?>img/logo.png" style="width: 150px"/>
                                         <!-- Uncomment below if you prefer to use an image logo -->
                                         <!-- <img src="img/logo.png" alt="" title=""> -->
                                     </a>

@@ -83,8 +83,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                     }
                                 }
                             ],
-                            ['class' => 'yii\grid\ActionColumn',
-                                'template' => '{view}{update}{delete}',
+                            [
+                                'class' => 'yii\grid\ActionColumn',
+                                'template' => '{view}{update}{delete}{cart}',
+                                'visibleButtons' => [
+                                    'cart' => function ($model, $key, $index) {
+                                        return $model->status_id != '1' ? false : true;
+                                    }
+                                ],
+                                'buttons' => [
+                                    'cart' => function($url, $model, $key) {     // render your custom button
+                                        return Html::a('<span class="fa fa-plus" style="padding: 8px;"></span>', ['#'], [
+                                                    'title' => Yii::t('app', 'Add to cart'),
+                                                    'class' => 'add-cart',
+                                                    'type' => '2',
+                                                    'id' => $model->id
+                                        ]);
+                                    },
+                                ]
                             ],
                         ],
                     ]);
@@ -94,5 +110,23 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.add-cart', function (e) {
+            e.preventDefault();
+            var vehicle_id = $(this).attr('id');
+            $.ajax({
+                url: '<?= Yii::$app->homeUrl; ?>masters/vehicle/cart',
+                type: "POST",
+                data: {vehicle_id: vehicle_id},
+                success: function (data) {
+                    $('.cart-count').html(data);
+                }
+            });
+
+        });
+    });
+</script>
 
 

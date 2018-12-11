@@ -520,3 +520,11 @@ active, .manifesta .ui-widget-header .ui-state-active {
     text-decoration: underline;
 }
 /****************************/
+
+.logo-lg img {
+    width: 130px;
+    margin: 0 auto;
+}
+.login-logo img {
+    margin: 0 auto;
+}

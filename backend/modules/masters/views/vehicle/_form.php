@@ -187,7 +187,7 @@ use yii\helpers\ArrayHelper;
     <div class="row">
 
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'status_id')->dropDownList(['' => '--Select--', '1' => 'ON HAND', '2' => 'ON THE WAY', '3' => 'SHIPPED', '4' => 'PICKED UP']) ?>
+            <?= $form->field($model, 'status_id')->dropDownList(['' => '--Select--', '1' => 'ON HAND', '2' => 'ON THE WAY', '3' => 'SHIPPED', '4' => 'PICKED UP', '5' => 'MANIFEST']) ?>
         </div>
         <div class='col-md-3 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'vin')->textInput(['maxlength' => true]) ?>
@@ -437,10 +437,10 @@ use yii\helpers\ArrayHelper;
     <?php ActiveForm::end(); ?>
 
 </div>
-<input type="text" id="datepicker" />
 
 <script>
     $(document).ready(function () {
+//        $('#vehicletowinginfo-customer_name').prev('.select2-container').find('.select2-input').focus();
         $('#vehicle-btn-auto').click(function () {
             var vin = $('#vehicle-vin').val();
             $('#vehicle-year').val('');

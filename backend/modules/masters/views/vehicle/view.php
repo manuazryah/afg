@@ -13,7 +13,6 @@ use yii\helpers\Url;
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Vehicles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-
 ?>
 <?php
 Modal::begin([
@@ -40,6 +39,7 @@ Modal::end();
                             <?= Html::a('<i class="fa fa-list"></i><span> Manage Vehicle</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                             <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                             <?= Html::button('Vehicle Condition Report', ['value' => Url::to(['vehicle-condition-report', 'id' => $model->id]), 'class' => 'btn btn-warning  btn-icon btn-icon-standalone modalButton']); ?>
+                            <?= Html::a('Add New', ['create'], ['class' => 'btn btn-primary']) ?>
                         </p>
 
                         <div class="row">
@@ -160,16 +160,16 @@ Modal::end();
                                         <th>TITLE TYPE</th>
 
                                         <td><?php
-                                            if ($model->titleInfos->title_type == 1) {
-                                                echo 'EXPORTABLE';
-                                            } else if ($model->titleInfos->title_type == 2) {
-                                                echo 'PENDING';
-                                            } else if ($model->titleInfos->title_type == 3) {
-                                                echo 'BOS';
-                                            } else if ($model->titleInfos->title_type == 4) {
-                                                echo 'LIEN';
-                                            }
-                                            ?></td>
+                                        if ($model->titleInfos->title_type == 1) {
+                                            echo 'EXPORTABLE';
+                                        } else if ($model->titleInfos->title_type == 2) {
+                                            echo 'PENDING';
+                                        } else if ($model->titleInfos->title_type == 3) {
+                                            echo 'BOS';
+                                        } else if ($model->titleInfos->title_type == 4) {
+                                            echo 'LIEN';
+                                        }
+                                        ?></td>
                                     </tr>
                                     <tr>
                                         <th>TITLE</th>

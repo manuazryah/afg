@@ -553,6 +553,7 @@ use common\models\Vehicle;
                          $('.cart-count').html($data.cart_count);
                         $('#body_vehicle').css("display", "inline-table");
                     } else {
+                        $('.cart-count').html($data.cart_count);
                         $('#body_vehicle').css("display", "none");
                     }
                 }

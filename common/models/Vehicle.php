@@ -49,7 +49,7 @@ class Vehicle extends \yii\db\ActiveRecord {
         return [
             [['model', 'make', 'hat', 'weight', 'value', 'status_id', 'year'], 'required'],
             [['cheque_no', 'add_chgs', 'status_id'], 'integer'],
-            [['created_at', 'updated_at', 'year', 'attachments', 'color', 'title_amount'], 'safe'],
+            [['created_at', 'updated_at', 'year', 'attachments', 'color', 'title_amount','location','DOC'], 'safe'],
             [['model', 'make', 'hat', 'weight', 'value', 'buyer_no', 'towed_from', 'lot_no', 'towed_amount', 'storage_amount', 'vin', 'created_by'], 'string', 'max' => 45],
         ];
     }

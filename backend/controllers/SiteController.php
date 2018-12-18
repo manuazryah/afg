@@ -90,12 +90,28 @@ class SiteController extends Controller {
     }
 
     public function actionHome() {
+        $searchModel = new \common\models\VehicleSearch();
+        $dataProvider = '';
+        if (isset(Yii::$app->request->queryParams['VehicleSearch']) && Yii::$app->request->queryParams['VehicleSearch'] != '') {
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            if (Yii::$app->user->identity->post_id != '1') {
+                $dataProvider->query->andWhere(['location' => Yii::$app->user->identity->location]);
+            }
+        }
         if (isset(Yii::$app->user->identity->id)) {
-
-            $onway = \common\models\Vehicle::find()->where(['status_id' => 2])->count();
-            $shipped = \common\models\Vehicle::find()->where(['status_id' => 3])->count();
-            $onhand = \common\models\Vehicle::find()->where(['status_id' => 1])->count();
-            $manifest = \common\models\Vehicle::find()->where(['status_id' => 4])->count();
+            if (Yii::$app->user->identity->post_id == '1') {
+                $onway = \common\models\Vehicle::find()->where(['status_id' => 2])->count();
+                $shipped = \common\models\Vehicle::find()->where(['status_id' => 3])->count();
+                $onhand = \common\models\Vehicle::find()->where(['status_id' => 1])->count();
+                $manifest = \common\models\Vehicle::find()->where(['status_id' => 5])->count();
+                $pickedup = \common\models\Vehicle::find()->where(['status_id' => 4])->count();
+            } else {
+                $onway = \common\models\Vehicle::find()->where(['status_id' => 2, 'location' => Yii::$app->user->identity->location])->count();
+                $shipped = \common\models\Vehicle::find()->where(['status_id' => 3, 'location' => Yii::$app->user->identity->location])->count();
+                $onhand = \common\models\Vehicle::find()->where(['status_id' => 1, 'location' => Yii::$app->user->identity->location])->count();
+                $manifest = \common\models\Vehicle::find()->where(['status_id' => 5, 'location' => Yii::$app->user->identity->location])->count();
+                $pickedup = \common\models\Vehicle::find()->where(['status_id' => 4, 'location' => Yii::$app->user->identity->location])->count();
+            }
             if (Yii::$app->user->isGuest) {
                 return $this->redirect(array('site/index'));
             }
@@ -104,6 +120,9 @@ class SiteController extends Controller {
                         'shipped' => $shipped,
                         'onhand' => $onhand,
                         'manifest' => $manifest,
+                        'pickedup' => $pickedup,
+                        'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
             ]);
         } else {
             throw new \yii\web\HttpException(2000, 'Session Expired.');
@@ -225,7 +244,11 @@ class SiteController extends Controller {
     }
 
     public function actionInventoryContent() {
-        $customers = \common\models\Customers::find()->where(['status' => 1])->all();
+        if (Yii::$app->user->identity->post_id == '1') {
+            $customers = \common\models\Customers::find()->where(['status' => 1])->all();
+        } else {
+            $customers = \common\models\Customers::find()->where(['status' => 1, 'state' => Yii::$app->user->identity->location])->all();
+        }
         if (Yii::$app->request->isAjax) {
             $report = $this->renderPartial('inventory_content', [
                 'customers' => $customers
@@ -237,7 +260,11 @@ class SiteController extends Controller {
     }
 
     public function actionInventoryReport() {
-        $customers = \common\models\Customers::find()->where(['status' => 1])->all();
+        if (Yii::$app->user->identity->post_id == '1') {
+            $customers = \common\models\Customers::find()->where(['status' => 1])->all();
+        } else {
+            $customers = \common\models\Customers::find()->where(['status' => 1, 'state' => Yii::$app->user->identity->location])->all();
+        }
         $content = $this->renderPartial('report', [
             'customers' => $customers
         ]);
@@ -257,7 +284,11 @@ class SiteController extends Controller {
     }
 
     public function actionInventoryExport() {
-        $customers = \common\models\Customers::find()->where(['status' => 1])->all();
+        if (Yii::$app->user->identity->post_id == '1') {
+            $customers = \common\models\Customers::find()->where(['status' => 1])->all();
+        } else {
+            $customers = \common\models\Customers::find()->where(['status' => 1, 'state' => Yii::$app->user->identity->location])->all();
+        }
         $content = $this->renderPartial('report', ['customers' => $customers]);
         $file = "daily-report.xls";
         header("Content-type: application/vnd.ms-excel");
@@ -267,7 +298,11 @@ class SiteController extends Controller {
 
     public function actionVehicleStatusReport() {
         if (Yii::$app->request->isAjax) {
-            $vehicles = \common\models\Vehicle::find()->where(['status_id' => $_POST['type']])->all();
+            if (Yii::$app->user->identity->post_id == '1') {
+                $vehicles = \common\models\Vehicle::find()->where(['status_id' => $_POST['type']])->all();
+            } else {
+                $vehicles = \common\models\Vehicle::find()->where(['status_id' => $_POST['type'], 'location' => Yii::$app->user->identity->location])->all();
+            }
             $report = $this->renderPartial('vehicle_status_report', [
                 'vehicles' => $vehicles,
                 'type' => $_POST['type']
@@ -279,8 +314,11 @@ class SiteController extends Controller {
     }
 
     public function actionVehicleStatusReportPdf($type) {
-
-        $vehicles = \common\models\Vehicle::find()->where(['status_id' => $type])->all();
+        if (Yii::$app->user->identity->post_id == '1') {
+            $vehicles = \common\models\Vehicle::find()->where(['status_id' => $type])->all();
+        } else {
+            $vehicles = \common\models\Vehicle::find()->where(['status_id' => $type, 'location' => Yii::$app->user->identity->location])->all();
+        }
         $content = $this->renderPartial('vehicle_status_report_pdf', [
             'vehicles' => $vehicles,
         ]);
@@ -300,7 +338,11 @@ class SiteController extends Controller {
     }
 
     public function actionVehicleStatusReportExport($type) {
-        $vehicles = \common\models\Vehicle::find()->where(['status_id' => $type])->all();
+        if (Yii::$app->user->identity->post_id == '1') {
+            $vehicles = \common\models\Vehicle::find()->where(['status_id' => $type])->all();
+        } else {
+            $vehicles = \common\models\Vehicle::find()->where(['status_id' => $type, 'location' => Yii::$app->user->identity->location])->all();
+        }
         $content = $this->renderPartial('vehicle_status_report_pdf', ['vehicles' => $vehicles,]);
         $file = "vehicle-status-export.xls";
         header("Content-type: application/vnd.ms-excel");

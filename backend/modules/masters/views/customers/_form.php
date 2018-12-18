@@ -62,7 +62,7 @@ use yii\widgets\ActiveForm;
 
         </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
 
-        </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'state')->textInput(['maxlength' => true]) ?>
+        </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'state')->dropDownList(yii\helpers\ArrayHelper::map(common\models\Location::find()->where(['status' => 1])->all(), 'id', 'location'), ['prompt' => '--Select--']) ?>
 
         </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'zipcode')->textInput(['maxlength' => true]) ?>
 

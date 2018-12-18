@@ -1,6 +1,10 @@
 <?php
 /* @var $this yii\web\View */
 
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii\grid\GridView;
+
 $this->title = 'AFGShipping';
 ?>
 <!-- Small boxes (Stat box) -->
@@ -57,6 +61,84 @@ $this->title = 'AFGShipping';
             </div>
         </div>
     </div>
+
+    <div class="customer-search">
+        <?php
+        $form = ActiveForm::begin([
+                    'action' => ['home'],
+                    'method' => 'get',
+        ]);
+        ?>
+       
+            <div class="col-md-10">
+                <?= $form->field($searchModel, 'vehicle_global_search')->textInput(['placeholder' => 'CUSTOMER NAME,VIN,LOT NO,MODEL,MAKE,COLOR'])->label('VEHICLE GLOBAL SEARCH') ?>
+            </div>
+            <div class="col-md-2">
+                <?= Html::submitButton('Search', ['class' => 'btn btn-warning','style'=>'margin-top: 22px;']) ?>
+                <?= Html::a('Reset', ['home'], ['class' => 'btn btn-default mrg-top-23']) ?>
+            </div>
+     
+        <?php ActiveForm::end(); ?>
+    </div>
+    <?php if (isset(Yii::$app->request->queryParams['VehicleSearch']) && Yii::$app->request->queryParams['VehicleSearch'] != '') { ?>
+        <div class="col-md-12">
+            <?=
+            GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+                    'hat',
+                    [
+                        'attribute' => 'requested_date',
+                        'value' => function($model) {
+                            return date('Y-m-d', strtotime($model->titleInfos->towing_request_date));
+                        }
+                    ],
+                    [
+                        'attribute' => 'dely_date',
+                        'value' => function($model) {
+                            return date('Y-m-d', strtotime($model->titleInfos->deliver_date));
+                        }
+                    ],
+                    'year',
+                    'make',
+                    'model',
+                    'vin',
+                    [
+                        'attribute' => 'keys',
+                        'value' => function($model) {
+                            return $model->towingInfos->keys;
+                        }
+                    ],
+                    'lot_no',
+                    [
+                        'attribute' => 'lot_no',
+                        'format' => 'raw',
+                        'value' => function($model) {
+//                                    return Html::button($model->lot_no, ['value' => Url::to(['index', 'id' => $model->id]), 'class' => 'modalButton']);
+                        }
+                    ],
+                    [
+                        'attribute' => 'status_id',
+                        'value' => function($model) {
+                            if ($model->status_id == 1) {
+                                return 'ON HAND';
+                            } else if ($model->status_id == 2) {
+                                return 'ON THE WAY';
+                            } else if ($model->status_id == 3) {
+                                return 'SHIPPED';
+                            } else if ($model->status_id == 4) {
+                                return 'PICKED UP';
+                            } else if ($model->status_id == 5) {
+                                return 'MANIFEST';
+                            }
+                        }
+                    ],
+                ],
+            ]);
+            ?>
+        </div>
+        <?php } ?>
     <div class="col-md-12">
         <button type="button" class="btn btn-block btn-success btn-sm inventory-report">Inventory Report</button>
     </div>
@@ -64,7 +146,7 @@ $this->title = 'AFGShipping';
         <div class="vehicle-stat-home">
             <h4>VEHICLE STATUS</h4>
             <table class="table table-bordered">
-                <?php $total = $onway + $onhand + $manifest + $shipped ?>
+<?php $total = $onway + $onhand + $manifest + $shipped ?>
                 <thead>
                     <tr>
                         <th>SORT TYPE</th>
@@ -84,31 +166,31 @@ $this->title = 'AFGShipping';
                         <td>ON THE WAY</td>
                         <td><?= $onway ?></td>
                         <td><button class="btn home-report" type="2">Report</button></td>
-                        <td></td>
+                        <td><?= yii\helpers\Html::a('VIEW', ['masters/vehicle/index', 'status' => 2], ['target' => '_blank']) ?></td>
                     </tr>
                     <tr>
                         <td>ON HAND</td>
                         <td><?= $onhand ?></td>
                         <td><button class="btn home-report" type="1">Report</button></td>
-                        <td></td>
+                        <td><?= yii\helpers\Html::a('VIEW', ['masters/vehicle/index', 'status' => 1], ['target' => '_blank']) ?></td>
                     </tr>
                     <tr>
                         <td>MANIFEST</td>
-                        <td></td>
-                        <td><button class="btn home-report" type="">Report</button></td>
-                        <td></td>
+                        <td><?= $manifest ?></td>
+                        <td><button class="btn home-report" type="5">Report</button></td>
+                        <td><?= yii\helpers\Html::a('VIEW', ['masters/vehicle/index', 'status' => 5], ['target' => '_blank']) ?></td>
                     </tr>
                     <tr>
                         <td>PICKED UP</td>
-                        <td><?= $manifest ?></td>
+                        <td><?= $pickedup ?></td>
                         <td><button class="btn home-report" type="4">Report</button></td>
-                        <td></td>
+                        <td><?= yii\helpers\Html::a('VIEW', ['masters/vehicle/index', 'status' => 4], ['target' => '_blank']) ?></td>
                     </tr>
                     <tr>
                         <td>CAR SHIPPED</td>
                         <td><?= $shipped ?></td>
-                        <td></td>
-                        <td></td>
+                        <td><button class="btn home-report" type="3">Report</button></td>
+                        <td><?= yii\helpers\Html::a('VIEW', ['masters/vehicle/index', 'status' => 3], ['target' => '_blank']) ?></td>
                     </tr>
                     <tr>
                         <td>WITH TITLE</td>

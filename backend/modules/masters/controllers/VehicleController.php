@@ -43,9 +43,54 @@ class VehicleController extends Controller {
      * Lists all Vehicle models.
      * @return mixed
      */
-    public function actionIndex() {
+    public function actionIndex($customer = null, $status = null) {
         $searchModel = new VehicleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if (Yii::$app->user->identity->post_id != '1') {
+            $dataProvider->query->andWhere(['location' => Yii::$app->user->identity->location]);
+        }
+        if (isset($status)) {
+            if ($status == 6) {
+                $vehicle_titles = \common\models\VehicleTitleInfo::find()->where(['title' => 0])->all();
+                $vehicle_title_id = array();
+                foreach ($vehicle_titles as $vehicle_title) {
+                    $vehicle_title_id[] = $vehicle_title->vehicle_id;
+                }
+                $dataProvider->query->andWhere(['IN', 'vehicle.id', $vehicle_title_id]);
+            } else if ($status == 7) {
+                $vehicle_titles = \common\models\VehicleTitleInfo::find()->where(['title' => 1])->all();
+                $vehicle_title_id = array();
+                foreach ($vehicle_titles as $vehicle_title) {
+                    $vehicle_title_id[] = $vehicle_title->vehicle_id;
+                }
+                $dataProvider->query->andWhere(['IN', 'vehicle.id', $vehicle_title_id]);
+            } else if ($status == 8) {
+                $vehicle_titles = \common\models\VehicleTowingInfo::find()->where(['towed' => 'Yes'])->all();
+                $vehicle_title_id = array();
+                foreach ($vehicle_titles as $vehicle_title) {
+                    $vehicle_title_id[] = $vehicle_title->vehicle_id;
+                }
+                $dataProvider->query->andWhere(['IN', 'vehicle.id', $vehicle_title_id]);
+            } else if ($status == 9) {
+                $vehicle_titles = \common\models\VehicleTowingInfo::find()->where(['towed' => 'No'])->all();
+                $vehicle_title_id = array();
+                foreach ($vehicle_titles as $vehicle_title) {
+                    $vehicle_title_id[] = $vehicle_title->vehicle_id;
+                }
+                $dataProvider->query->andWhere(['IN', 'vehicle.id', $vehicle_title_id]);
+            } else {
+
+                $dataProvider->query->andWhere(['status_id' => $status]);
+            }
+        }
+        if (isset($customer)) {
+            $customer_vehicles = \common\models\VehicleTowingInfo::find()->where(['customers_id' => $customer])->all();
+            $vehicle_id = array();
+            foreach ($customer_vehicles as $vehicle) {
+                $vehicle_id[] = $vehicle->vehicle_id;
+            }
+            $dataProvider->query->andWhere(['IN', 'vehicle.id', $vehicle_id]);
+        }
 
         return $this->render('index', [
                     'searchModel' => $searchModel,
@@ -80,6 +125,10 @@ class VehicleController extends Controller {
             $transaction = Vehicle::getDb()->beginTransaction();
             try {
                 if ($model->save()) {
+                    $user_adding = \common\models\AdminUsers::findOne(Yii::$app->user->identity->id);
+                    $model->location = $user_adding->location;
+                    $model->DOC = date('Y-m-d');
+                    $model->update();
                     $vehicle_check_options->vehicle_id = $model->id;
                     $vehicle_condition->vehicle_id = $model->id;
                     $vehicle_title->vehicle_id = $model->id;
@@ -270,13 +319,13 @@ class VehicleController extends Controller {
                     $cart_items = Yii::$app->session['cart'];
                     if (($key = array_search($removed, $cart_items)) !== false) {
                         unset($cart_items[$key]);
-                        Yii::$app->session['cart']=$cart_items;
+                        Yii::$app->session['cart'] = $cart_items;
                     }
                 }
             }
         }
         $row = "";
-        $cart_count=count(Yii::$app->session['cart']);
+        $cart_count = count(Yii::$app->session['cart']);
         if ($vin) {
             foreach ($vin as $v) {
                 $vehicle = Vehicle::findOne($v);
@@ -295,7 +344,7 @@ class VehicleController extends Controller {
             }
         }
         $msg = !empty($row) ? 'success' : 'failed';
-        return json_encode(array('msg' => $msg, 'row' => $row,'cart_count'=>$cart_count));
+        return json_encode(array('msg' => $msg, 'row' => $row, 'cart_count' => $cart_count));
     }
 
     public function actionVehicleConditionReport($id) {

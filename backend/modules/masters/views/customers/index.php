@@ -48,6 +48,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             // 'other_emails:ntext',
                             // 'upload_documents',
                             'company_name',
+                            [
+                                'attribute' => 'state',
+                                'value' => function($model) {
+                                    $location = common\models\Location::findOne($model->state);
+                                    if (isset($location) && $location != '') {
+                                        return $location->location;
+                                    } else{
+                                        return '';
+                                    }
+                                },
+                            ],
                             // 'phone_usa',
                             // 'phone_uae',
                             // 'trn_uae',

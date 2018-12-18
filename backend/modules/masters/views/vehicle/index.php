@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use kartik\date\DatePicker;
+use yii\helpers\Url;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\VehicleSearch */
@@ -10,6 +12,15 @@ use kartik\date\DatePicker;
 
 $this->title = 'Vehicles';
 $this->params['breadcrumbs'][] = $this->title;
+?>
+<?php
+Modal::begin([
+    'header' => '',
+    'id' => 'modal',
+    'size' => 'modal-lg',
+]);
+echo "<div id = 'modalContent'></div>";
+Modal::end();
 ?>
 <div class="vehicle-index">
 
@@ -35,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?=
                     GridView::widget([
                         'dataProvider' => $dataProvider,
-//                        'filterModel' => $searchModel,
+                        'filterModel' => $searchModel,
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
                             'hat',
@@ -68,7 +79,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                     return $model->towingInfos->keys;
                                 }
                             ],
-                            'lot_no',
+                            
+                            [
+                                'attribute' => 'lot_no',
+                                'format' => 'raw',
+                                'value' => function($model) {
+                                    return Html::button($model->lot_no, ['value' => Url::to(['vehicle-condition-report', 'id' => $model->id]), 'class' => 'modalButton vehicl_lot_no']);
+                                }
+                            ],
                             [
                                 'attribute' => 'status_id',
                                 'value' => function($model) {
@@ -80,6 +98,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         return 'SHIPPED';
                                     } else if ($model->status_id == 4) {
                                         return 'PICKED UP';
+                                    } else if ($model->status_id == 5) {
+                                        return 'MANIFEST';
                                     }
                                 }
                             ],
@@ -130,3 +150,19 @@ $this->params['breadcrumbs'][] = $this->title;
 </script>
 
 
+<script>
+    $(document).on('click', '.modalButton', function () {
+        $('#modal').modal('show')
+                .find('#modalContent')
+                .load($(this).attr("value"));
+    });
+</script>
+
+<style>
+    .vehicl_lot_no{
+        background: none;
+        border: none;
+        color: #3c8dbc;
+    }
+
+</style>

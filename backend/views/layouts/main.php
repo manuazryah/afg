@@ -127,7 +127,7 @@ AppAsset::register($this);
                     <li>
                         <?= Html::a('<i class="fa fa-files-o"></i> <span class="title">Export</span>', ['/export/export/index'], ['class' => 'title']) ?>
                     </li>
-                    <li>
+<!--                    <li>
                         <?= Html::a('<i class="fa fa-credit-card"></i> <span>Payments</span>', ['/site/index'], ['class' => '']) ?>
                     </li>
                     <li class="treeview">
@@ -152,7 +152,7 @@ AppAsset::register($this);
                                 <?= Html::a('<i class="fa fa-angle-double-right"></i> <span>Un Paid Invoices</span>', ['/site/index'], ['class' => '']) ?>
                             </li>
                         </ul>
-                    </li>
+                    </li>-->
                     <li>
                         <?= Html::a('<i class="fa fa-money"></i> <span>Prices</span>', ['/masters/prices'], ['class' => '']) ?>
                     </li>

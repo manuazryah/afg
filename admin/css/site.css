@@ -590,9 +590,40 @@ active, .manifesta .ui-widget-header .ui-state-active {
     height: 25px;
 }
 .home-report:hover{
-     color: #fff;
+    color: #fff;
 }
 .nav>li>a:hover, .nav>li>a:active, .nav>li>a:focus {
     color: #444;
     background: #747576;
+}
+
+/**********************Customer view********************************/
+.customer-view-count .controls li.active{
+    background-color: #fff;
+    border-top: 3px solid #420e0e;
+    padding: 3px 0;
+}  
+.customer-view-count .box-body2{
+    background-color: #3ec1d5;
+    border-radius: 16px;
+    margin: 2px;
+}
+.customer-view-count .box-text2 {
+    text-align: initial;
+    padding-bottom: 12px;
+    margin-top: 20px;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+    color: #fff;
+}
+.customer-view-count .nav>li>a:hover, .customer-view-count.nav>li>a:active,.customer-view-count .nav>li>a:focus{
+    background: #fff;
+}
+.customer-view-report{
+    background-color: #3ec1d5;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 5px;
+    border:none;
 }

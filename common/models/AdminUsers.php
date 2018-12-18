@@ -49,7 +49,7 @@ class AdminUsers extends ActiveRecord implements IdentityInterface {
             [['user_name'], 'unique', 'message' => 'Username must be unique.', 'on' => 'update'],
             [['email'], 'email'],
             [['post_id', 'status', 'CB', 'UB'], 'integer'],
-            [['DOC', 'DOU'], 'safe'],
+            [['DOC', 'DOU','location'], 'safe'],
             [['user_name'], 'string', 'max' => 30],
             [['password'], 'string', 'max' => 300],
             [['name', 'email'], 'string', 'max' => 100],

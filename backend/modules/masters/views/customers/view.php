@@ -247,7 +247,7 @@ Modal::end();
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h3 class="pull-left"> VEHICLE STATUS  </h3>
-                                                    <button type="button" class="btn btn-block btn-success btn-sm inventory-report">Inventory Report</button>
+                                                    <button type="button" class="btn btn-block btn-success btn-sm inventory-report" id="<?= $model->id ?>">Inventory Report</button>
                                                     <table class="table table-striped table-bordered" style="min-height: 447px;">
                                                         <thead>
                                                             <tr>
@@ -423,6 +423,16 @@ Modal::end();
         </div>
     </div>
 </div>
+
+<div class="modal fade inventory-report-modal" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 <style>
     #piechart rect{
         fill: #ecf0f5;
@@ -456,5 +466,23 @@ Modal::end();
         $('#modal').modal('show')
                 .find('#modalContent')
                 .load($(this).attr("value"));
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.inventory-report', function () {
+            $.ajax({
+                url: '<?= Yii::$app->homeUrl; ?>masters/customers/inventory-content',
+                type: "POST",
+                data: {customer: $(this).attr('id')},
+                success: function (data) {
+                    var res = $.parseJSON(data);
+                    $('.modal-content').html(res.result['report']);
+                    $('#modal-default').modal('show');
+                }
+            });
+        });
+
     });
 </script>

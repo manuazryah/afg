@@ -17,19 +17,19 @@ use yii\helpers\ArrayHelper;
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>   <?= $form->field($model, 'post_id')->dropDownList(ArrayHelper::map($posts, 'id', 'post_name'), ['prompt' => '--Select--']) ?>
 
         </div>
-        
+
         <?php if ($model->isNewRecord) { ?>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'user_name')->textInput(['maxlength' => true]) ?>
             </div>
         <?php } ?>
-        
+
         <?php if ($model->isNewRecord) { ?>
             <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
                 <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
             </div>
         <?php } ?>
-        
+
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -37,7 +37,7 @@ use yii\helpers\ArrayHelper;
 
         </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'phone_number')->textInput(['maxlength' => true]) ?>
 
-        </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd'>    <?= $form->field($model, 'location')->dropDownList(yii\helpers\ArrayHelper::map(common\models\Location::find()->where(['status' => 1])->all(), 'id', 'location'), ['prompt' => '--Select--']) ?>
+        </div><div class='col-md-4 col-sm-6 col-xs-12 left_padd location'>    <?= $form->field($model, 'location')->dropDownList(yii\helpers\ArrayHelper::map(common\models\Location::find()->where(['status' => 1])->all(), 'id', 'location'), ['prompt' => '--Select--']) ?>
 
         </div>
         <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
@@ -53,3 +53,26 @@ use yii\helpers\ArrayHelper;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#adminusers-post_id').change(function () {
+            var id = $(this).val();
+            if (id == 1) {
+                $('.location').hide();
+            } else {
+                $('.location').show();
+            }
+        });
+
+        var post = $('#adminusers-post_id').val();
+        if (post == 1) {
+            $('.location').hide();
+        } else {
+            $('.location').show();
+        }
+
+    });
+
+</script>

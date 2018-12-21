@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\AdminUsers */
 
-$this->title = 'Create Admin User';
-$this->params['breadcrumbs'][] = ['label' => 'Admin Users', 'url' => ['index']];
+$this->title = 'Create  User';
+$this->params['breadcrumbs'][] = ['label' => ' Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
             <div class="panel-body">
-                <?= Html::a('<i class="fa fa-list"></i><span> Manage Admin Users</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone link-btn']) ?>
+                <?= Html::a('<i class="fa fa-list"></i><span> Manage  Users</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone link-btn']) ?>
                 <div class="panel-body"><div class="admin-users-create">
                         <?=
                         $this->render('_form', [

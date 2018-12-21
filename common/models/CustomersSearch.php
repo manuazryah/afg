@@ -86,14 +86,136 @@ class CustomersSearch extends Customers {
                 ->andFilterWhere(['like', 'fax', $this->fax])
                 ->andFilterWhere(['like', 'notes', $this->notes]);
 
-        if (!empty($this->global_search)) {
-            $query->orFilterWhere(['like', 'customer_id', $this->global_search]);
-            $query->orFilterWhere(['like', 'name', $this->global_search]);
-            $query->orFilterWhere(['like', 'company_name', $this->global_search]);
-            $query->orFilterWhere(['like', 'city', $this->global_search]);
-            $query->orFilterWhere(['like', 'state', $this->global_search]);
-            $query->orFilterWhere(['like', 'country', $this->global_search]);
-            $query->orFilterWhere(['like', 'trn_usa', $this->global_search]);
+//        if (!empty($this->global_search)) {
+//            $query->orFilterWhere(['like', 'customer_id', $this->global_search]);
+//            $query->orFilterWhere(['like', 'name', $this->global_search]);
+//            $query->orFilterWhere(['like', 'company_name', $this->global_search]);
+//            $query->orFilterWhere(['like', 'city', $this->global_search]);
+//            $query->orFilterWhere(['like', 'state', $this->global_search]);
+//            $query->orFilterWhere(['like', 'country', $this->global_search]);
+//            $query->orFilterWhere(['like', 'trn_usa', $this->global_search]);
+//        }
+
+        if ($this->customer_id == '') {
+            if ($this->global_search != '') {
+                $query4 = new yii\db\Query();
+                $query4->select(['*'])->from('customers')->andWhere(['like', 'customer_id', $this->global_search]);
+                $command4 = $query4->createCommand();
+                $result4 = $command4->queryAll();
+                if (!empty($result4)) {
+                    foreach ($result4 as $ind_val) {
+                        $arr[] = $ind_val['id'];
+                    }
+                }
+            }
+        } else {
+            $query->andFilterWhere(['like', 'customer_id', $this->customer_id]);
+        }
+
+
+        if ($this->name == '') {
+            if ($this->global_search != '') {
+                $query4 = new yii\db\Query();
+                $query4->select(['*'])->from('customers')->andWhere(['like', 'name', $this->global_search]);
+                $command4 = $query4->createCommand();
+                $result4 = $command4->queryAll();
+                if (!empty($result4)) {
+                    foreach ($result4 as $ind_val) {
+                        $arr[] = $ind_val['id'];
+                    }
+                }
+            }
+        } else {
+            $query->andFilterWhere(['like', 'name', $this->name]);
+        }
+
+        if ($this->company_name == '') {
+            if ($this->global_search != '') {
+                $query4 = new yii\db\Query();
+                $query4->select(['*'])->from('customers')->andWhere(['like', 'company_name', $this->global_search]);
+                $command4 = $query4->createCommand();
+                $result4 = $command4->queryAll();
+                if (!empty($result4)) {
+                    foreach ($result4 as $ind_val) {
+                        $arr[] = $ind_val['id'];
+                    }
+                }
+            }
+        } else {
+            $query->andFilterWhere(['like', 'company_name', $this->company_name]);
+        }
+
+
+
+        if ($this->city == '') {
+            if ($this->global_search != '') {
+                $query4 = new yii\db\Query();
+                $query4->select(['*'])->from('customers')->andWhere(['like', 'city', $this->global_search]);
+                $command4 = $query4->createCommand();
+                $result4 = $command4->queryAll();
+                if (!empty($result4)) {
+                    foreach ($result4 as $ind_val) {
+                        $arr[] = $ind_val['id'];
+                    }
+                }
+            }
+        } else {
+            $query->andFilterWhere(['like', 'city', $this->city]);
+        }
+
+
+        if ($this->state == '') {
+            if ($this->global_search != '') {
+                $query4 = new yii\db\Query();
+                $query4->select(['*'])->from('customers')->andWhere(['like', 'state', $this->global_search]);
+                $command4 = $query4->createCommand();
+                $result4 = $command4->queryAll();
+                if (!empty($result4)) {
+                    foreach ($result4 as $ind_val) {
+                        $arr[] = $ind_val['id'];
+                    }
+                }
+            }
+        } else {
+            $query->andFilterWhere(['like', 'state', $this->state]);
+        }
+
+        if ($this->country == '') {
+            if ($this->global_search != '') {
+                $query4 = new yii\db\Query();
+                $query4->select(['*'])->from('customers')->andWhere(['like', 'country', $this->global_search]);
+                $command4 = $query4->createCommand();
+                $result4 = $command4->queryAll();
+                if (!empty($result4)) {
+                    foreach ($result4 as $ind_val) {
+                        $arr[] = $ind_val['id'];
+                    }
+                }
+            }
+        } else {
+            $query->andFilterWhere(['like', 'country', $this->country]);
+        }
+        
+        
+        if ($this->trn_usa == '') {
+            if ($this->global_search != '') {
+                $query4 = new yii\db\Query();
+                $query4->select(['*'])->from('customers')->andWhere(['like', 'trn_usa', $this->global_search]);
+                $command4 = $query4->createCommand();
+                $result4 = $command4->queryAll();
+                if (!empty($result4)) {
+                    foreach ($result4 as $ind_val) {
+                        $arr[] = $ind_val['id'];
+                    }
+                }
+            }
+        } else {
+            $query->andFilterWhere(['like', 'trn_usa', $this->trn_usa]);
+        }
+
+        if (!empty($arr)) {
+            $array = array_unique($arr);
+            $query->andFilterWhere(['customers.id' => $array]);
         }
 
         return $dataProvider;

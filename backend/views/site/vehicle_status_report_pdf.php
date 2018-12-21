@@ -32,13 +32,17 @@ use yii\helpers\Html;
             <th>MAKE</th>
             <th>MODEL</th>
             <th>COLOR</th>
+            <th>LOT NO</th>
             <th>VIN</th>
-            <th>KEYS</th>
+            <th>TITLE</th>
             <th>AGE</th>
             <th>NOTE</th>
         </tr>
         <?php
         foreach ($vehicles as $vehicle_details) {
+            $your_date = strtotime($vehicle_details->DOC);
+            $now = strtotime(date('Y-m-d'));
+            $datediff = $now - $your_date;
             ?>
             <tr align="center">
                 <td><?= $vehicle_details->hat ?></td>
@@ -56,7 +60,7 @@ use yii\helpers\Html;
                         echo 'No';
                     }
                     ?></td>
-                <td>117</td>
+                <td><?= round($datediff / (60 * 60 * 24)); ?></td>
                 <td></td>
             </tr>
             <?php

@@ -99,7 +99,7 @@ use yii\helpers\Html;
             <div class="pull-right hidden-xs">
                 <b>Version</b> 2.4.0
             </div>
-            <strong>Copyright &copy; 2017-2018 <a href="http://azryah.com/">AFG Shipping</a>.</strong> All rights
+            <strong>Copyright &copy; 2017-2018 <a href="http://azryah.com/">AFG GLOBAL SHIPPER LLC</a>.</strong> All rights
             reserved.
         </footer>
         <?php $this->endBody() ?>

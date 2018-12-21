@@ -13,10 +13,11 @@ use yii\helpers\Html;
         <span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title">Reports</h4>
     <div>
-        <?= Html::a('<i class="fa fa-file-pdf-o"></i> Open as Pdf', ['/site/vehicle-status-report-pdf','type'=>$type], ['class' => 'btn btn-block btn-social btn-bitbucket pdf-link', 'target' => '_blank']) ?>
-        <?= Html::a('<i class="fa fa-file-pdf-o"></i> Download as Excel', ['/site/vehicle-status-report-export','type'=>$type], ['class' => 'btn btn-block btn-social btn-bitbucket excel-link', 'target' => '_blank']) ?>
+        <?= Html::a('<i class="fa fa-file-pdf-o"></i> Open as Pdf', ['/site/vehicle-status-report-pdf', 'type' => $type], ['class' => 'btn btn-block btn-social btn-bitbucket pdf-link', 'target' => '_blank']) ?>
+        <?= Html::a('<i class="fa fa-file-pdf-o"></i> Download as Excel', ['/site/vehicle-status-report-export', 'type' => $type], ['class' => 'btn btn-block btn-social btn-bitbucket excel-link', 'target' => '_blank']) ?>
     </div>
 </div>
+
 <div class="modal-body">
 
 
@@ -50,27 +51,32 @@ use yii\helpers\Html;
             </tr>
             <?php
             foreach ($vehicles as $vehicle_details) {
-                    ?>
-                    <tr align="center">
-                        <td><?= $vehicle_details->hat ?></td>
-                        <td><?= date('Y-m-d', strtotime($vehicle_details->titleInfos->towing_request_date)) ?></td>
-                        <td><?= $vehicle_details->year ?></td>
-                        <td><?= $vehicle_details->make ?></td>
-                        <td><?= $vehicle_details->model ?></td>
-                        <td><?= $vehicle_details->color ?></td>
-                        <td><?= $vehicle_details->lot_no ?></td>
-                        <td><?= $vehicle_details->vin ?></td>
-                        <td><?php
-                            if ($vehicle_details->titleInfos->title == 1) {
-                                echo 'Yes';
-                            } else if ($vehicle_details->titleInfos->title == 2) {
-                                echo 'No';
-                            }
-                            ?></td>
-                        <td>117</td>
-                        <td></td>
-                    </tr>
-                    <?php
+                
+                $your_date = strtotime($vehicle_details->DOC);
+                $now = strtotime(date('Y-m-d'));
+                $datediff = $now - $your_date;
+
+                ?>
+                <tr align="center">
+                    <td><?= $vehicle_details->hat ?></td>
+                    <td><?= date('Y-m-d', strtotime($vehicle_details->titleInfos->towing_request_date)) ?></td>
+                    <td><?= $vehicle_details->year ?></td>
+                    <td><?= $vehicle_details->make ?></td>
+                    <td><?= $vehicle_details->model ?></td>
+                    <td><?= $vehicle_details->color ?></td>
+                    <td><?= $vehicle_details->lot_no ?></td>
+                    <td><?= $vehicle_details->vin ?></td>
+                    <td><?php
+                        if ($vehicle_details->titleInfos->title == 1) {
+                            echo 'Yes';
+                        } else if ($vehicle_details->titleInfos->title == 2) {
+                            echo 'No';
+                        }
+                        ?></td>
+                    <td><?= round($datediff / (60 * 60 * 24));?></td>
+                    <td></td>
+                </tr>
+                <?php
             }
             ?>
         </tbody>

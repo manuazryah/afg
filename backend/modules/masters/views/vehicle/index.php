@@ -79,7 +79,6 @@ Modal::end();
                                     return $model->towingInfos->keys;
                                 }
                             ],
-                            
                             [
                                 'attribute' => 'lot_no',
                                 'format' => 'raw',
@@ -101,6 +100,14 @@ Modal::end();
                                     } else if ($model->status_id == 5) {
                                         return 'MANIFEST';
                                     }
+                                }
+                            ],
+                            [
+                                'attribute' => 'title_amount',
+                                'header' => 'Note',
+                                'format' => 'raw',
+                                'value' => function($model) {
+                                    return Html::a('NOTES', ['#'], ['class' => 'add-notes', 'id' => $model->id]);
                                 }
                             ],
                             [
@@ -131,6 +138,16 @@ Modal::end();
     </div>
 </div>
 
+<div class="modal fade inventory-report-modal" id="modal-default1">
+    <div class="modal-dialog">
+        <div class="modal-content" id="vehicle-modal-content">
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 <script>
     $(document).ready(function () {
         $(document).on('click', '.add-cart', function (e) {
@@ -146,6 +163,38 @@ Modal::end();
             });
 
         });
+
+        $(document).on('click', '.add-notes', function (e) {
+            e.preventDefault();
+            var vehicle_id = $(this).attr('id');
+            $.ajax({
+                url: '<?= Yii::$app->homeUrl; ?>masters/vehicle/notes',
+                type: "POST",
+                data: {vehicle_id: vehicle_id},
+                success: function (data) {
+                    var res = $.parseJSON(data);
+                    $('#vehicle-modal-content').html(res.result['report']);
+                    $('#modal-default1').modal('show');
+                }
+            });
+        });
+
+
+
+        $(document).on('click', '.note-submit', function (e) {
+            e.preventDefault();
+            var vehicle_id = $('#customernotes-vehicle_id').val();
+            var note = $('#customernotes-notes').val();
+            $.ajax({
+                url: '<?= Yii::$app->homeUrl; ?>masters/vehicle/add-note',
+                type: "POST",
+                data: {note: note, vehicle_id: vehicle_id},
+                success: function (data) {
+                    $('.vehicle-previous-notes-ul').prepend(data);
+                }
+            });
+        });
+
     });
 </script>
 

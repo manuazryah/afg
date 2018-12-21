@@ -122,17 +122,121 @@ class ExportSearch extends Export {
                 ->andFilterWhere(['like', 'transpotation_value', $this->transpotation_value])
                 ->andFilterWhere(['like', 'invoice', $this->invoice]);
 
-        if (!empty($this->export_global_search)) {
-            $query->orFilterWhere(['like', 'broker_name', $this->export_global_search]);
-            $query->orFilterWhere(['like', 'booking_no', $this->export_global_search]);
-            $query->orFilterWhere(['like', 'xtn_no', $this->export_global_search]);
-            $query->orFilterWhere(['like', 'seal_no', $this->export_global_search]);
-            $query->orFilterWhere(['like', 'container_no', $this->export_global_search]);
-            $query->orFilterWhere(['like', 'voyage', $this->export_global_search]);
+//        if (!empty($this->export_global_search)) {
+//            $query->orFilterWhere(['like', 'broker_name', $this->export_global_search]);
+//            $query->orFilterWhere(['like', 'booking_no', $this->export_global_search]);
+//            $query->orFilterWhere(['like', 'xtn_no', $this->export_global_search]);
+//            $query->orFilterWhere(['like', 'seal_no', $this->export_global_search]);
+//            $query->orFilterWhere(['like', 'container_no', $this->export_global_search]);
+//            $query->orFilterWhere(['like', 'voyage', $this->export_global_search]);
+//        }
+//        if (!empty($this->export_vehicle_global_search)) {
+//            $query->orFilterWhere(['like', 'broker_name', $this->export_vehicle_global_search]);
+//            $query->orFilterWhere(['like', 'booking_no', $this->export_vehicle_global_search]);
+//        }
+
+        $arr = [];
+        if ($this->broker_name == '') {
+            if ($this->export_global_search != '') {
+                $query1 = new yii\db\Query();
+                $query1->select(['*'])->from('export')->andWhere(['like', 'broker_name', $this->export_global_search]);
+                $command = $query1->createCommand();
+                $result1 = $command->queryAll();
+                if (!empty($result1)) {
+                    foreach ($result1 as $ind_val) {
+                        $arr[] = $ind_val['id'];
+                    }
+                }
+            }
+        } else {
+            $query->andFilterWhere(['like', 'broker_name', $this->broker_name]);
         }
-        if (!empty($this->export_vehicle_global_search)) {
-            $query->orFilterWhere(['like', 'broker_name', $this->export_vehicle_global_search]);
-            $query->orFilterWhere(['like', 'booking_no', $this->export_vehicle_global_search]);
+
+        if ($this->xtn_no == '') {
+            if ($this->export_global_search != '') {
+                $query1 = new yii\db\Query();
+                $query1->select(['*'])->from('export')->andWhere(['like', 'xtn_no', $this->export_global_search]);
+                $command = $query1->createCommand();
+                $result1 = $command->queryAll();
+                if (!empty($result1)) {
+                    foreach ($result1 as $ind_val) {
+                        $arr[] = $ind_val['id'];
+                    }
+                }
+            }
+        } else {
+            $query->andFilterWhere(['like', 'xtn_no', $this->xtn_no]);
+        }
+
+        if ($this->seal_no == '') {
+            if ($this->export_global_search != '') {
+                $query1 = new yii\db\Query();
+                $query1->select(['*'])->from('export')->andWhere(['like', 'seal_no', $this->export_global_search]);
+                $command = $query1->createCommand();
+                $result1 = $command->queryAll();
+                if (!empty($result1)) {
+                    foreach ($result1 as $ind_val) {
+                        $arr[] = $ind_val['id'];
+                    }
+                }
+            }
+        } else {
+            $query->andFilterWhere(['like', 'seal_no', $this->seal_no]);
+        }
+
+        if ($this->container_no == '') {
+            if ($this->export_global_search != '') {
+                $query1 = new yii\db\Query();
+                $query1->select(['*'])->from('export')->andWhere(['like', 'container_no', $this->export_global_search]);
+                $command = $query1->createCommand();
+                $result1 = $command->queryAll();
+                if (!empty($result1)) {
+                    foreach ($result1 as $ind_val) {
+                        $arr[] = $ind_val['id'];
+                    }
+                }
+            }
+        } else {
+            $query->andFilterWhere(['like', 'container_no', $this->container_no]);
+        }
+
+
+        if ($this->voyage == '') {
+            if ($this->export_global_search != '') {
+                $query1 = new yii\db\Query();
+                $query1->select(['*'])->from('export')->andWhere(['like', 'voyage', $this->export_global_search]);
+                $command = $query1->createCommand();
+                $result1 = $command->queryAll();
+                if (!empty($result1)) {
+                    foreach ($result1 as $ind_val) {
+                        $arr[] = $ind_val['id'];
+                    }
+                }
+            }
+        } else {
+            $query->andFilterWhere(['like', 'voyage', $this->voyage]);
+        }
+
+
+        if ($this->booking_no == '') {
+            if ($this->export_global_search != '') {
+                $query1 = new yii\db\Query();
+                $query1->select(['*'])->from('export')->andWhere(['like', 'booking_no', $this->export_global_search]);
+                $command = $query1->createCommand();
+                $result1 = $command->queryAll();
+                if (!empty($result1)) {
+                    foreach ($result1 as $ind_val) {
+                        $arr[] = $ind_val['id'];
+                    }
+                }
+            }
+        } else {
+            $query->andFilterWhere(['like', 'booking_no', $this->booking_no]);
+        }
+
+        if (!empty($arr)) {
+            $array = array_unique($arr);
+            $query->andFilterWhere(['export.id' => $array]);
         }
 
         return $dataProvider;

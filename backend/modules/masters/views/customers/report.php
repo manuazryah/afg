@@ -13,13 +13,12 @@ use yii\helpers\Html;
         <h4 class="modal-title">Reports</h4>
     </div>
     <div class="col-md-6">
-        <?= Html::a('<i class="fa fa-file-pdf-o"></i> Open as Pdf', ['report-pdf','id'=>$customer->id,'status'=>$status], ['class' => 'btn btn-block btn-social btn-bitbucket pdf-link', 'target' => '_blank', 'style' => 'width:40%;float:right']) ?>
+        <?= Html::a('<i class="fa fa-file-pdf-o"></i> Open as Pdf', ['report-pdf', 'id' => $customer->id, 'status' => $status], ['class' => 'btn btn-block btn-social btn-bitbucket pdf-link', 'target' => '_blank', 'style' => 'width:40%;float:right']) ?>
     </div>
 </div>
 
 <div class="modal-body">
     <?php
-    
     if (count($vehicle_id) > 0) {
         if (isset($status)) {
             if ($status == 1) {
@@ -72,6 +71,9 @@ use yii\helpers\Html;
                 <?php
                 foreach ($vehicle_id as $vehicle) {
                     $vehicle_details = \common\models\Vehicle::findOne($vehicle);
+                    $your_date = strtotime($vehicle_details->DOC);
+                    $now = strtotime(date('Y-m-d'));
+                    $datediff = $now - $your_date;
                     if ($vehicle_details->status_id == $status) {
                         ?>
                         <tr align="center">
@@ -90,7 +92,7 @@ use yii\helpers\Html;
                                     echo 'No';
                                 }
                                 ?></td>
-                            <td>117</td>
+                            <td><?= round($datediff / (60 * 60 * 24));?></td>
                             <td><?php
                                 if ($vehicle_details->status_id == 1) {
                                     echo 'ON HAND';
@@ -102,7 +104,7 @@ use yii\helpers\Html;
                                     echo 'PICKED UP';
                                 }
                                 ?></td>
-                            <td><?=$vehicle_details->titleInfos->note?></td>
+                            <td><?= $vehicle_details->titleInfos->note ?></td>
                         </tr>
                         <?php
                     }
@@ -110,7 +112,7 @@ use yii\helpers\Html;
                 ?>
             </tbody>
         </table>
-    <?php
+        <?php
     } else {
         echo '<p>No result found</p>';
     }

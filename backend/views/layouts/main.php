@@ -106,7 +106,7 @@ AppAsset::register($this);
                             </li>
 
                             <li>
-                                <?= Html::a('<i class="fa fa-angle-double-right"></i> Admin Users', ['/admin/admin-users/index'], ['class' => 'title']) ?>
+                                <?= Html::a('<i class="fa fa-angle-double-right"></i> Add Users', ['/admin/admin-users/index'], ['class' => 'title']) ?>
                             </li>
                         </ul>
                     </li>

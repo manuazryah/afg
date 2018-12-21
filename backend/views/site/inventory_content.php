@@ -61,6 +61,9 @@ use yii\helpers\Html;
                     <?php
                     foreach ($customer_vehicles as $customer_vehicle) {
                         $vehicle_details = \common\models\Vehicle::findOne($customer_vehicle->vehicle_id);
+                        $your_date = strtotime($vehicle_details->DOC);
+                        $now = strtotime(date('Y-m-d'));
+                        $datediff = $now - $your_date;
                         if ($vehicle_details->status_id == 1 || $vehicle_details->status_id == 2) {
                             ?>
                             <tr align="center">
@@ -78,9 +81,11 @@ use yii\helpers\Html;
                                     } else if ($vehicle_details->titleInfos->title == 2) {
                                         echo 'No';
                                     }
-                                    ?></td>
-                                <td>117</td>
-                                <td><?php  if ($vehicle_details->status_id == 1) {
+                                    ?>
+                                </td>
+                                <td><?= round($datediff / (60 * 60 * 24));?></td>
+                                <td><?php
+                                    if ($vehicle_details->status_id == 1) {
                                         echo 'ON HAND';
                                     } else if ($vehicle_details->status_id == 2) {
                                         echo 'ON THE WAY';
@@ -88,10 +93,11 @@ use yii\helpers\Html;
                                         echo 'SHIPPED';
                                     } else if ($vehicle_details->status_id == 4) {
                                         echo 'PICKED UP';
-                                    } ?></td>
+                                    }
+                                    ?></td>
                                 <td></td>
                             </tr>
-                        <?php
+                            <?php
                         }
                     }
                     ?>

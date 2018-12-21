@@ -146,7 +146,8 @@ class VehicleController extends Controller {
                     $files = UploadedFile::getInstances($model, 'attachments');
                     if (!empty($files))
                         $this->Upload($files, $model);
-                    return $this->redirect(['index']);
+                    Yii::$app->getSession()->setFlash('success', "Create Successfully");
+                    return $this->redirect(['create']);
                 }
             } catch (\Exception $e) {
                 $transaction->rollBack();
@@ -381,6 +382,35 @@ class VehicleController extends Controller {
                 }
             }
             return count($session['cart']);
+        }
+    }
+
+    public function actionNotes() {
+        if (Yii::$app->request->isAjax) {
+            $model = new \common\models\CustomerNotes();
+            $previous_notes = \common\models\CustomerNotes::find()->where(['vehicle_id' => $_POST['vehicle_id']])->orderBy(['id'=>SORT_DESC])->all();
+            $report = $this->renderPartial('notes', [
+                'model' => $model,
+                'previous_notes' => $previous_notes,
+                'vehicle_id' => $_POST['vehicle_id'],
+            ]);
+            $report_content = array('report' => $report);
+            $data['result'] = $report_content;
+            return json_encode($data);
+        }
+    }
+
+    public function actionAddNote() {
+        if (Yii::$app->request->isAjax) {
+            $model = new \common\models\CustomerNotes();
+            $model->notes = $_POST['note'];
+            $model->vehicle_id = $_POST['vehicle_id'];
+            $model->status = 2;
+            $model->CB = Yii::$app->user->identity->id;
+            $model->save();
+            $link= \yii\helpers\Html::a('<b>'.Yii::$app->user->identity->name.'</b>',['/admin/admin-users/update', 'id' => $model->CB],['target'=>'_blank']);
+            $data = '<li class="vehicle-previous-notes-li"><div class="vehicle-previous-notes-div"><p>' . $model->notes . '</p>'.$link.'</div></li>';
+            return $data;
         }
     }
 

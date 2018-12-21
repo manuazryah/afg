@@ -7,12 +7,10 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use kartik\date\DatePicker;
 
-/* @var $this yii\web\View */
-/* @var $searchModel common\models\ServiceSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = Yii::$app->user->identity->name;
 $this->params['breadcrumbs'][] = $this->title;
+
+
 ?>
 
 <style>
@@ -48,8 +46,12 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 <div class="customers-index">
-
     <div class="row">
+
+        
+<?= \common\components\CarCountWidget::widget()?>
+
+
         <div class="col-md-12">
 
             <div class="panel panel-default">

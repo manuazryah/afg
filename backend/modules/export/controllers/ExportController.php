@@ -43,6 +43,14 @@ class ExportController extends Controller {
     public function actionIndex() {
         $searchModel = new ExportSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//        if (Yii::$app->user->identity->post_id != '1') {
+//            $customers = \common\models\Customers::find()->where(['state' => Yii::$app->user->identity->location])->all();
+//            $customer_id = array();
+//            foreach ($customers as $customer) {
+//                $customer_id[] = $customer->id;
+//            }
+//            $dataProvider->query->andWhere(['IN', 'export.customer', $customer_id]);
+//        }
 
         return $this->render('index', [
                     'searchModel' => $searchModel,
@@ -57,7 +65,14 @@ class ExportController extends Controller {
     public function actionContainer() {
         $searchModel = new ExportSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        if (Yii::$app->user->identity->post_id != '1') {
+            $customers = \common\models\Customers::find()->where(['state' => Yii::$app->user->identity->location])->all();
+            $customer_id = array();
+            foreach ($customers as $customer) {
+                $customer_id[] = $customer->id;
+            }
+            $dataProvider->query->andWhere(['IN', 'export.customer', $customer_id]);
+        }
         return $this->render('container', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,

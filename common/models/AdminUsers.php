@@ -49,7 +49,7 @@ class AdminUsers extends ActiveRecord implements IdentityInterface {
             [['user_name'], 'unique', 'message' => 'Username must be unique.', 'on' => 'update'],
             [['email'], 'email'],
             [['post_id', 'status', 'CB', 'UB'], 'integer'],
-            [['DOC', 'DOU','location'], 'safe'],
+            [['DOC', 'DOU', 'location'], 'safe'],
             [['user_name'], 'string', 'max' => 30],
             [['password'], 'string', 'max' => 300],
             [['name', 'email'], 'string', 'max' => 100],
@@ -57,6 +57,10 @@ class AdminUsers extends ActiveRecord implements IdentityInterface {
             [['post_id'], 'exist', 'skipOnError' => true, 'targetClass' => AdminPosts::className(), 'targetAttribute' => ['post_id' => 'id']],
             [['user_name', 'password'], 'required', 'on' => 'login'],
             [['password'], 'validatePassword', 'on' => 'login'],
+            [['location'], 'required', 'when' => function ($model) {
+                }, 'whenClient' => "function (attribute, value) {
+               return $('#adminusers-post_id').val() != '1';
+            }"],
         ];
     }
 

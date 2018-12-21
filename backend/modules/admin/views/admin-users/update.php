@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\AdminUsers */
 
-$this->title = 'Update Admin User: ';
-$this->params['breadcrumbs'][] = ['label' => 'Admin Users', 'url' => ['index']];
+$this->title = 'Update  User: ';
+$this->params['breadcrumbs'][] = ['label' => ' Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
             </div>
             <div class="panel-body">
-                <?= Html::a('<i class="fa fa-list"></i><span> Manage Admin Users</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone link-btn']) ?>
+                <?= Html::a('<i class="fa fa-list"></i><span> Manage  Users</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone link-btn']) ?>
                 <?=
                 Html::a('<i class="fa fa-pencil-square-o"></i><span> Change password</span>', ['change-password', 'data' => Yii::$app->EncryptDecrypt->Encrypt('encrypt', Yii::$app->user->identity->id)], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right change-pwd']);
                 ?>

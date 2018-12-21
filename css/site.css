@@ -528,3 +528,52 @@ active, .manifesta .ui-widget-header .ui-state-active {
 .login-logo img {
     margin: 0 auto;
 }
+.prit0{
+    padding-right: 0px;
+}
+.plft0{
+    padding-left: 0px;
+}
+.car-count{
+    margin-bottom: 30px;
+}
+.car-count .location_heading{
+    text-align:center;
+    font-weight: bold;   
+    color: white; 
+    padding:5px 0px; 
+    background-color:#0f75bc;
+}
+.car-count .car-count-value{
+    font-weight: bold;
+    color: white; 
+    text-align:center; 
+    padding:5px 0px; 
+    background-color:#373737
+}
+.car-count table tr:nth-child(even) {
+    background: #CCC
+}
+.car-count table tr:nth-child(even) td:first-child {
+    border-right: 1px solid #ecf0f5;
+}
+.car-count table {
+    border: 1px solid #cccccc;
+    border-top: 0px;
+}
+.car-count table td:first-child{
+    max-width: 197px;
+    overflow: hidden;
+    width: 197px;
+    border-right: 1px solid #ccc;
+}
+.car-count table td:first-child{
+    max-width: 197px;
+    overflow: hidden;
+    width: 197px;
+    border-right: 1px solid #ccc;
+}
+.car-count table td.shipped_value{
+    padding-left: 10px;
+    text-align: center;
+}

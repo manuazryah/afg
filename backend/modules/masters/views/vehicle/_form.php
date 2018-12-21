@@ -13,6 +13,7 @@ use yii\helpers\ArrayHelper;
 
 <div class="vehicle-form form-inline">
     <?php $form = ActiveForm::begin(); ?>
+    <?= \common\widgets\Alert::widget()?>
     <div class="row">
         <h4 class="frm-sub-title">CUSTOMER INFO</h4>
     </div>

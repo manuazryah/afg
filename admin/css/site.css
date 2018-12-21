@@ -627,3 +627,17 @@ active, .manifesta .ui-widget-header .ui-state-active {
     border-radius: 5px;
     border:none;
 }
+
+.vehicle-previous-notes .vehicle-previous-notes-ul{
+    margin-top: 10px;
+}
+.vehicle-previous-notes .vehicle-previous-notes-li{
+    list-style: none;
+    margin-left: -26px;
+}
+.vehicle-previous-notes .vehicle-previous-notes-div{
+    border: 1px solid #eee;
+    padding: 5px;
+    width: 98%;
+    margin-bottom: 10px;
+}

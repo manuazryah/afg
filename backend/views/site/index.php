@@ -4,8 +4,19 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\grid\GridView;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 
 $this->title = 'AFGShipping';
+?>
+<?php
+Modal::begin([
+    'header' => '',
+    'id' => 'modal',
+    'size' => 'modal-lg',
+]);
+echo "<div id = 'modalContent'></div>";
+Modal::end();
 ?>
 <!-- Small boxes (Stat box) -->
 <div class="row">
@@ -13,7 +24,7 @@ $this->title = 'AFGShipping';
         <!-- small box -->
         <div class="small-box bg-aqua">
             <div class="inner">
-                <h3>150</h3>
+                <h3><?= $onway ?></h3>
 
                 <p>ON THE WAY</p>
             </div>
@@ -27,7 +38,7 @@ $this->title = 'AFGShipping';
         <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3><?= $onhand ?></h3>
                 <p>ON HAND</p>
             </div>
             <div class="icon">
@@ -40,7 +51,7 @@ $this->title = 'AFGShipping';
         <!-- small box -->
         <div class="small-box bg-yellow">
             <div class="inner">
-                <h3>44</h3>
+                <h3><?= $manifest ?></h3>
                 <p>MANIFEST</p>
             </div>
             <div class="icon">
@@ -53,7 +64,7 @@ $this->title = 'AFGShipping';
         <!-- small box -->
         <div class="small-box bg-red">
             <div class="inner">
-                <h3>65</h3>
+                <h3><?= $shipped ?></h3>
                 <p>SHIPPED</p>
             </div>
             <div class="icon">
@@ -69,18 +80,18 @@ $this->title = 'AFGShipping';
                     'method' => 'get',
         ]);
         ?>
-       
-            <div class="col-md-10">
-                <?= $form->field($searchModel, 'vehicle_global_search')->textInput(['placeholder' => 'CUSTOMER NAME,VIN,LOT NO,MODEL,MAKE,COLOR'])->label('VEHICLE GLOBAL SEARCH') ?>
-            </div>
-            <div class="col-md-2">
-                <?= Html::submitButton('Search', ['class' => 'btn btn-warning','style'=>'margin-top: 22px;']) ?>
-                <?= Html::a('Reset', ['home'], ['class' => 'btn btn-default mrg-top-23']) ?>
-            </div>
-     
-        <?php ActiveForm::end(); ?>
+
+        <div class="col-md-10">
+<?= $form->field($searchModel, 'vehicle_global_search')->textInput(['placeholder' => 'CUSTOMER NAME,VIN,LOT NO,MODEL,MAKE,COLOR'])->label('VEHICLE GLOBAL SEARCH') ?>
+        </div>
+        <div class="col-md-2">
+            <?= Html::submitButton('Search', ['class' => 'btn btn-warning', 'style' => 'margin-top: 22px;']) ?>
+<?= Html::a('Reset', ['home'], ['class' => 'btn btn-default mrg-top-23']) ?>
+        </div>
+
+    <?php ActiveForm::end(); ?>
     </div>
-    <?php if (isset(Yii::$app->request->queryParams['VehicleSearch']) && Yii::$app->request->queryParams['VehicleSearch'] != '') { ?>
+        <?php if (isset(Yii::$app->request->queryParams['VehicleSearch']) && Yii::$app->request->queryParams['VehicleSearch'] != '') { ?>
         <div class="col-md-12">
             <?=
             GridView::widget([
@@ -110,12 +121,12 @@ $this->title = 'AFGShipping';
                             return $model->towingInfos->keys;
                         }
                     ],
-                    'lot_no',
+//                    'lot_no',
                     [
                         'attribute' => 'lot_no',
                         'format' => 'raw',
                         'value' => function($model) {
-//                                    return Html::button($model->lot_no, ['value' => Url::to(['index', 'id' => $model->id]), 'class' => 'modalButton']);
+                            return Html::button($model->lot_no, ['value' => Url::to(['masters/vehicle/vehicle-condition-report', 'id' => $model->id]), 'class' => 'modalButton vehicl_lot_no']);
                         }
                     ],
                     [
@@ -138,7 +149,7 @@ $this->title = 'AFGShipping';
             ]);
             ?>
         </div>
-        <?php } ?>
+<?php } ?>
     <div class="col-md-12">
         <button type="button" class="btn btn-block btn-success btn-sm inventory-report">Inventory Report</button>
     </div>
@@ -237,6 +248,11 @@ $this->title = 'AFGShipping';
     #piechart rect{
         fill: #ecf0f5;
     }
+    .vehicl_lot_no{
+        background: none;
+        border: none;
+        color: #3c8dbc;
+    }
 </style>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!---------------------Script for showing order status in home page-------------------------->
@@ -297,3 +313,10 @@ $this->title = 'AFGShipping';
 </script>
 
 
+<script>
+    $(document).on('click', '.modalButton', function () {
+        $('#modal').modal('show')
+                .find('#modalContent')
+                .load($(this).attr("value"));
+    });
+</script>

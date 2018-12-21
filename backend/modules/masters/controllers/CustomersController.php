@@ -38,9 +38,9 @@ class CustomersController extends Controller {
     public function actionIndex() {
         $searchModel = new CustomersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        if (Yii::$app->user->identity->post_id != '1') {
-            $dataProvider->query->andWhere(['state' => Yii::$app->user->identity->location]);
-        }
+//        if (Yii::$app->user->identity->post_id != '1') {
+//            $dataProvider->query->andWhere(['state' => Yii::$app->user->identity->location]);
+//        }
 
         return $this->render('index', [
                     'searchModel' => $searchModel,

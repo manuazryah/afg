@@ -17,6 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="customers-index">
 
     <div class="row">
+        
+        <?= \common\components\CarCountWidget::widget()?>
         <div class="col-md-12">
 
             <div class="panel panel-default">

@@ -97,6 +97,14 @@ class SiteController extends Controller
             ]);
         }
     }
+    
+    
+    public function actionChooseLogin(){
+        $this->layout = 'login';
+       return $this->render('login-here', [
+                'model' => $model,
+            ]);
+    }
 
     /**
      * Logs out the current user.

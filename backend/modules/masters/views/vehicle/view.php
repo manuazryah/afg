@@ -23,6 +23,9 @@ Modal::begin([
 echo "<div id = 'modalContent'></div>";
 Modal::end();
 ?>
+<!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>-->
 <div class="row">
     <div class="col-md-12">
 
@@ -160,16 +163,16 @@ Modal::end();
                                         <th>TITLE TYPE</th>
 
                                         <td><?php
-                                        if ($model->titleInfos->title_type == 1) {
-                                            echo 'EXPORTABLE';
-                                        } else if ($model->titleInfos->title_type == 2) {
-                                            echo 'PENDING';
-                                        } else if ($model->titleInfos->title_type == 3) {
-                                            echo 'BOS';
-                                        } else if ($model->titleInfos->title_type == 4) {
-                                            echo 'LIEN';
-                                        }
-                                        ?></td>
+                                            if ($model->titleInfos->title_type == 1) {
+                                                echo 'EXPORTABLE';
+                                            } else if ($model->titleInfos->title_type == 2) {
+                                                echo 'PENDING';
+                                            } else if ($model->titleInfos->title_type == 3) {
+                                                echo 'BOS';
+                                            } else if ($model->titleInfos->title_type == 4) {
+                                                echo 'LIEN';
+                                            }
+                                            ?></td>
                                     </tr>
                                     <tr>
                                         <th>TITLE</th>
@@ -221,12 +224,12 @@ Modal::end();
                                         if ($img_nmees['1'] != '') {
                                             ?>
 
+                                           
                                             <div class = "col-md-3 img-box" id="<?= $k; ?>">
                                                 <div class="news-img">
-                                                    <img class="img-responsive" src="<?= Yii::$app->homeUrl . '../uploads/vehicle/' . $model->id . '/' . end($arry) ?>">
-                                                </div> 
+                                                    <a data-fancybox="gallery" href="<?= Yii::$app->homeUrl . '../uploads/vehicle/' . $model->id . '/' . end($arry) ?>"><img src="<?= Yii::$app->homeUrl . '../uploads/vehicle/' . $model->id . '/' . end($arry) ?>" class="img-fluid" style="width:100%"></a>
+                                                </div>
                                             </div>
-
 
                                             <?php
                                         }
@@ -239,7 +242,15 @@ Modal::end();
                                 }
                                 ?>
                             </div>
+
+
+
+
+
                         </div>
+
+
+
                     </div>
                 </div>
             </div>
@@ -253,4 +264,3 @@ Modal::end();
                 .load($(this).attr("value"));
     });
 </script>
-

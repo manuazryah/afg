@@ -21,6 +21,8 @@ class AppAsset extends AssetBundle {
         'css/jquery-jvectormap.css',
         'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic',
         'css/site.css',
+        'https://use.fontawesome.com/releases/v5.0.13/css/all.css',
+        'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css',
     ];
     public $js = [
 //        'js/jquery.min.js',
@@ -38,6 +40,7 @@ class AppAsset extends AssetBundle {
         'js/adminlte.min.js',
 //        'js/dashboard.js',
         'js/demo.js',
+        'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

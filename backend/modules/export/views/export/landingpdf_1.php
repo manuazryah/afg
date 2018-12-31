@@ -254,7 +254,7 @@ use yii\helpers\Html;
                 <table width = "100%">
 
                     <tbody><tr><td><b>*** NON HAZ MAT</b></td><td><b>OCEAN FREIGHT PRE-PAID</b></td><td><b>TOTAL WEIGHT KG</b></td></tr>
-                        <tr><td><b>*** SEND TELEX RELEASE</b></td><td><b>ITN#</b></td><td>5466</td></tr>
+                        <tr><td><b>*** SEND TELEX RELEASE</b></td><td><b>ITN#</b></td><td><?= $weight ?></td></tr>
                         <tr>
                             <td colspan = "3">
                                 <p>These Comodities, technology or software were exported from the United States in the acordance with the export administrative regulations. Diversion contrary to the U.S. law prohibited.</p>

@@ -40,17 +40,11 @@ class ExportController extends Controller {
      * Lists all Export models.
      * @return mixed
      */
-    public function actionIndex() {
+    public function actionIndex($customer = null) {
         $searchModel = new ExportSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-//        if (Yii::$app->user->identity->post_id != '1') {
-//            $customers = \common\models\Customers::find()->where(['state' => Yii::$app->user->identity->location])->all();
-//            $customer_id = array();
-//            foreach ($customers as $customer) {
-//                $customer_id[] = $customer->id;
-//            }
-//            $dataProvider->query->andWhere(['IN', 'export.customer', $customer_id]);
-//        }
+        if (isset($customer))
+            $dataProvider->query->andWhere(['customer' => $customer]);
 
         return $this->render('index', [
                     'searchModel' => $searchModel,
@@ -97,7 +91,7 @@ class ExportController extends Controller {
      */
     public function actionCreate($cart = null) {
         $model = new Export();
-        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model)) {
+        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->validate()) {
             $model->vehicle_id = implode(',', $model->vehicle_id);
             $model->export_date = date('Y-m-d', strtotime($model->export_date));
             $model->loding_date = date('Y-m-d', strtotime($model->loding_date));
@@ -111,6 +105,7 @@ class ExportController extends Controller {
             $model->exporter_dob = date('Y-m-d', strtotime($model->exporter_dob));
             $model->ultimate_consignee_dob = date('Y-m-d', strtotime($model->ultimate_consignee_dob));
             $model->save();
+            $this->Setstatus($model);
             $files = UploadedFile::getInstances($model, 'container_images');
             if (!empty($files))
                 $this->Upload($files, $model);
@@ -118,7 +113,13 @@ class ExportController extends Controller {
             if (!empty($invoice)) {
                 $model->invoice = $invoice->extension;
                 $model->update();
-                $this->UploadImages($model, $invoice);
+                $this->UploadImages($model, $invoice, 1);
+            }
+            $title = UploadedFile::getInstance($model, 'titles');
+            if (!empty($title)) {
+                $model->titles = $title->extension;
+                $model->update();
+                $this->UploadImages($model, $title, 2);
             }
             return $this->redirect(['index']);
         } else {
@@ -138,7 +139,8 @@ class ExportController extends Controller {
     public function actionUpdate($id) {
         $model = $this->findModel($id);
         $invoice_ = $model->invoice;
-        if ($model->load(Yii::$app->request->post())) {
+        $titles_ = $model->titles;
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->vehicle_id = implode(',', $model->vehicle_id);
             $model->export_date = date('Y-m-d', strtotime($model->export_date));
             $model->loding_date = date('Y-m-d', strtotime($model->loding_date));
@@ -158,7 +160,16 @@ class ExportController extends Controller {
             } else {
                 $model->invoice = $invoice_;
             }
+
+            $title = UploadedFile::getInstance($model, 'titles');
+            if (!empty($title)) {
+                $model->titles = $title->extension;
+                $this->UploadImages($model, $title, 2);
+            } else {
+                $model->titles = $titles_;
+            }
             $model->save();
+            $this->Setstatus($model);
             $files = UploadedFile::getInstances($model, 'container_images');
             if (!empty($files))
                 $this->Upload($files, $model);
@@ -171,19 +182,51 @@ class ExportController extends Controller {
     }
 
     /*
+     * This function is to set vehicle status
+     */
+
+    public function Setstatus($model) {
+        if ($model->container_no != '' && $model->seal_no != '' && $model->booking_no != '') {
+            $status = 3;
+        } else if ($model->container_no == '' && $model->seal_no == '') {
+            $status = 5;
+        }
+        if (isset($status) && $status != '') {
+            $vehicles= explode(',', $model->vehicle_id);
+            foreach ($vehicles as $vehicle) {
+              $vehicle_detail= \common\models\Vehicle::findOne($vehicle);
+              $vehicle_detail->status_id=$status;
+              $vehicle_detail->save(FALSE);
+            }
+        }
+    }
+
+    /*
      * This function upload invoice
      * return
      */
 
-    public function UploadImages($model, $uploads) {
-        $path = Yii::$app->basePath . '/../uploads/export/invoice/' . $model->id;
-        FileHelper::createDirectory($path, $mode = 0775, $recursive = true);
-        if (!empty($uploads)) {
-            $file = $path . '/' . $model->id . '.' . $model->invoice;
-            if (file_exists($file)) {
-                unlink($file);
+    public function UploadImages($model, $uploads, $type = null) {
+        if ($type == 1) {
+            $path = Yii::$app->basePath . '/../uploads/export/invoice/' . $model->id;
+            FileHelper::createDirectory($path, $mode = 0775, $recursive = true);
+            if (!empty($uploads)) {
+                $file = $path . '/' . $model->id . '.' . $model->invoice;
+                if (file_exists($file)) {
+                    unlink($file);
+                }
+                $uploads->saveAs($file);
             }
-            $uploads->saveAs($file);
+        } else if ($type == 2) {
+            $path = Yii::$app->basePath . '/../uploads/export/titles/' . $model->id;
+            FileHelper::createDirectory($path, $mode = 0775, $recursive = true);
+            if (!empty($uploads)) {
+                $file = $path . '/' . $model->id . '.' . $model->titles;
+                if (file_exists($file)) {
+                    unlink($file);
+                }
+                $uploads->saveAs($file);
+            }
         }
     }
 
@@ -315,6 +358,7 @@ class ExportController extends Controller {
         $pdf = new Pdf([
             'mode' => Pdf::MODE_CORE, // leaner size using standard fonts
             'content' => $content,
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/bill_of_lading.css',
             'options' => [
                 'title' => 'Privacy Policy - Krajee.com',
                 'subject' => 'Generating PDF files via yii2-mpdf extension has never been easy'
@@ -391,6 +435,24 @@ class ExportController extends Controller {
                 $data['result'] = $report_content;
                 return json_encode($data);
             }
+        }
+    }
+
+    public function actionCheckArno() {
+        if (Yii::$app->request->isAjax) {
+            $arno = $_POST['arno'];
+            $mode = $_POST['mode'];
+            if ($mode === "create") {
+                $user_exists = Export::find()->where(['ar_no' => $arno])->exists();
+            } else {
+                $user_exists = Export::find()->where(['ar_no' => $arno])->andWhere(['<>', 'id', $mode])->exists();
+            }
+            if ($user_exists) {
+                $error = 1;
+            } else {
+                $error = 0;
+            }
+            return $error;
         }
     }
 

@@ -243,6 +243,22 @@ Modal::end();
                         </div>
 
                         <div class="row">
+                            <?php if (isset($model->invoice) && $model->invoice != '') { ?>
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <h4>Invoice</h4>
+                                    <embed src="<?= Yii::$app->homeUrl . '../uploads/export/invoice/' . $model->id . '/' . $model->id . '.' . $model->invoice ?>" width="500px" height="300px" />
+                                </div>
+                            <?php } ?>
+
+                            <?php if (isset($model->titles) && $model->titles != '') { ?>
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <h4>Titles</h4>
+                                    <embed src="<?= Yii::$app->homeUrl . '../uploads/export/titles/' . $model->id . '/' . $model->id . '.' . $model->titles ?>" width="500px" height="300px" />
+                                </div>
+                            <?php } ?>
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <h4>Container Images Gallery</h4>
                                 <?php
@@ -256,10 +272,11 @@ Modal::end();
                                         $img_nmees = explode('.', $img_nmee);
                                         if ($img_nmees['1'] != '') {
                                             ?>
+
                                             <div class = "col-md-3 img-box" id="<?= $k; ?>">
                                                 <div class="news-img">
-                                                    <img class="img-responsive" src="<?= Yii::$app->homeUrl . '../uploads/export/container/' . $model->id . '/' . end($arry) ?>">
-                                                </div> 
+                                                    <a data-fancybox="gallery" href="<?= Yii::$app->homeUrl . '../uploads/export/container/' . $model->id . '/' . end($arry) ?>"><img src="<?= Yii::$app->homeUrl . '../uploads/export/container/' . $model->id . '/' . end($arry) ?>" class="img-fluid" style="width:100%"></a>
+                                                </div>
                                             </div>
                                             <?php
                                         }

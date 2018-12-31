@@ -11,19 +11,24 @@ use common\models\Vehicle;
 /* @var $this yii\web\View */
 /* @var $model common\models\Export */
 /* @var $form yii\widgets\ActiveForm */
-
 ?>
 
 <div class="export-form form-inline">
     <?= \common\components\AlertMessageWidget::widget() ?>
     <?php $form = ActiveForm::begin(); ?>
-
+    <?= $form->errorSummary($model) ?>
     <div class="row">
         <div class='col-md-12 col-sm-12 col-xs-12 left_padd'>
             <?php
             $vehicles = ArrayHelper::map(Vehicle::find()->all(), 'id', 'vin');
+
             if (!$model->isNewRecord) {
-                $model->vehicle_id = explode(',', $model->vehicle_id);
+                if (!is_array($model->vehicle_id)) {
+                    $model->vehicle_id = explode(',', $model->vehicle_id);
+                } else {
+                    $model->vehicle_id = implode(',', $model->vehicle_id);
+                    $model->vehicle_id = explode(',', $model->vehicle_id);
+                }
             }
             ?>
             <?php
@@ -47,6 +52,9 @@ use common\models\Vehicle;
                         <th>Color</th>
                         <th>VIN</th>
                         <th>Status</th>
+                        <th>Location</th>
+                        <th>Lot No</th>
+                        <th>Customer Name</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,7 +62,13 @@ use common\models\Vehicle;
                     if (!$model->isNewRecord) {
                         foreach ($model->vehicle_id as $vh) {
                             $vehicle_detail = Vehicle::findone($vh);
-                            if ($vehicle_detail) {
+                            $location_name = '';
+                            if (isset($vehicle_detail->location) && $vehicle_detail->location != '') {
+                                $location = common\models\Location::findOne($vehicle_detail->location);
+                                $location_name = $location->location;
+                            }
+                            $company = \common\models\Customers::findOne($vehicle_detail->towingInfos->customers_id);
+                            if (isset($vehicle_detail)) {
                                 ?>
                                 <tr>
                                     <td><?= $vehicle_detail->year ?></td>
@@ -63,6 +77,9 @@ use common\models\Vehicle;
                                     <td><?= $vehicle_detail->color ?></td>
                                     <td><?= $vehicle_detail->vin ?></td>
                                     <td><?= $vehicle_detail->status_id ?></td>
+                                    <td><?= $location_name ?></td>
+                                    <td><?= $vehicle_detail->lot_no ?></td>
+                                    <td><?= $company->name ?></td>
                                 </tr>
                                 <?php
                             }
@@ -99,119 +116,133 @@ use common\models\Vehicle;
     <hr class="horizontal-line">
     <div class="row">
         <h4 class="frm-sub-title">Export Info </h4>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?php
-            if (!$model->isNewRecord) {
-                $model->export_date = date('d-m-Y', strtotime($model->export_date));
-            } else {
-                $model->export_date = date('d-m-Y');
-            }
-            ?>
-            <?=
-            $form->field($model, 'export_date')->widget(DatePicker::classname(), [
-                'type' => DatePicker::TYPE_INPUT,
-                'pluginOptions' => [
-                    'autoclose' => true,
-                    'format' => 'dd-M-yyyy'
-                ]
-            ]);
-            ?>
+
+        <div class="row">
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?php
+                if (!$model->isNewRecord) {
+                    $model->export_date = date('d-m-Y', strtotime($model->export_date));
+                } else {
+                    $model->export_date = date('d-m-Y');
+                }
+                ?>
+                <?=
+                $form->field($model, 'export_date')->widget(DatePicker::classname(), [
+                    'type' => DatePicker::TYPE_INPUT,
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd-M-yyyy'
+                    ]
+                ]);
+                ?>
+            </div>
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?php
+                if (!$model->isNewRecord) {
+                    $model->loding_date = date('d-m-Y', strtotime($model->loding_date));
+                } else {
+                    $model->loding_date = date('d-m-Y');
+                }
+                ?>
+                <?=
+                $form->field($model, 'loding_date')->widget(DatePicker::classname(), [
+                    'type' => DatePicker::TYPE_INPUT,
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd-M-yyyy'
+                    ]
+                ]);
+                ?>
+            </div>
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?= $form->field($model, 'broker_name')->textInput(['maxlength' => true]) ?>
+            </div>
         </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?php
-            if (!$model->isNewRecord) {
-                $model->loding_date = date('d-m-Y', strtotime($model->loding_date));
-            } else {
-                $model->loding_date = date('d-m-Y');
-            }
-            ?>
-            <?=
-            $form->field($model, 'loding_date')->widget(DatePicker::classname(), [
-                'type' => DatePicker::TYPE_INPUT,
-                'pluginOptions' => [
-                    'autoclose' => true,
-                    'format' => 'dd-M-yyyy'
-                ]
-            ]);
-            ?>
+        <div class="row">
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?= $form->field($model, 'booking_no')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?= $form->field($model, 'oti_no')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?php
+                if (!$model->isNewRecord) {
+                    $model->ETA = date('d-m-Y', strtotime($model->ETA));
+                } else {
+                    $model->ETA = date('d-m-Y');
+                }
+                ?>
+                <?=
+                $form->field($model, 'ETA')->widget(DatePicker::classname(), [
+                    'type' => DatePicker::TYPE_INPUT,
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd-M-yyyy'
+                    ]
+                ]);
+                ?>
+            </div>
         </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'broker_name')->textInput(['maxlength' => true]) ?>
+        <div class="row">
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?= $form->field($model, 'ar_no')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?= $form->field($model, 'xtn_no')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?= $form->field($model, 'seal_no')->textInput(['maxlength' => true]) ?>
+            </div>
         </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'booking_no')->textInput(['maxlength' => true]) ?>
+
+        <div class="row">
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?= $form->field($model, 'container_no')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?php
+                if (!$model->isNewRecord) {
+                    $model->cut_off = date('d-m-Y', strtotime($model->cut_off));
+                } else {
+                    $model->cut_off = date('d-m-Y');
+                }
+                ?>
+                <?=
+                $form->field($model, 'cut_off')->widget(DatePicker::classname(), [
+                    'type' => DatePicker::TYPE_INPUT,
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd-M-yyyy'
+                    ]
+                ]);
+                ?>
+            </div>
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?= $form->field($model, 'vessel')->textInput(['maxlength' => true]) ?>
+            </div>
         </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'oti_no')->textInput(['maxlength' => true]) ?>
+        <div class="row">
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?= $form->field($model, 'voyage')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?= $form->field($model, 'terminal')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?= $form->field($model, 'stremship_line')->textInput(['maxlength' => true]) ?>
+            </div>
         </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?php
-            if (!$model->isNewRecord) {
-                $model->ETA = date('d-m-Y', strtotime($model->ETA));
-            } else {
-                $model->ETA = date('d-m-Y');
-            }
-            ?>
-            <?=
-            $form->field($model, 'ETA')->widget(DatePicker::classname(), [
-                'type' => DatePicker::TYPE_INPUT,
-                'pluginOptions' => [
-                    'autoclose' => true,
-                    'format' => 'dd-M-yyyy'
-                ]
-            ]);
-            ?>
-        </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'ar_no')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'xtn_no')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'seal_no')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'container_no')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?php
-            if (!$model->isNewRecord) {
-                $model->cut_off = date('d-m-Y', strtotime($model->cut_off));
-            } else {
-                $model->cut_off = date('d-m-Y');
-            }
-            ?>
-            <?=
-            $form->field($model, 'cut_off')->widget(DatePicker::classname(), [
-                'type' => DatePicker::TYPE_INPUT,
-                'pluginOptions' => [
-                    'autoclose' => true,
-                    'format' => 'dd-M-yyyy'
-                ]
-            ]);
-            ?>
-        </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'vessel')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'voyage')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'terminal')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'stremship_line')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'destination')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
-            <?= $form->field($model, 'ITN')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class='col-md-8 col-sm-12 col-xs-12 left_padd'>
-            <?= $form->field($model, 'contact_details')->textInput(['maxlength' => true]) ?>
+        <div class="row">
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?= $form->field($model, 'destination')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+                <?= $form->field($model, 'ITN')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class='col-md-8 col-sm-12 col-xs-12 left_padd'>
+                <?= $form->field($model, 'contact_details')->textInput(['maxlength' => true]) ?>
+            </div>
         </div>
     </div>
     <hr class="horizontal-line">
@@ -457,7 +488,7 @@ use common\models\Vehicle;
     <hr class="horizontal-line">
     <div class="row">
         <h4 class="frm-sub-title">Container Images</h4>
-        <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
+        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'invoice')->fileInput() ?>
             <?php
             if (isset($model->invoice) && $model->invoice != '') {
@@ -472,8 +503,18 @@ use common\models\Vehicle;
             }
             ?>
         </div>
-        <div class='col-md-6 col-sm-6 col-xs-12 left_padd'>
+        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
             <?= $form->field($model, 'container_images[]')->fileInput(['multiple' => true]) ?>
+        </div>
+        <div class='col-md-4 col-sm-6 col-xs-12 left_padd'>
+            <?= $form->field($model, 'titles')->fileInput() ?>
+            <?php
+            if (isset($model->titles) && $model->titles != '') {
+                ?>
+                <a target="_blank" href="<?= Yii::$app->homeUrl . '../uploads/export/titles/' . $model->id . '/' . $model->id . '.' . $model->titles ?>">Click here to view titles</a>  
+                <?php
+            }
+            ?>
         </div>
     </div>
 
@@ -519,7 +560,7 @@ use common\models\Vehicle;
 </div>
 <script>
     $(document).ready(function () {
-
+        
         $(document).on('change', '#export-vehicle_id', function (e) {
             var vin = $(this).val();
             var that = this;
@@ -538,19 +579,19 @@ use common\models\Vehicle;
             } else {
                 $(this).data('originalvalues', []);
             }
-
-
+            
+            
             $("#body_vehicle tbody").empty();
             $.ajax({
                 type: 'POST',
                 cache: false,
-                data: {vin: vin,removed:removed},
+                data: {vin: vin, removed: removed},
                 url: '<?= Yii::$app->homeUrl ?>masters/vehicle/vehicle-details',
                 success: function (data) {
                     var $data = JSON.parse(data);
                     if ($data.msg === 'success') {
                         $("#body_vehicle tbody").append($data.row);
-                         $('.cart-count').html($data.cart_count);
+                        $('.cart-count').html($data.cart_count);
                         $('#body_vehicle').css("display", "inline-table");
                     } else {
                         $('.cart-count').html($data.cart_count);
@@ -559,7 +600,7 @@ use common\models\Vehicle;
                 }
             });
         });
-
+        
         $('#export-customer').change(function () {
             $.ajax({
                 type: 'POST',
@@ -573,7 +614,12 @@ use common\models\Vehicle;
                 }
             });
         });
-
+        
+        
+        $('#export-ar_no').change(function () {
+            var val = $(this).val();
+        });
+        
         var cart = '<?= $cart ?>';
         if (cart) {
             $.ajax({
@@ -587,8 +633,14 @@ use common\models\Vehicle;
                 }
             });
         }
-
+        
     });
-
+    
 </script>
+
+<style>
+    .error-summary{
+        color: #dd4b39;
+    }
+</style>
 

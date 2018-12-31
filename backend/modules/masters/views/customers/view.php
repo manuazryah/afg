@@ -378,6 +378,33 @@ Modal::end();
                                 </div>
 
 
+                                <div class="col-md-4 customer-view-grid">
+                                    <div class="price-grid">
+                                        <p>All Vehicle</p>
+                                        <span><?= count($vehicle_id) ?> /</span><span class="period">item</span>
+                                        <p><?= Html::a('View',['vehicle/index','customer'=>$model->id],['class'=>'btn btn-default','target'=>'_blank'])?></p>
+                                    </div>
+                                </div>
+                                <?php
+                                $export_customers = \common\models\Export::find()->where(['customer' => $model->id])->count();
+                                ?>
+                                <div class="col-md-4 customer-view-grid">
+                                    <div class="price-grid">
+                                        <p>All Export</p>
+                                        <span><?= $export_customers ?> /</span><span class="period">item</span>
+                                        <p><?= Html::a('View',['/export/export/index','customer'=>$model->id],['class'=>'btn btn-default','target'=>'_blank'])?></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 customer-view-grid">
+                                    <div class="price-grid">
+                                        <p>All Inventory</p>
+                                        <span><?= $car_on_hand + $car_on_way ?> /</span><span class="period">item</span>
+                                       <p><?= Html::a('View',['vehicle/index','customer'=>$model->id],['class'=>'btn btn-default','target'=>'_blank'])?></p>
+                                    </div>
+                                </div>
+
+
                                 <div class="col-md-12">
                                     <h4>Customer Documents</h4>
 

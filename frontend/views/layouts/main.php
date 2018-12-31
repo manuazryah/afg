@@ -77,6 +77,10 @@ AppAsset::register($this);
                                         <li>
                                             <a class="page-scroll" href="#contact">Contact</a>
                                         </li>
+                                        
+                                        <li>
+                                            <a class="page-scroll" href="<?= Yii::$app->homeUrl?>site/choose-login" style="color: #3EC1D5">Login</a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <!-- navbar-collapse -->

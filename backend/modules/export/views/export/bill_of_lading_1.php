@@ -2,28 +2,34 @@
 
 use yii\helpers\Html;
 ?>
+<!--<div class="modal-body">-->
 <div id="modalContentreport">
-    <button type="button" id="btnPrintThislanding" class="btn btn-primary"><i class="fa fa-print"></i> Print</button>                
-    <a class="btn btn-primary" href="/export/landingpdf?id=43915&amp;mail=1" title="Will send the mail to customer" target="_blank" data-toggle="tooltip"><i class="fa fa-envelope"></i> Email</a>                
-    <?= Html::a('<i class="fa fa-file-pdf-o"></i> Open as Pdf', ['landingpdf', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank', 'title' => 'Will open the generated PDF file in a new window']) ?>  
-    <div id="btnlanding" class="condition_reports">
-        <div class="bola">
+    <button type="button" id="btnPrintThiscover" class="btn btn-primary"><i class="fa fa-print"></i> Print</button>
+    <?= Html::a('<i class="fa fa-envelope"></i> Email', ['landingpdf', 'id' => $model->id, 'mail' => 1], ['class' => 'btn btn-primary', 'target' => '_blank', 'title' => 'Will send the mail to customer']) ?>
+    <?= Html::a('<i class="fa fa-file-pdf-o"></i> Open as Pdf', ['landingpdf', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank', 'title' => 'Will open the generated PDF file in a new window']) ?>
+    
+    <div id="btncover" class="condition_reports">
+
+        <div class="bola" >
+
             <table class="" width="100%">
-                <tbody><tr><td width="73%" id="lopa"><b>AFG GLOBAL SHIPPER LLC</b></td><td width="27%"><b>BILL OF LADING</b></td></tr>
+                <tbody><tr><td width="73%" id="lopa"><b>AFG GLOBAL SHIPPER LLC </b></td><td width="27%"><b>BILL OF LADING</b></td></tr>
                 </tbody></table>
 
             <div class="shipa">
                 <table width="100%">
                     <thead><tr><td><b>SHIPPER / EXPORTER</b></td></tr></thead>
+
                     <tbody>
-<?php
+                        <?php
                         if ($model->customer) {
                             $customer = common\models\Customers::findOne($model->customer);
                         }
                         ?>
-                        <tr><td contenteditable="true">  <?= !empty($customer) ? $customer->company_name : '' ?>, <?= !empty($customer) ? $customer->address1 : '' ?></td></tr>
+                        <tr><td contenteditable="true"><?= !empty($customer) ? $customer->company_name : '' ?>, <?= !empty($customer) ? $customer->address1 : '' ?> </td></tr>
                         <tr><td contenteditable="true"><?= !empty($customer) ? $customer->city : '' ?>&nbsp;<?= !empty($customer) ? $customer->zipcode : '' ?></td></tr>
                         <tr><td contenteditable="true"> <?= !empty($customer) ? $customer->phone_usa : '' ?>	</td></tr>
+
                     </tbody>
                 </table>
 
@@ -177,15 +183,22 @@ use yii\helpers\Html;
                     <table width="100%">
                         <tbody><tr>
                                 <td><b>CONTAINER TYPE</b></td></tr>
-                            
-                            <tr><td contenteditable="true" style="font-size:13px;">1 X 40'HC DRY VAN</td></tr>
+                            <?php
+                            if ($model->additional_info_container_type == 1)
+                                $container_type = "1 X 20'HC DRY VAN";
+                            if ($model->additional_info_container_type == 2)
+                                $container_type = "1 X 45'HC DRY VAN";
+                            if ($model->additional_info_container_type == 3)
+                                $container_type = "1 X 40'HC DRY VAN";
+                            ?>
+                            <tr><td contenteditable="true" style="font-size:13px;"><?= $container_type ?></td></tr>
                         </tbody></table>
 
                 </div>
-                <div class="simi1" style="float: left;">
+                <div class="simi1">
                     <table width="100%">
                         <tbody><tr><td><b>SEAL #</b></td></tr>
-                            <tr><td contenteditable="true"></td></tr>
+                            <tr><td contenteditable="true"><?= $model->seal_no ?></td></tr>
                         </tbody></table>
                 </div>
             </div>
@@ -205,14 +218,12 @@ use yii\helpers\Html;
             <div class="desc">
                 <table width="100%">
                     <tbody>
-                        <tr>
-                            <?php $vehicles = explode(',', $model->vehicle_id); ?>
+                        <tr><?php $vehicles = explode(',', $model->vehicle_id); ?>
                             <th width="72%" colspan="4"><b>SHIPPERS DESCRIPTIONS OF GOODS</b><br><?= count($vehicles) ?> UNITS USED VEHICLE</th>
                             <th width="12%"><b>WEIGHT</b></th>
                             <th width="16%" contenteditable="true"><b>CUBE <br>55 M3</b></th>
                         </tr>
-
-                             <?php
+                        <?php
                         $vehicles = explode(',', $model->vehicle_id);
                         $weight = 0;
                         foreach ($vehicles as $vehicle) {
@@ -232,20 +243,20 @@ use yii\helpers\Html;
                     </tbody></table>
             </div>
 
-            <div class="carsi">
-                <table class="" width="100%">
-                    <tbody><tr><th width="72%"> <b></b></th><th width="12%" contenteditable="true"<?= $weight ?>kg</th><th width="16%"></th></tr>
+            <div class = "carsi">
+                <table class = "" width = "100%">
+                    <tbody><tr><th width = "72%"> <b></b></th><th width = "12%" contenteditable = "true"><?= $weight ?></th><th width = "16%"></th></tr>
                     </tbody>
                 </table>
             </div>
 
-            <div class="addtls">
-                <table width="100%">
+            <div class = "addtls">
+                <table width = "100%">
 
                     <tbody><tr><td><b>*** NON HAZ MAT</b></td><td><b>OCEAN FREIGHT PRE-PAID</b></td><td><b>TOTAL WEIGHT KG</b></td></tr>
-                        <tr><td><b>*** SEND TELEX RELEASE</b></td><td><b>ITN#</b></td><td>3742</td></tr>
+                        <tr><td><b>*** SEND TELEX RELEASE</b></td><td><b>ITN#</b></td><td><?= $weight ?></td></tr>
                         <tr>
-                            <td colspan="3">
+                            <td colspan = "3">
                                 <p>These Comodities, technology or software were exported from the United States in the acordance with the export administrative regulations. Diversion contrary to the U.S. law prohibited.</p>
                             </td>
                         </tr>
@@ -254,7 +265,7 @@ use yii\helpers\Html;
 
             </div>
 
-            <table class="bottom-text" width="100%">
+            <table class = "bottom-text" width = "100%">
                 <tbody><tr><td>
                             HEREBY CERTIFY HAVING RECEIVED THE ABOVE DESCRIBED SHIPMENT IN OUTWARDLY GOOD CONDITION FROM THE SHIPPER SHOWN IN SECTION "EXPORTER", FOR FORWARDING TO THE ULTIMATE CONSIGNEE SHOWN IN THE SECTION "CONSIGNEE" ABOVE. IN WITNESS WHEREOF, THE ____________ NONNEGOTIABLE FCR'S HAVE BEEN SIGNED, AND IF ONE (1) IS ACCOMPLISHED BY DELIVERY OF GOODS, ISSUANCE OF A DELIVERY ORDER OR BY SOME OTHER MEANS, THE OTHERS SHALL BE AVOIDED IF REQUIRED BY THE FREIGHT FORWARDER, ONE (1) ORIGINAL FCR MUST BE SURRENDERED, DULY ENDORSED IN EXCHANGE FOR THE GOODS OR DELIVERY ORDER.
                         </td></tr>
@@ -264,17 +275,17 @@ use yii\helpers\Html;
                 <tbody>
                     <tr>
                         <td colspan="4">
-                            <span style="display:block;margin-top:10px;">AFG Global Shipper LLC is a freight forwarding company, and we are not liable for any charges if your container is stopped by the US Customs for random, routine procedural checks.
+                            <span style="display:block;margin-top:10px;">Ariana Worldwide is a freight forwarding company, and we are not liable for any charges if your container is stopped by the US Customs for random, routine procedural checks.
                             </span><span style="display:block;margin-top:10px;">
                                 On our end, we will always make sure to have all the necessary paperwork attached when we ship your container and take the correct steps to meet all requirements.  However, due to US Customs policy, they can always stop a container for random inspections.  Although we will try our best to help you with anything we can, we are not responsible for this stop or any fees related to it because they are a completely separate entity from us.  You will be liable to US Customs and all charges pertaining to this stop will be covered by you and paid directly to them.
                             </span>
                         </td>
                     </tr>
                     <tr>
-                        <td width="12%"><b>AUTHORIZED</b></td><td width="42%" style="border-bottom-width: 1px;border-bottom-style: solid;" contenteditable="true">
+                        <td width="12%"><b>AUTHORIZED</b></td><td width="42%" class="line_under" contenteditable="true">
 
                         </td>
-                        <td width="11%"><b>DATED AT:</b></td><td style="border-bottom-width: 1px;border-bottom-style: solid;" width="35%" contenteditable="true"></td>
+                        <td width="11%"><b>DATED AT:</b></td><td class="line_under" width="35%" contenteditable="true"></td>
                     </tr>
 
                 </tbody></table>
@@ -282,9 +293,15 @@ use yii\helpers\Html;
 
         </div>
     </div>
-
-
-    <script>$("#btnPrintThislanding").click(function () {
-            $("#btnlanding").printThis({"debug": false, "importCSS": true, "importStyle": false, "loadCSS": "/assets_b/css/print_bl.css", "pageTitle": "", "removeInline": false, "printDelay": 2000, "header": null, "formValues": true});
+    <script>
+        $(function () {
+            $("#btnPrintThiscover").click(function () {
+                $("#btncover").printThis();
+            });
         });
-    </script></div>
+        //                        $("#btnPrintThisdock").click(function () {
+        //                            $("#btndock").printThis({"debug": false, "importCSS": true, "importStyle": false, "pageTitle": "", "removeInline": false, "printDelay": 50, "header": null, "formValues": true});
+        //                        });
+    </script>
+</div>
+<!--</div>-->

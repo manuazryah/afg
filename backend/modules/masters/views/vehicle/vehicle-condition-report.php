@@ -5,8 +5,8 @@ use yii\helpers\Html;
 <div id="modalContentreport">
     <button type="button" id="btnPrintThisdock" class="btn btn-primary"><i class="fa fa-print"></i> Print</button>
     <?= Html::a('<i class="fa fa-file-pdf-o "></i> Open as Pdf', ['vehicle-condition-reportpdf', 'id' => $model->id], ['class' => 'btn btn-primary', 'target' => '_blank']) ?>
-
-    <div id="conditionreport" class="condition_reports">
+    <?= Html::a('<i class="fa fa-message "></i> Email', ['#'], ['class' => 'btn btn-primary send-email','id' => $model->id]) ?>
+    <div id="conditionreport" class="condition_reports display-msg">
         <div class="cond_here">
             <div class="row">
                 <div class="col-md-12">
@@ -403,3 +403,22 @@ use yii\helpers\Html;
         $("#conditionreport").printThis({"debug": false, "importCSS": true, "importStyle": false, "loadCSS": '<?= Yii::$app->homeUrl ?>/css/print.css', "scale": 90, "pageTitle": "", "removeInline": false, "printDelay": 200, "header": null, "formValues": true});
     });
 </script>
+
+
+<script>
+    $(document).ready(function(){
+        $('.send-email').click(function(e){
+            e.preventDefault();
+            var id=$(this).attr('id');
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                data: {id: id},
+                url: '<?= Yii::$app->homeUrl ?>masters/vehicle/send-email',
+                success: function (data) {
+                 $("<p class='contact-sucess-msg msg1'>Your mail has been successfully send. <button type='button' class='close ome-enquiry-close' data-dismiss='alert' aria-hidden='true'>×</button></p>").insertBefore($(".display-msg"));
+                }
+            });
+        })
+    });
+    </script>

@@ -79,7 +79,6 @@ class VehicleController extends Controller {
                 }
                 $dataProvider->query->andWhere(['IN', 'vehicle.id', $vehicle_title_id]);
             } else {
-
                 $dataProvider->query->andWhere(['status_id' => $status]);
             }
         }
@@ -125,14 +124,37 @@ class VehicleController extends Controller {
             $transaction = Vehicle::getDb()->beginTransaction();
             try {
                 if ($model->save()) {
-                    $user_adding = \common\models\AdminUsers::findOne(Yii::$app->user->identity->id);
-                    $model->location = $user_adding->location;
+                    if ($model->location == '') {
+                        $user_adding = \common\models\AdminUsers::findOne(Yii::$app->user->identity->id);
+                        $model->location = $user_adding->location;
+                    }
                     $model->DOC = date('Y-m-d');
                     $model->update();
                     $vehicle_check_options->vehicle_id = $model->id;
                     $vehicle_condition->vehicle_id = $model->id;
                     $vehicle_title->vehicle_id = $model->id;
                     $vehicle_towing->vehicle_id = $model->id;
+                    if (isset($vehicle_towing->pictures)) {
+                        if ($vehicle_towing->pictures == 1) {
+                            $vehicle_towing->pictures = 'Yes';
+                        } else {
+                            $vehicle_towing->pictures = 'No';
+                        }
+                    }
+                    if (isset($vehicle_towing->towed)) {
+                        if ($vehicle_towing->towed == 1) {
+                            $vehicle_towing->towed = 'Yes';
+                        } else {
+                            $vehicle_towing->towed = 'No';
+                        }
+                    }
+                    if (isset($vehicle_towing->keys)) {
+                        if ($vehicle_towing->keys == 1) {
+                            $vehicle_towing->keys = 'Yes';
+                        } else {
+                            $vehicle_towing->keys = 'No';
+                        }
+                    }
                     $vehicle_towing->customers_id = $vehicle_towing->customer_name;
                     $vehicle_title->towing_request_date = date('Y-m-d', strtotime($vehicle_title->towing_request_date));
                     $vehicle_title->deliver_date = date('Y-m-d', strtotime($vehicle_title->deliver_date));
@@ -181,6 +203,27 @@ class VehicleController extends Controller {
         $vehicle_towing = VehicleTowingInfo::find()->where(['vehicle_id' => $id])->one();
 
         if ($model->load(Yii::$app->request->post()) && $vehicle_check_options->load(Yii::$app->request->post()) && $vehicle_condition->load(Yii::$app->request->post()) && $vehicle_title->load(Yii::$app->request->post()) && $vehicle_towing->load(Yii::$app->request->post())) {
+            if (isset($vehicle_towing->pictures)) {
+                if ($vehicle_towing->pictures == 1) {
+                    $vehicle_towing->pictures = 'Yes';
+                } else {
+                    $vehicle_towing->pictures = 'No';
+                }
+            }
+            if (isset($vehicle_towing->towed)) {
+                if ($vehicle_towing->towed == 1) {
+                    $vehicle_towing->towed = 'Yes';
+                } else {
+                    $vehicle_towing->towed = 'No';
+                }
+            }
+            if (isset($vehicle_towing->keys)) {
+                if ($vehicle_towing->keys == 1) {
+                    $vehicle_towing->keys = 'Yes';
+                } else {
+                    $vehicle_towing->keys = 'No';
+                }
+            }
             $vehicle_towing->customers_id = $vehicle_towing->customer_name;
             $vehicle_title->towing_request_date = date('Y-m-d', strtotime($vehicle_title->towing_request_date));
             $vehicle_title->deliver_date = date('Y-m-d', strtotime($vehicle_title->deliver_date));
@@ -330,6 +373,12 @@ class VehicleController extends Controller {
         if ($vin) {
             foreach ($vin as $v) {
                 $vehicle = Vehicle::findOne($v);
+                $location_name = '';
+                if (isset($vehicle->location) && $vehicle->location != '') {
+                    $location = \common\models\Location::findOne($vehicle->location);
+                    $location_name = $location->location;
+                }
+                $company = \common\models\Customers::findOne($vehicle->towingInfos->customers_id); 
                 if ($vehicle->status_id == 1) {
                     $status = 'ON HAND';
                 } else if ($vehicle->status_id == 2) {
@@ -340,8 +389,7 @@ class VehicleController extends Controller {
                     $status = 'PICKED UP';
                 }
                 $row .= '<tr><td>' . $vehicle->year . '</td><td>' . $vehicle->make . '</td><td>' . $vehicle->model . '</td>
-                <td>' . $vehicle->color . '</td><td>' . $vehicle->vin . '</td><td>' . $status . '</td>
-                    </tr>';
+                <td>' . $vehicle->color . '</td><td>' . $vehicle->vin . '</td><td>' . $status . '</td><td>' . $location_name . '</td><td>' . $vehicle->lot_no . '</td><td>' . $company->name . '</td></tr>';
             }
         }
         $msg = !empty($row) ? 'success' : 'failed';
@@ -388,7 +436,7 @@ class VehicleController extends Controller {
     public function actionNotes() {
         if (Yii::$app->request->isAjax) {
             $model = new \common\models\CustomerNotes();
-            $previous_notes = \common\models\CustomerNotes::find()->where(['vehicle_id' => $_POST['vehicle_id']])->orderBy(['id'=>SORT_DESC])->all();
+            $previous_notes = \common\models\CustomerNotes::find()->where(['vehicle_id' => $_POST['vehicle_id']])->orderBy(['id' => SORT_DESC])->all();
             $report = $this->renderPartial('notes', [
                 'model' => $model,
                 'previous_notes' => $previous_notes,
@@ -408,9 +456,23 @@ class VehicleController extends Controller {
             $model->status = 2;
             $model->CB = Yii::$app->user->identity->id;
             $model->save();
-            $link= \yii\helpers\Html::a('<b>'.Yii::$app->user->identity->name.'</b>',['/admin/admin-users/update', 'id' => $model->CB],['target'=>'_blank']);
-            $data = '<li class="vehicle-previous-notes-li"><div class="vehicle-previous-notes-div"><p>' . $model->notes . '</p>'.$link.'</div></li>';
+            $link = \yii\helpers\Html::a('<b>' . Yii::$app->user->identity->name . '</b>', ['/admin/admin-users/update', 'id' => $model->CB], ['target' => '_blank']);
+            $data = '<li class="vehicle-previous-notes-li"><div class="vehicle-previous-notes-div"><p>' . $model->notes . '</p>' . $link . '</div></li>';
             return $data;
+        }
+    }
+
+    public function actionSendEmail() {
+        if (Yii::$app->request->isAjax) {
+            $_POST['id'] = 1;
+            $model = $this->findModel($_POST['id']);
+            $message = $this->renderPartial('vehicle-condition-report_email', ['model' => $model]);
+            $customer = \common\models\Customers::findOne($model->towingInfos->customers_id);
+            $to = $customer->email;
+            $headers = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n" .
+                    "From: info@afgshipping.com";
+            mail($to, $subject, $message, $headers);
         }
     }
 

@@ -53,6 +53,10 @@ use yii\helpers\Html;
                     <th>Damaged</th>
                     <td><?= $model->towingInfos->damaged ?></td>
                 </tr>
+                <tr>
+                    <th>Towed From</th>
+                    <td colspan="3"><?= $model->towed_from ?></td>
+                </tr>
             </table>
         </div>
         <div class="main-right">
@@ -77,10 +81,7 @@ use yii\helpers\Html;
                     <th>License#</th>
                     <td colspan="5"></td>
                 </tr>
-                <tr>
-                    <th>Towed From</th>
-                    <td colspan="5"><?= $model->towed_from ?></td>
-                </tr>
+
                 <tr>
                     <th>Towed Amount</th>
                     <td colspan="2"><?= $model->towed_amount ?></td>
@@ -106,41 +107,40 @@ use yii\helpers\Html;
         </div>
     </div>
     <div class="vehicle-condition">
-        
+
         <table class="head">
             <tr>
                 <td>CHECK OPTIONS INCLUDED IN VEHICLE</td>
             </tr>
         </table>
-        
+
         <table class="specification">
             <tr>
-                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->keys == 1) { ?> checked <?php } ?>></th>
+                <th><input disabled="true" name="Keys" type="checkbox"  <?php if ($model->vehiceCheckOptions->keys == 1) { ?> checked="checked" <?php } ?>></th>
                 <td>Keys</td>
-                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->cd_changer == 1) { ?> checked <?php } ?>></th>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->cd_changer == 1) { ?> checked="checked" <?php } ?>></th>
                 <td>CD Changer </td>
-                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->gps_navigation_system == 1) { ?> checked <?php } ?>></th>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->gps_navigation_system == 1) { ?> checked="checked" <?php } ?>></th>
                 <td>GPS Navigation System</td>
-                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->spare_tire_jack == 1) { ?> checked <?php } ?>></th>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->spare_tire_jack == 1) { ?> checked="checked" <?php } ?>></th>
                 <td>Spare Tire/Jack</td>
-                 <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->wheel_covers == 1) { ?> checked <?php } ?>></th>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->wheel_covers == 1) { ?> checked="checked" <?php } ?>></th>
                 <td>Wheel Covers </td>
             </tr>
             <tr>
-               
-                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->radio == 1) { ?> checked <?php } ?>></th>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->radio == 1) { ?> checked="checked" <?php } ?>></th>
                 <td>Radio  </td>
-                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->cd_player == 1) { ?> checked <?php } ?>></th>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->cd_player == 1) { ?> checked="checked" <?php } ?>></th>
                 <td>CD Player </td>
-                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->mirror == 1) { ?> checked <?php } ?>></th>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->mirror == 1) { ?> checked="checked" <?php } ?>></th>
                 <td>Mirror</td>
-                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->speaker == 1) { ?> checked <?php } ?>></th>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->speaker == 1) { ?> checked="checked" <?php } ?>></th>
                 <td>Speaker</td>
-                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->other == 1) { ?> checked <?php } ?>></th>
+                <th><input disabled="true" name="Keys" type="checkbox" <?php if ($model->vehiceCheckOptions->other == 1) { ?> checked="checked" <?php } ?>></th>
                 <td>Other...</td>
             </tr>
         </table>
-        
+
         <table class="head">
             <tr>
                 <td>CONDITION OF VEHICLE</td>
@@ -195,8 +195,8 @@ use yii\helpers\Html;
                 <td>
                     <table class="tbl1">
                         <tr>
-                            <th colspan="2">01</th>
-                            <td></td>
+                            <th>01</th>
+                            <td colspan="2"></td>
                         </tr>
                         <tr>
                             <th>02</th>
@@ -220,12 +220,12 @@ use yii\helpers\Html;
                 <td>
                     <table class="tbl1">
                         <tr>
-                            <th colspan="2">06</th>
-                            <td></td>
+                            <th>06</th>
+                            <td colspan="2"></td>
                         </tr>
                         <tr>
-                            <th colspan="2">07</th>
-                            <td></td>
+                            <th >07</th>
+                            <td colspan="2"></td>
                         </tr>
                         <tr>
                             <th>08</th>
@@ -236,8 +236,8 @@ use yii\helpers\Html;
                             <td colspan="2"></td>
                         </tr>
                         <tr>
-                            <th colspan="2">10</th>
-                            <td></td>
+                            <th >10</th>
+                            <td colspan="2"></td>
                         </tr>
                     </table>
                 </td>
@@ -247,20 +247,20 @@ use yii\helpers\Html;
             <tr>
                 <td>
                     <img src="<?= Yii::$app->homeUrl; ?>img/vehicle-driverside.jpg" width="300">
-                    <table class="tbl4">
-                        <tr>
-                            <th>11</th>
-                            <td></td>
+                    <table class="tbl4" >
+                        <tr >
+                            <th style="border-bottom:1px solid">11</th>
+                            <td style="border-bottom:1px solid"></td>
                             <th>12</th>
-                            <td></td>
+                            <td style="border-bottom:1px solid"></td>
                             <th>13</th>
-                            <td></td>
+                            <td style="border-bottom:1px solid"></td>
                         </tr>
                         <tr>
                             <th>14</th>
                             <td></td>
                             <th>15</th>
-                            <td></td>
+                            <td ></td>
                             <th>16</th>
                             <td></td>
                         </tr>
@@ -271,11 +271,11 @@ use yii\helpers\Html;
                     <table class="tbl4">
                         <tr>
                             <th>17</th>
-                            <td></td>
+                            <td style="border-bottom:1px solid"></td>
                             <th>18</th>
-                            <td></td>
+                            <td style="border-bottom:1px solid"></td>
                             <th>19</th>
-                            <td></td>
+                            <td style="border-bottom:1px solid"></td>
                         </tr>
                         <tr>
                             <th>20</th>
@@ -287,7 +287,7 @@ use yii\helpers\Html;
                 </td>
             </tr>
         </table>
-        <table class="tbl02">
+        <table class="tbl02" style="font-size: 12px">
             <tr>
                 <td>
                     <ol>
@@ -299,17 +299,17 @@ use yii\helpers\Html;
                 </td>
             </tr>
         </table>
-        <table class="tbl03">
+        <table class="tbl03" style="font-size: 12px">
             <tr>
                 <td>
-                    <p><strong>DIMENSIONS: </strong>The above is an accurate representation of the condition of the vehicle at the time of loading. NOTICE: The
+                    <p ><strong>DIMENSIONS: </strong>The above is an accurate representation of the condition of the vehicle at the time of loading. NOTICE: The
                         OWNER'S or AUTHORIZED AGENT'S Signature of the origin is also to the following RELEASE: this will authorize CARRIER to
                         drive my vehicle either at origin destination between point (s) of loading/unloading and the point(s) of pick-up/delivery.</p>
                     <p><strong>This above Vehicle has been deliverd in the condition described.</strong></p>
                 </td>
             </tr>
         </table>
-        <table class="tbl04">
+        <table class="tbl04" style="font-size: 12px">
             <tr>
                 <th>Completed By </th>
                 <td>SYED MAHMOOD AND IBRAHIM USED CARS & SPARE PARTS </td>
@@ -317,5 +317,32 @@ use yii\helpers\Html;
                 <td>2018-12-04</td>
             </tr>
         </table>
+    </div>
+
+    <div class="row">
+        <div class="pics">
+            <?php
+            $path = Yii::getAlias('@paths') . '/vehicle/' . $model->id;
+            if (count(glob("{$path}/*")) > 0) {
+                $k = 0;
+                foreach (glob("{$path}/*") as $file) {
+                    $k++;
+                    $arry = explode('/', $file);
+                    $img_nmee = end($arry);
+                    $img_nmees = explode('.', $img_nmee);
+                    if ($img_nmees['1'] != '') {
+                        ?>
+                        <img width="230px" height="230px" src="<?= Yii::$app->homeUrl . '../uploads/vehicle/' . $model->id . '/' . end($arry) ?>" style="margin-left: 20px;">
+                        <?php
+                    }
+                    if ($k % 4 == 0) {
+                        ?>
+
+                        <?php
+                    }
+                }
+            }
+            ?>
+        </div>
     </div>
 </div>

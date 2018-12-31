@@ -34,3 +34,28 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $('#export-ar_no').change(function () {
+            var arno = $(this).val();
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                data: {arno: arno, mode: 'create'},
+                url: '<?= Yii::$app->homeUrl ?>export/export/check-arno',
+                success: function (data) {
+                    if (data == 1) {
+                        $(".field-export-ar_no").append("<p class='username-error' style='color: #dd4b39;position: absolute;font-size: 12px;'>Username already exists, choose another one</p>");
+                        $("#export-ar_no").css({"border-color": "#dd4b39"});
+                    } else {
+                        $("#export-ar_no").css({"border-color": "rgb(210, 214, 222)"});
+                        $('.username-error').remove();
+                    }
+                }
+            });
+        });
+
+       
+
+    });
+</script>
